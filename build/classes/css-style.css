@@ -1,0 +1,84 @@
+@charset "UTF-8";
+
+body {
+	background: #ffffff;
+}
+
+.headline {
+	margin: 50px;
+	background-color: #408080;
+	font-size: 75px;
+	font-family: algerian;
+	color: #000000;
+	text-align: center
+}
+
+.button {
+	margin: 5px;
+	background: #408080;
+	color: #000000;
+	width: 200px;
+	height: 40px;
+	font-size: 25px;
+	cursor: pointer;
+	
+}
+.button_local {
+	margin: 5px;
+	background: #408080;
+	color: #c0c0c0;
+	width: 60px;
+	height: 40px;
+	font-size: 18px;
+	cursor: pointer;
+	
+}
+
+.form {
+	margin: 0 25% 0 25%;
+	width: 50%;
+}
+
+.heading {
+	margin: 10px;
+	margin-left: 0px;
+	margin-right: 0px;
+	height: 140px;
+	background-color: #408080;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	
+}
+
+.heading-1 {
+	display: flex;
+	 justify-content: center;
+}
+.heading-2{
+	display: flex;
+  flex-direction: column;
+	margin-right: 30px;
+
+}
+.textNews {
+	text-align: center;
+	margin: 10px;
+	font-size: 35px;
+	color: #000000;
+}
+.text {
+	text-align: center;
+	margin: 10px;
+	font-size: 35px;
+	color: #008000;
+}
+
+.field{
+	width: 150px;
+	font-size: 13px;
+	padding: 6px 0 4px 10px;
+	border: 3px solid #cecece;
+	background: #c0c0c0;
+}
+
