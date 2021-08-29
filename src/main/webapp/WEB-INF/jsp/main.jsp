@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>News portal</title>
+<title>News portal main page</title>
 <link rel="stylesheet" href="resources/css/css-style.css">
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="localization.local" var="loc" />
@@ -16,36 +16,36 @@
 <fmt:message bundle="${loc}" key="local.locbutton.name.en" var="en_button" />
 <fmt:message bundle="${loc}" key="local.locbutton.name.login" var="Login_button"/>
 <fmt:message bundle="${loc}" key="local.locbutton.name.register" var="Register_button" />
-<fmt:message bundle="${loc}" key="local.text.welcom" var="welcome"/>	
+<fmt:message bundle="${loc}" key="local.text.welcom" var="welcome"/>
 
 </head>
 <body>
 	<div class="heading">
 
-		<h1 class=headline><c:out value="${name_site}" /></h1>
-		
+        <h1 class=headline><c:out value="${name_site}"/></h1>
+
 		<div class=heading-1>
 			<div class="heading-2">
 			<form action="Controller" method="post">
 				<input type="hidden" name="local" value="ru" />
-				<input type="hidden" name="command" value="CHANGE_LOCAL" /> 
+				<input type="hidden" name="command" value="CHANGE_LOCAL" />
 				<input type="submit" class="button_local" value="${ru_button}" /><br />
 			</form>
-	
+
 			<form action="Controller" method="post">
 				<input type="hidden" name="local" value="en"/>
 				<input type="hidden" name="command" value="CHANGE_LOCAL"/>
 				<input type="submit" class="button_local" value="${en_button}" /><br />
 			</form>
-		
+
 			</div>
 			<div class="heading-2">
 				<form action="Controller" method="post">
-					<input type="hidden" name="command" value="AUTHORIZATION_PAGE" /> 
+					<input type="hidden" name="command" value="AUTHORIZATION_PAGE" />
 					<input type="submit" class="button" value="${Login_button}" />
 				</form>
 				<form action="Controller" method="post">
-					<input type="hidden" name="command" value="REGISTRATION_PAGE" /> 
+					<input type="hidden" name="command" value="REGISTRATION_PAGE" />
 					<input type="submit" class="button" value="${Register_button}" />
 
 				</form>
@@ -59,7 +59,7 @@
    		 <c:forEach  items="${newses}" var="clip" >
    		    <tr ALIGN="center"><th ALIGN="center"> <c:out value="${clip.getTitle()}"/> </th></tr>
     	    <tr ALIGN="center"><td ALIGN="center"> <c:out value="${clip.getDescription()}"/>
-     	   <HR WIDTH="70%" ALIGN="center" SIZE="1"> </td></tr> 
+     	   <HR WIDTH="70%" ALIGN="center" SIZE="1"> </td></tr>
  	   </c:forEach>
 </table>
 </body>

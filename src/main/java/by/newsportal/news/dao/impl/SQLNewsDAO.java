@@ -15,14 +15,14 @@ import by.newsportal.news.dao.connection.ConnectionPoolException;
 import by.newsportal.news.dao.exception.DAOException;
 
 public class SQLNewsDAO implements NewsDAO {
-    private static final String PARAM_ID = "id";
-    private static final String PARAM_TITLE = "title";
-    private static final String PARAM_FULL_TEXT = "description";
+    private static final String NEWS_ID = "id";
+    private static final String NEWS_TITLE = "title";
+    private static final String NEWS_DESCRIPTION = "description";
     //private static final String SQL_INSERT_NEWS = "INSERT INTO news( " + PARAM_TITLE + ", " + PARAM_FULL_TEXT + ", "
         //    + PARAM_BRIEF + ", " + PARAM_IMG_LINK + ") VALUES (?, ?, ?, ?)";
     private static final String SQL_GET_NUMBER_ROWS = "select count(*) from news";
     private static final String SQL_GET_NEWS_LIST = "SELECT * FROM news";
-    private static final String SQL_DELETE_NEWS = "DELETE FROM news WHERE(" + PARAM_ID + "=?)";
+    private static final String SQL_DELETE_NEWS = "DELETE FROM news WHERE(" + NEWS_ID + "=?)";
 
 
     @Override
@@ -35,13 +35,13 @@ public class SQLNewsDAO implements NewsDAO {
              Statement st = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
              ResultSet result = st.executeQuery(SQL_GET_NEWS_LIST);) {
             result.absolute(1);
-            for (int i = 0; i < 7; i++) {
+            for (int i = 0; i < 5; i++) {
                 if (!result.next()) {
                     break;
                 }
-                id = result.getInt(PARAM_ID);
-                title = result.getString(PARAM_TITLE);
-                description = result.getString(PARAM_FULL_TEXT);
+                id = result.getInt(NEWS_ID);
+                title = result.getString(NEWS_TITLE);
+                description = result.getString(NEWS_DESCRIPTION);
                 newsList.add(new News(id, title, description));
             }
         } catch (SQLException e) {
@@ -51,7 +51,6 @@ public class SQLNewsDAO implements NewsDAO {
         } catch (Exception e) {
             throw new DAOException("False query", e);
         }
-
         return newsList;
     }
 }
