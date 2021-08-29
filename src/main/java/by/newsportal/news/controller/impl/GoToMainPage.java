@@ -1,16 +1,14 @@
 package by.newsportal.news.controller.impl;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import by.newsportal.news.bean.News;
 import by.newsportal.news.controller.Command;
-import by.newsportal.news.servise.NewsServise;
-import by.newsportal.news.servise.ServiseProvider;
-import by.newsportal.news.servise.exception.ServiseException;
+import by.newsportal.news.service.NewsService;
+import by.newsportal.news.service.ServiceProvider;
+import by.newsportal.news.service.exception.ServiceException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,13 +16,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class GoToMainPage implements Command {
-    public static final ServiseProvider PROVIDER = ServiseProvider.getInstance();
-    public static final NewsServise NEWS_SERVISE = PROVIDER.getNewsServise();
+    public static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
+    public static final NewsService NEWS_SERVISE = PROVIDER.getNewsService();
     public static final String SESSION_PATH = "path";
     public static final String PATH_COMMAND_MAIN = "go_to_main_page";
     public static final String MAIN_PAGE = "/WEB-INF/jsp/main.jsp";
     public static final String ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
-    private static final NewsServise NEWS_SERVICE = PROVIDER.getNewsServise();
+    private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
 
 
 
@@ -74,7 +72,7 @@ public class GoToMainPage implements Command {
             try {
                 List<News> newses = NEWS_SERVICE.addNewses(currentPageNumber);
                 session.setAttribute("newses", newses);
-            } catch (ServiseException e) {
+            } catch (ServiceException e) {
                 e.printStackTrace();
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher(ERROR_PAGE);
                 requestDispatcher.forward(request, response);
@@ -84,7 +82,7 @@ public class GoToMainPage implements Command {
             request.getSession(true).setAttribute(SESSION_PATH, PATH_COMMAND_MAIN);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(MAIN_PAGE);
             requestDispatcher.forward(request, response);
-        } catch (ServiseException e) {
+        } catch (ServiceException e) {
             e.printStackTrace();
         }
     }

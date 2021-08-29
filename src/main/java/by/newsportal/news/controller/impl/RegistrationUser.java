@@ -5,17 +5,17 @@ import java.io.IOException;
 import by.newsportal.news.bean.RegistrationInfo;
 import by.newsportal.news.bean.User;
 import by.newsportal.news.controller.Command;
-import by.newsportal.news.servise.ServiseProvider;
-import by.newsportal.news.servise.UserServise;
-import by.newsportal.news.servise.exception.ServiseException;
+import by.newsportal.news.service.ServiceProvider;
+import by.newsportal.news.service.UserService;
+import by.newsportal.news.service.exception.ServiceException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class RegistrationUser implements Command {
     private static final RegistrationUser instance = new RegistrationUser();
-    private static final ServiseProvider PROVIDER = ServiseProvider.getInstance();
-    private static final UserServise USER_SERVISE = PROVIDER.getUserServise();
+    private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
+    private static final UserService USER_SERVISE = PROVIDER.getUserService();
     private static final String EMPTY_PASSWORD = "";
     public static final String SESSION_PATH = "path";
     public static final String PART_PATH = "Controller?command=";
@@ -49,7 +49,7 @@ public class RegistrationUser implements Command {
             }
             request.getSession(true).setAttribute(SESSION_PATH, PATH_COMMAND_AUTHORIZATION);
             path = PATH_COMMAND_AUTHORIZATION + "&registration_message=You have been registered";
-        } catch (ServiseException e) {
+        } catch (ServiceException e) {
             e.printStackTrace();
             request.getSession(true).setAttribute(SESSION_PATH, PATH_COMMAND_ERROR);
         }

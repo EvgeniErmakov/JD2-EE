@@ -6,11 +6,10 @@ import java.util.Collections;
 import java.util.List;
 
 import by.newsportal.news.bean.News;
-import by.newsportal.news.bean.User;
 import by.newsportal.news.controller.Command;
-import by.newsportal.news.servise.NewsServise;
-import by.newsportal.news.servise.ServiseProvider;
-import by.newsportal.news.servise.exception.ServiseException;
+import by.newsportal.news.service.NewsService;
+import by.newsportal.news.service.ServiceProvider;
+import by.newsportal.news.service.exception.ServiceException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,11 +20,11 @@ public class AfterAuthorization implements Command {
 	private static AfterAuthorization instance = new AfterAuthorization();
 
 	public static final String SESSION_PATH = "path";
-	public static final ServiseProvider PROVIDER = ServiseProvider.getInstance();
+	public static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
 	public static final String SESSION_PATH_COMMAND = "AFTER_AUTHORIZATION";
 	public static final String ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
 	public static final String AFTER_AUTHORIZATION_PAGE = "/WEB-INF/jsp/AfterAuthorization.jsp";
-	private static final NewsServise NEWS_SERVICE = PROVIDER.getNewsServise();
+	private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
 	private AfterAuthorization() {
 	}
 
@@ -71,7 +70,7 @@ public class AfterAuthorization implements Command {
 			try {
 				List<News> newses = NEWS_SERVICE.addNewses(currentPageNumber);
 				session.setAttribute("newses", newses);
-			} catch (ServiseException e) {
+			} catch (ServiceException e) {
 				e.printStackTrace();
 				RequestDispatcher requestDispatcher = request.getRequestDispatcher(ERROR_PAGE);
 				requestDispatcher.forward(request, response);
@@ -81,7 +80,7 @@ public class AfterAuthorization implements Command {
 			request.getSession(true).setAttribute(SESSION_PATH, SESSION_PATH_COMMAND);
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher(AFTER_AUTHORIZATION_PAGE);
 			requestDispatcher.forward(request, response);
-		} catch (ServiseException e) {
+		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
 	}
