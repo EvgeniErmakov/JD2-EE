@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import by.newsportal.news.bean.RegistrationInfo;
 import by.newsportal.news.bean.RoleEnum;
@@ -15,17 +14,15 @@ import by.newsportal.news.dao.connection.ConnectionPoolException;
 import by.newsportal.news.dao.exception.DAOException;
 
 public class SQLUserDAO implements UserDAO {
-    private static final String PARAMETR_NAME = "name";
-    private static final String PARAMETR_SURNAME = "surname";
-    private static final String PARAMETR_EMAIL = "email";
-    private static final String PARAMETR_PASSWORD = "password";
-    //  private static final String PARAMETR_ROLE = "role";
-    private static final String PARAMETR_DATE = "Date";
-    private static final String SQL_INSERT_USER = "INSERT INTO users(user_name, password, role) VALUES (?, ?, ?)";
-    private static String SQL_GET_AUTHORIZATION = "SELECT * from ProjectNews WHERE(" + PARAMETR_EMAIL + "= ? AND " + PARAMETR_PASSWORD + "= ?)";
-
+    private static final String NAME = "name";
+    private static final String SURNAME = "surname";
+    private static final String EMAIL = "email";
+    private static final String PASSWORD = "password";
+    private static final String ROLE = "role";
+    private static final String SQL_INSERT_USER = "INSERT INTO projectnews(name,surname,email,password,role) VALUES(?,?,?,?,?)";
+    private static String SQL_GET_AUTHORIZATION = "SELECT * FROM projectnews WHERE(" + EMAIL + "= ? AND " + PASSWORD + "= ?)";
+    private static final String SELECT_USER = "SELECT * FROM projectnews WHERE(" + EMAIL + "= ?)";
     private ConnectionPool connectionPool = ConnectionPool.getInstance();
-    ;
 
     {
         try {
@@ -37,61 +34,46 @@ public class SQLUserDAO implements UserDAO {
 
     @Override
     public User registration(RegistrationInfo information) throws DAOException {
-        try {
-            Connection connection = connectionPool.takeConnection();
-            Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM projectnews");
+        try (Connection connection = ConnectionPool.getInstance().takeConnection();
+             PreparedStatement insertUser = connection.prepareStatement(SQL_INSERT_USER);
+             PreparedStatement selectUser = connection.prepareStatement(SELECT_USER)) {
 
-            while (rs.next()) {
-                String emailTab = rs.getString(4);
-                if (information.getEmail().equals(emailTab)) {
-                    return null;
-                }
+            selectUser.setString(1, information.getEmail());
+            ResultSet result = selectUser.executeQuery();
+
+            if (result.next()) {
+                return null;
+            } else {
+                insertUser.setString(1, information.getName());
+                insertUser.setString(2, information.getSurname());
+                insertUser.setString(3, information.getEmail());
+                insertUser.setString(4, information.getEnteredPassword());
+                insertUser.setString(5, RoleEnum.USER.getRole());
+                insertUser.executeUpdate();
+                return new User(information.getEmail(), information.getEnteredPassword());
             }
-
-            String sql = "INSERT INTO projectnews(name,surname,email,password) VALUES(?,?,?,?)";
-
-            PreparedStatement ps = connection.prepareStatement(sql);
-
-            ps.setString(1, information.getName());
-            ps.setString(2, information.getSurname());
-            ps.setString(3, information.getEmail());
-            ps.setString(4, information.getEnteredPassword());
-
-            ps.executeUpdate();
-
-            connectionPool.closeConnection(connection, st, rs);
-            return new User(information.getEmail(), information.getEnteredPassword());
-        } catch (SQLException e1) {
-
-            throw new DAOException();
+        } catch (SQLException e) {
+            throw new DAOException("SQLException", e);
         } catch (ConnectionPoolException e) {
-
-            throw new DAOException();
+            throw new DAOException("ConnectionPoolException", e);
         }
-
     }
 
     @Override
     public User authorization(RegistrationInfo userInfo) throws DAOException {
-        System.out.println("Vizov autorizacii");
         User user = null;
         try (Connection connection = ConnectionPool.getInstance().takeConnection();
              PreparedStatement pr = connection.prepareStatement(SQL_GET_AUTHORIZATION);) {
             pr.setString(1, userInfo.getEmail());
             pr.setString(2, userInfo.getEnteredPassword());
-            System.out.println("Remote DB connection established");
             ResultSet result = pr.executeQuery();
-
             if (result.next()) {
-                String name = result.getString(PARAMETR_EMAIL);
-                String surname = result.getString(PARAMETR_EMAIL);
-                String email = result.getString(PARAMETR_EMAIL);
-                String password = result.getString(PARAMETR_EMAIL);
-                //   String roleString = result.getString(PARAMETR_ROLE);
-
-                //  RoleEnum roleRole = RoleEnum.valueOf(roleString);
-                user = new User(name, surname, email, password);
+                String name = result.getString(NAME);
+                String surname = result.getString(SURNAME);
+                String email = result.getString(EMAIL);
+                String password = result.getString(PASSWORD);
+                RoleEnum role = RoleEnum.valueOf(result.getString(ROLE));
+                user = new User(name, surname, email, password, role);
             }
             return user;
         } catch (SQLException e) {
@@ -101,6 +83,5 @@ public class SQLUserDAO implements UserDAO {
         } catch (Exception e) {
             throw new DAOException("False query", e);
         }
-
     }
 }

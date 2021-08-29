@@ -8,7 +8,7 @@ body {
 	margin: 50px;
 	background-color: #408080;
 	font-size: 75px;
-	font-family: algerian;
+	font-family: Serif;
 	color: #000000;
 	text-align: center
 }
@@ -63,7 +63,6 @@ body {
 }
 .textNews {
 	text-align: center;
-	margin: 10px;
 	font-size: 35px;
 	color: #000000;
 }

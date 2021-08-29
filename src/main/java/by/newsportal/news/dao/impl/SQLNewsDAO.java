@@ -35,7 +35,7 @@ public class SQLNewsDAO implements NewsDAO {
              Statement st = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
              ResultSet result = st.executeQuery(SQL_GET_NEWS_LIST);) {
             result.absolute(1);
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 7; i++) {
                 if (!result.next()) {
                     break;
                 }

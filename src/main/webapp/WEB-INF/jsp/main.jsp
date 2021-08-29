@@ -52,14 +52,13 @@
 			</div>
 		</div>
 	</div>
-	
-	<p class="text"><c:out value="${welcom}"/></p>
-	<HR WIDTH="70%" ALIGN="center" SIZE="1">
 
-	<table class="textNews" align="center">
+<p class="text"><c:out value="${welcom}"/></p>
+	<HR WIDTH="70%" ALIGN="center" SIZE="1">
+	<table class="textNews" align="center" >
    		 <c:forEach  items="${newses}" var="clip" >
-   		    <tr><th> <c:out value="${clip.getTitle()}"/> </th></tr>
-    	    <tr><td> <c:out value="${clip.getDescription()}"/>
+   		    <tr ALIGN="center"><th ALIGN="center"> <c:out value="${clip.getTitle()}"/> </th></tr>
+    	    <tr ALIGN="center"><td ALIGN="center"> <c:out value="${clip.getDescription()}"/>
      	   <HR WIDTH="70%" ALIGN="center" SIZE="1"> </td></tr> 
  	   </c:forEach>
 </table>
