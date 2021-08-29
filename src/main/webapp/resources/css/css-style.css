@@ -8,11 +8,16 @@ body {
 	margin: 50px;
 	background-color: #408080;
 	font-size: 75px;
-	font-family: Serif;
+	font-family: Georgia, serif !important;
 	color: #000000;
 	text-align: center
 }
-
+.nameSite{
+	margin: 50px;
+	background-color: #408080;
+	font-size: 75px;
+	font-family: Georgia, serif !important;
+}
 .button {
 	margin: 5px;
 	background: #408080;

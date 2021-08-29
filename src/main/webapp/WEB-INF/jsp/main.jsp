@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>News portal</title>
+<title>News portal main page</title>
 <link rel="stylesheet" href="resources/css/css-style.css">
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="localization.local" var="loc" />
