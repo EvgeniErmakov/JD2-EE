@@ -46,7 +46,7 @@ public class AfterAuthorization implements Command{
 		return;
 	}
 	try {
-		request.setAttribute("newses", NEWS_SERVISE.addNewses());
+		request.setAttribute("newses", NEWS_SERVISE.addNewses(1));
 	} catch (ServiseException e) {
 		System.out.println(e.getMessage());
 		e.printStackTrace();

@@ -1,11 +1,8 @@
 package by.newsportal.news.dao.impl;
 
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 
 import by.newsportal.news.bean.News;
@@ -26,7 +23,7 @@ public class SQLNewsDAO implements NewsDAO {
 
 
     @Override
-    public List<News> getNewsList() throws DAOException {
+    public List<News> getNewsList(int currentPageNumber) throws DAOException {
         Integer id;
         String title;
         String description;
@@ -34,7 +31,7 @@ public class SQLNewsDAO implements NewsDAO {
         try (Connection connection = ConnectionPool.getInstance().takeConnection();
              Statement st = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
              ResultSet result = st.executeQuery(SQL_GET_NEWS_LIST);) {
-            result.absolute(1);
+            result.absolute(currentPageNumber+(currentPageNumber-1)*4-1);
             for (int i = 0; i < 5; i++) {
                 if (!result.next()) {
                     break;
@@ -52,5 +49,25 @@ public class SQLNewsDAO implements NewsDAO {
             throw new DAOException("False query", e);
         }
         return newsList;
+    }
+
+    @Override
+    public Integer getNewsMaxNumber() throws DAOException {
+        Integer numberRow = 0;
+        try (Connection connection = ConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_GET_NUMBER_ROWS);
+             ResultSet rs = statement.executeQuery();) {
+            while (rs.next()) {
+                numberRow = rs.getInt("count(*)");
+            }
+
+        } catch (SQLException e) {
+            throw new DAOException("Remote server could not be connected", e);
+        } catch (ConnectionPoolException e) {
+            throw new DAOException("False query", e);
+        } catch (Exception e) {
+            throw new DAOException();
+        }
+        return numberRow;
     }
 }
