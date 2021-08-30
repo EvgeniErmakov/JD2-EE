@@ -21,15 +21,6 @@ public class SQLUserDAO implements UserDAO {
     private static final String SQL_INSERT_USER = "INSERT INTO projectnews(name,surname,email,password,role) VALUES(?,?,?,?,?)";
     private static String SQL_GET_AUTHORIZATION = "SELECT * FROM projectnews WHERE(" + EMAIL + "= ? AND " + PASSWORD + "= ?)";
     private static final String SELECT_USER = "SELECT * FROM projectnews WHERE(" + EMAIL + "= ?)";
-    private ConnectionPool connectionPool = ConnectionPool.getInstance();
-
-    {
-        try {
-            connectionPool.initPoolData();
-        } catch (ConnectionPoolException e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public User registration(RegistrationInfo information) throws DAOException {

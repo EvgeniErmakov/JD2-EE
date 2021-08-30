@@ -48,7 +48,12 @@ public final class ConnectionPool {
 			this.poolSize = Integer.parseInt(dbResurceManager.getValue(DBParameter.DB_POLL_SIZE));
 		} catch (NumberFormatException e) {
 			poolSize = 5;
-		}		
+		}
+		try {
+			initPoolData();
+		} catch (ConnectionPoolException e) {
+			throw new RuntimeException("Error : initPoolData", e);
+		}
 	}
 
 	public void initPoolData() throws ConnectionPoolException {
