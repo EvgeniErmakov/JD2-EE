@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
 		try {
 			return USER_DAO.registration(info);
 		} catch (DAOException e) {
-			throw new ServiceException();
+			throw new ServiceException("User_DAO Exception", e);
 		}
 	}
 
@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 		try {
 			return USER_DAO.authorization(info);
 		} catch (DAOException e) {
-			throw new ServiceException();
+			throw new ServiceException("User_DAO Exception", e);
 		}
 	}
 }

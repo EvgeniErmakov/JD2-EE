@@ -10,7 +10,6 @@ import by.newsportal.news.service.NewsService;
 import by.newsportal.news.service.exception.ServiceException;
 
 public class NewsServiceImpl implements NewsService {
-
     private static final DAOProvider PROVIDER = DAOProvider.getInstance();
     private static final NewsDAO NEWS_DAO = PROVIDER.getNewsDAO();
 
@@ -19,9 +18,8 @@ public class NewsServiceImpl implements NewsService {
         try {
             return NEWS_DAO.getNewsList(currentPageNumber);
         } catch (DAOException e) {
-            throw new ServiceException();
+            throw new ServiceException("NEWS_DAO Exception", e);
         }
-
     }
 
     @Override
@@ -30,9 +28,8 @@ public class NewsServiceImpl implements NewsService {
         try {
             newsMaxNumber = NEWS_DAO.getNewsMaxNumber();
         } catch (DAOException e) {
-            throw new ServiceException(e.getMessage(), e);
+            throw new ServiceException("NEWS_DAO Exception", e);
         }
         return newsMaxNumber;
     }
-
 }

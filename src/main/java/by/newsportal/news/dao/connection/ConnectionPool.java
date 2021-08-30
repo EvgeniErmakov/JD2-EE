@@ -24,33 +24,26 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executor;
 
-
-
 public final class ConnectionPool {
-
 	private static final ConnectionPool instance = new ConnectionPool();
-
 	public static ConnectionPool getInstance() {
 		return instance;
 	}
-
 	private BlockingQueue<Connection> connectionQueue;
 	private BlockingQueue<Connection> giveAwayConQueue;
 
-	private String driverName;
-	private String url;
-	private String user;
-	private String password;
+	private final String DRIVER_NAME;
+	private final String URL;
+	private final String USER;
+	private final String PASSWORD;
 	private int poolSize;
 
 	private ConnectionPool() {
-		
 		DBResurceManager dbResurceManager = DBResurceManager.getInstance();
-
-		this.driverName = dbResurceManager.getValue(DBParameter.DB_DRIVER);
-		this.url = dbResurceManager.getValue(DBParameter.DB_URL);
-		this.user = dbResurceManager.getValue(DBParameter.DB_USER);
-		this.password = dbResurceManager.getValue(DBParameter.DB_PASSWORD);
+		this.DRIVER_NAME = dbResurceManager.getValue(DBParameter.DB_DRIVER);
+		this.URL = dbResurceManager.getValue(DBParameter.DB_URL);
+		this.USER = dbResurceManager.getValue(DBParameter.DB_USER);
+		this.PASSWORD = dbResurceManager.getValue(DBParameter.DB_PASSWORD);
 		try {
 			this.poolSize = Integer.parseInt(dbResurceManager.getValue(DBParameter.DB_POLL_SIZE));
 		} catch (NumberFormatException e) {
@@ -60,14 +53,13 @@ public final class ConnectionPool {
 
 	public void initPoolData() throws ConnectionPoolException {
 		Locale.setDefault(Locale.ENGLISH);
-
 		try {
-			Class.forName(driverName);
-			giveAwayConQueue = new ArrayBlockingQueue<Connection>(poolSize);
-			connectionQueue = new ArrayBlockingQueue<Connection>(poolSize);
+			Class.forName(DRIVER_NAME);
+			giveAwayConQueue = new ArrayBlockingQueue<>(poolSize);
+			connectionQueue = new ArrayBlockingQueue<>(poolSize);
 
 			for (int i = 0; i < poolSize; i++) {
-				Connection connection = DriverManager.getConnection(url, user, password);
+				Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
 				PooledConnection pooledConnection = new PooledConnection(connection);
 				connectionQueue.add(pooledConnection);
 			}

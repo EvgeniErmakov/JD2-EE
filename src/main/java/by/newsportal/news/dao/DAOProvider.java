@@ -10,7 +10,6 @@ private static final DAOProvider INSTANCE = new DAOProvider();
 	private NewsDAO newsDAO = new SQLNewsDAO();
 	
 	private DAOProvider() {
-		
 	}
 	
 	public static DAOProvider getInstance() {

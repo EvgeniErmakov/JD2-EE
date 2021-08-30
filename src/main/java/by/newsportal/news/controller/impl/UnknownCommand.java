@@ -8,16 +8,16 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class UnknowCommand implements Command {
-	private static UnknowCommand instance = new UnknowCommand();
+public class UnknownCommand implements Command {
+	private static UnknownCommand instance = new UnknownCommand();
 	public static final String SESSION_PATH = "path";
 	public static final String PATH_COMMAND_ERR = "UNKNOWN_COMMAND";
 	public static final String ERROR_PAGE = "/WEB-INF/jsp/Error.jsp";
 
-	private UnknowCommand() {
+	private UnknownCommand() {
 	}
 
-	public static UnknowCommand getInstance() {
+	public static UnknownCommand getInstance() {
 		return instance;
 	}
 

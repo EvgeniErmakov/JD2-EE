@@ -29,7 +29,6 @@
     </h1>
     </h1>
     <div class=heading-1>
-
         <div class="heading-2">
             <form action="Controller" method="post">
                 <input type="hidden" name="local" value="ru"/>

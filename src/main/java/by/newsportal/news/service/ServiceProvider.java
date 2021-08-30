@@ -10,7 +10,6 @@ public final class ServiceProvider {
 	private NewsService newsService = new NewsServiceImpl();
 
 	private ServiceProvider() {
-		
 	}
 	
 	public static ServiceProvider getInstance() {

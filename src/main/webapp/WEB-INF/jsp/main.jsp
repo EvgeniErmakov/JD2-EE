@@ -37,7 +37,7 @@
             </form>
         </div>
 
-        <div class="heading-2" style = "">
+        <div class="heading-2" style="">
 
             <form action="Controller" method="post">
                 <input type="hidden" name="command" value="AUTHORIZATION_PAGE"/>

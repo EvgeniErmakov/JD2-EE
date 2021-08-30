@@ -22,7 +22,6 @@ public class AutorizationUser implements Command {
     public static final String PATH_COMMAND_ERROR = "UNKNOWN_COMMAND";
     public static final String PATH_COMMAND_AFTER_AUTHORIZATION = "AFTER_AUTHORIZATION";
 
-
     private AutorizationUser() {
     }
 
@@ -44,7 +43,6 @@ public class AutorizationUser implements Command {
             }
 
             User user = USER_SERVISE.authorization(info);
-
             request.getSession(true).setAttribute(SESSION_PATH, PATH_COMMAND_AFTER_AUTHORIZATION);
             request.getSession(true).setAttribute("user", user);
 
@@ -55,7 +53,6 @@ public class AutorizationUser implements Command {
                 request.getSession(true).setAttribute("user", user);
                 path = PATH_COMMAND_AFTER_AUTHORIZATION;
             }
-
         } catch (ServiceException e) {
             request.getSession(true).setAttribute(SESSION_PATH, PATH_COMMAND_ERROR);
         }

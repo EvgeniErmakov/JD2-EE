@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import by.newsportal.news.bean.RegistrationInfo;
 import by.newsportal.news.bean.RoleEnum;
 import by.newsportal.news.bean.User;
@@ -77,7 +76,7 @@ public class SQLUserDAO implements UserDAO {
             }
             return user;
         } catch (SQLException e) {
-            throw new DAOException("Remote server could not be connected SQLException", e);
+            throw new DAOException("Remote server could't be connected SQLException", e);
         } catch (ConnectionPoolException e) {
             throw new DAOException("False query", e);
         } catch (Exception e) {

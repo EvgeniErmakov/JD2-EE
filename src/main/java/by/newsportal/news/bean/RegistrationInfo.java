@@ -84,6 +84,15 @@ public class RegistrationInfo {
 			return false;
 		return true;
 	}
-	
 
+	@Override
+	public String toString() {
+		return "RegistrationInfo{" +
+				"name='" + name + '\'' +
+				", email='" + email + '\'' +
+				", enteredPassword='" + enteredPassword + '\'' +
+				", repeatedPassword='" + repeatedPassword + '\'' +
+				", surname='" + surname + '\'' +
+				'}';
+	}
 }
