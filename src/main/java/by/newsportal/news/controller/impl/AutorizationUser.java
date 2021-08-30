@@ -49,7 +49,6 @@ public class AutorizationUser implements Command {
             if (user == null) {
                 path = PATH_COMMAND_AUTHORIZATION + "&incorrect_data_message=User is not found";
             } else {
-                request.getSession(true).setAttribute(SESSION_PATH, PATH_COMMAND_AFTER_AUTHORIZATION);
                 request.getSession(true).setAttribute("user", user);
                 path = PATH_COMMAND_AFTER_AUTHORIZATION;
             }
