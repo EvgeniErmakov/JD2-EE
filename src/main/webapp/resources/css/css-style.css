@@ -4,7 +4,6 @@ body {
     background: #ffffff;
 }
 
-
 .heading-site {
     color: black;
     font-family: serif;
@@ -20,10 +19,7 @@ body {
     font-family: Georgia, serif !important;
     text-align: center;
     text-decoration: none;
-    bgcolor: black;
     link: black;
-    vlink: black;
-    alink: black;
     color: black;
 }
 
@@ -135,4 +131,3 @@ body {
     border: 3px solid #cecece;
     background: #c0c0c0;
 }
-
