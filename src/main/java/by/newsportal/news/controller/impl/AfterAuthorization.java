@@ -40,17 +40,16 @@ public class AfterAuthorization implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int currentPageNumber = 1;
-
-		Integer pagesMaxNum = 1;
-		List<Integer> numberOfPageList = null;
+		int currentPageNumber;
+		int pagesMaxNum;
+		List<Integer> numberOfPageList;
 		HttpSession session = request.getSession(true);
 
 		try {
 			pagesMaxNum = NEWS_SERVICE.getNewsMaxNumber();
 			pagesMaxNum = (pagesMaxNum % 5) > 0 ? pagesMaxNum / 5 + 1 : pagesMaxNum / 5;
 			numberOfPageList = new ArrayList<>();
-			for (Integer i = 1; i <= pagesMaxNum; i++) {
+			for (int i = 1; i <= pagesMaxNum; i++) {
 				numberOfPageList.add(i);
 			}
 			Collections.sort(numberOfPageList);
