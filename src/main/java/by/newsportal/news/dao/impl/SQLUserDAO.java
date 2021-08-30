@@ -19,7 +19,7 @@ public class SQLUserDAO implements UserDAO {
     private static final String PASSWORD = "password";
     private static final String ROLE = "role";
     private static final String SQL_INSERT_USER = "INSERT INTO projectnews(name,surname,email,password,role) VALUES(?,?,?,?,?)";
-    private static String SQL_GET_AUTHORIZATION = "SELECT * FROM projectnews WHERE(" + EMAIL + "= ? AND " + PASSWORD + "= ?)";
+    private static final String SQL_GET_AUTHORIZATION = "SELECT * FROM projectnews WHERE(" + EMAIL + "= ? AND " + PASSWORD + "= ?)";
     private static final String SELECT_USER = "SELECT * FROM projectnews WHERE(" + EMAIL + "= ?)";
 
     @Override
@@ -68,8 +68,6 @@ public class SQLUserDAO implements UserDAO {
             return user;
         } catch (SQLException e) {
             throw new DAOException("Remote server could't be connected SQLException", e);
-        } catch (ConnectionPoolException e) {
-            throw new DAOException("False query", e);
         } catch (Exception e) {
             throw new DAOException("False query", e);
         }

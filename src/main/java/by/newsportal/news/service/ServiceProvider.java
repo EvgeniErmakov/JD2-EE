@@ -5,23 +5,21 @@ import by.newsportal.news.service.impl.UserServiceImpl;
 
 public final class ServiceProvider {
 	private static final ServiceProvider INSTANCE = new ServiceProvider();
-	
-	private UserService userService = new UserServiceImpl();
-	private NewsService newsService = new NewsServiceImpl();
+	private final UserService USER_SERVICE = new UserServiceImpl();
+	private final NewsService NEWS_SERVICE = new NewsServiceImpl();
 
 	private ServiceProvider() {
-
 	}
-	
+
 	public static ServiceProvider getInstance() {
 		return INSTANCE;
 	}
 
 	public UserService getUserService() {
-		return userService;
+		return USER_SERVICE;
 	}
 	
 	public NewsService getNewsService() {
-		return newsService;
+		return NEWS_SERVICE;
 	}
 }

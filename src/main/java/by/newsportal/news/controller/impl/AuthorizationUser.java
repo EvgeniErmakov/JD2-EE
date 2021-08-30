@@ -12,8 +12,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class AutorizationUser implements Command {
-    private static AutorizationUser instance = new AutorizationUser();
+public class AuthorizationUser implements Command {
+    private static final AuthorizationUser INSTANCE = new AuthorizationUser();
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
     private static final UserService USER_SERVISE = PROVIDER.getUserService();
     public static final String SESSION_PATH = "path";
@@ -22,11 +22,11 @@ public class AutorizationUser implements Command {
     public static final String PATH_COMMAND_ERROR = "UNKNOWN_COMMAND";
     public static final String PATH_COMMAND_AFTER_AUTHORIZATION = "AFTER_AUTHORIZATION";
 
-    private AutorizationUser() {
+    private AuthorizationUser() {
     }
 
-    public static AutorizationUser getInstance() {
-        return instance;
+    public static AuthorizationUser getInstance() {
+        return INSTANCE;
     }
 
     @Override

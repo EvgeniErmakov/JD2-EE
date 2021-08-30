@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class AfterAuthorization implements Command {
-	private static AfterAuthorization instance = new AfterAuthorization();
+	private static final AfterAuthorization INSTANCE = new AfterAuthorization();
 	public static final String SESSION_PATH = "path";
 	public static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
 	public static final String SESSION_PATH_COMMAND = "AFTER_AUTHORIZATION";
@@ -27,7 +27,7 @@ public class AfterAuthorization implements Command {
 	}
 
 	public static AfterAuthorization getInstance() {
-		return instance;
+		return INSTANCE;
 	}
 
 	private Integer pageNumberConverter(String currentPageNumber) {

@@ -2,15 +2,15 @@ package by.newsportal.news.dao.connection;
 
 import java.util.ResourceBundle;
 
-public class DBResurceManager {
-	private final static DBResurceManager instance = new DBResurceManager();
+public class DBResourceManager {
+	private final static DBResourceManager INSTANCE = new DBResourceManager();
 	
 	ResourceBundle bundle = ResourceBundle.getBundle("database-sittings.db");
 	
-	private DBResurceManager() {}
+	private DBResourceManager() {}
 	
-	public static DBResurceManager getInstance() {
-		return instance;
+	public static DBResourceManager getInstance() {
+		return INSTANCE;
 	}
 	
 	public String getValue(String key) {

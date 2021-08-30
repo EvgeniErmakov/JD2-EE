@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class RegistrationUser implements Command {
     private static final RegistrationUser instance = new RegistrationUser();
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
-    private static final UserService USER_SERVISE = PROVIDER.getUserService();
+    private static final UserService USER_SERVICE = PROVIDER.getUserService();
     private static final String EMPTY_PASSWORD = "";
     public static final String SESSION_PATH = "path";
     public static final String PART_PATH = "Controller?command=";
@@ -41,7 +41,7 @@ public class RegistrationUser implements Command {
                 return;
             }
 
-            User user = USER_SERVISE.registration(information);
+            User user = USER_SERVICE.registration(information);
 
             if (user == null) {
                 response.sendRedirect(PART_PATH + PATH_COMMAND_REGISTRATION + "&email_is_busy=This user is already registered");

@@ -18,7 +18,6 @@ public class RegistrationInfo {
         this.repeatedPassword = request.getParameter("repeatedPassword");
         this.name = request.getParameter("name");
         this.surname = request.getParameter("surname");
-
     }
 
     public String getSurname() {

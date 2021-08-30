@@ -22,14 +22,13 @@ public class GoToMainPage implements Command {
     public static final String MAIN_PAGE = "/WEB-INF/jsp/main.jsp";
     public static final String ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
     private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
-
-    private static GoToMainPage instance = new GoToMainPage();
+    private static final GoToMainPage INSTANCE = new GoToMainPage();
 
     private GoToMainPage() {
     }
 
     public static GoToMainPage getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     private Integer pageNumberConverter(String currentPageNumber) {

@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class GoToRegistrationPage implements Command {
-	private static GoToRegistrationPage instance = new GoToRegistrationPage();
+	private static final GoToRegistrationPage INSTANCE = new GoToRegistrationPage();
 	public static final String SESSION_PATH = "path";
 	public static final String PATH_COMMAND_REG = "REGISTRATION_PAGE";
 	public static final String REGISTRATION_PAGE = "/WEB-INF/jsp/RegistrationPage.jsp";
@@ -16,7 +16,7 @@ public class GoToRegistrationPage implements Command {
 	private GoToRegistrationPage() {}
 
 	public static GoToRegistrationPage getInstance() {
-		return instance;
+		return INSTANCE;
 	}
 
 	@Override

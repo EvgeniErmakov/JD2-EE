@@ -37,8 +37,6 @@ public class SQLNewsDAO implements NewsDAO {
             }
         } catch (SQLException e) {
             throw new DAOException("Remote server could not be connected", e);
-        } catch (ConnectionPoolException e) {
-            throw new DAOException("False query", e);
         } catch (Exception e) {
             throw new DAOException("False query", e);
         }
