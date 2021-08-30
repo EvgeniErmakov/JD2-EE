@@ -17,11 +17,13 @@ public class RegistrationUser implements Command {
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
     private static final UserService USER_SERVICE = PROVIDER.getUserService();
     private static final String EMPTY_PASSWORD = "";
-    public static final String SESSION_PATH = "path";
-    public static final String PART_PATH = "Controller?command=";
-    public static final String PATH_COMMAND_REGISTRATION = "REGISTRATION_PAGE";
-    public static final String PATH_COMMAND_ERROR = "UNKNOWN_COMMAND";
-    public static final String PATH_COMMAND_AUTHORIZATION = "AUTHORIZATION_PAGE";
+    private static final String SESSION_PATH = "path";
+    private static final String PATH_COMMAND_REGISTRATION = "REGISTRATION_PAGE";
+    private static final String PATH_COMMAND_ERROR = "Controller?command=UNKNOWN_COMMAND";
+    private static final String PATH_COMMAND_AUTHORIZATION = "AUTHORIZATION_PAGE";
+    private static final String INCORRECT_DATA = "Controller?command=REGISTRATION_PAGE&incorrect_data_message=Incorrect data";
+    private static final String EMAIL_BUSY = "Controller?command=REGISTRATION_PAGE&email_is_busy=This user is already registered";
+    private static final String SUCCESSFUL_REGISTRATION = "Controller?command=AUTHORIZATION_PAGE&registration_message=You have been registered";
 
     private RegistrationUser() {
     }
@@ -37,22 +39,22 @@ public class RegistrationUser implements Command {
         request.getSession(true).setAttribute(SESSION_PATH, PATH_COMMAND_REGISTRATION);
         try {
             if (EMPTY_PASSWORD.equals(information.getEnteredPassword()) || !(information.getEnteredPassword().equals(information.getRepeatedPassword()))) {
-                response.sendRedirect(PART_PATH + PATH_COMMAND_REGISTRATION + "&incorrect_data_message=Incorrect data");
+                response.sendRedirect(INCORRECT_DATA);
                 return;
             }
 
             User user = USER_SERVICE.registration(information);
 
             if (user == null) {
-                response.sendRedirect(PART_PATH + PATH_COMMAND_REGISTRATION + "&email_is_busy=This user is already registered");
+                response.sendRedirect(EMAIL_BUSY);
                 return;
             }
             request.getSession(true).setAttribute(SESSION_PATH, PATH_COMMAND_AUTHORIZATION);
-            path = PATH_COMMAND_AUTHORIZATION + "&registration_message=You have been registered";
+            path = SUCCESSFUL_REGISTRATION;
         } catch (ServiceException e) {
             e.printStackTrace();
             request.getSession(true).setAttribute(SESSION_PATH, PATH_COMMAND_ERROR);
         }
-        response.sendRedirect("Controller?command=" + path);
+        response.sendRedirect(path);
     }
 }

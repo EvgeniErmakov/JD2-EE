@@ -15,12 +15,13 @@ import jakarta.servlet.http.HttpServletResponse;
 public class AuthorizationUser implements Command {
     private static final AuthorizationUser INSTANCE = new AuthorizationUser();
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
-    private static final UserService USER_SERVIСE = PROVIDER.getUserService();
+    private static final UserService USER_SERVICE = PROVIDER.getUserService();
     public static final String SESSION_PATH = "path";
-    public static final String PART_PATH = "Controller?command=";
     public static final String PATH_COMMAND_AUTHORIZATION = "AUTHORIZATION_PAGE";
     public static final String PATH_COMMAND_ERROR = "UNKNOWN_COMMAND";
     public static final String PATH_COMMAND_AFTER_AUTHORIZATION = "AFTER_AUTHORIZATION";
+    private static final String INCORRECT_DATA = "Controller?command=AUTHORIZATION_PAGE&incorrect_data_message=Incorrect data:";
+    private static final String USER_NOT_FOUND = "AUTHORIZATION_PAGE&incorrect_data_message=User is not found";
 
     private AuthorizationUser() {
     }
@@ -37,17 +38,16 @@ public class AuthorizationUser implements Command {
 
         try {
             if (info.getEnteredPassword().equals("") || info.getEmail().equals("")) {
-                path = PART_PATH + PATH_COMMAND_AUTHORIZATION + "&incorrect_data_message=Incorrect data:";
-                response.sendRedirect(path);
+                response.sendRedirect(INCORRECT_DATA);
                 return;
             }
 
-            User user = USER_SERVIСE.authorization(info);
+            User user = USER_SERVICE.authorization(info);
             request.getSession(true).setAttribute(SESSION_PATH, PATH_COMMAND_AFTER_AUTHORIZATION);
             request.getSession(true).setAttribute("user", user);
 
             if (user == null) {
-                path = PATH_COMMAND_AUTHORIZATION + "&incorrect_data_message=User is not found";
+                path = USER_NOT_FOUND;
             } else {
                 request.getSession(true).setAttribute("user", user);
                 path = PATH_COMMAND_AFTER_AUTHORIZATION;
