@@ -40,7 +40,7 @@ public class GoToMainPage implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int currentPageNumber = 1;
+        int currentPageNumber;
 
         Integer pagesMaxNum;
         List<Integer> numberOfPageList;

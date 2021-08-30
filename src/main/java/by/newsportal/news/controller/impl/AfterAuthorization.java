@@ -23,6 +23,7 @@ public class AfterAuthorization implements Command {
 	public static final String ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
 	public static final String AFTER_AUTHORIZATION_PAGE = "/WEB-INF/jsp/AfterAuthorization.jsp";
 	private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
+
 	private AfterAuthorization() {
 	}
 

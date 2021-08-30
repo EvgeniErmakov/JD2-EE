@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class AuthorizationUser implements Command {
     private static final AuthorizationUser INSTANCE = new AuthorizationUser();
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
-    private static final UserService USER_SERVISE = PROVIDER.getUserService();
+    private static final UserService USER_SERVIСE = PROVIDER.getUserService();
     public static final String SESSION_PATH = "path";
     public static final String PART_PATH = "Controller?command=";
     public static final String PATH_COMMAND_AUTHORIZATION = "AUTHORIZATION_PAGE";
@@ -42,7 +42,7 @@ public class AuthorizationUser implements Command {
                 return;
             }
 
-            User user = USER_SERVISE.authorization(info);
+            User user = USER_SERVIСE.authorization(info);
             request.getSession(true).setAttribute(SESSION_PATH, PATH_COMMAND_AFTER_AUTHORIZATION);
             request.getSession(true).setAttribute("user", user);
 
