@@ -62,7 +62,6 @@
         </tr>
         <tr ALIGN="center">
             <td ALIGN="center"><c:out value="${clip.getDescription()}"/>
-                <div><a href="Controller?commandToController=UPDATE_NEWS_PAGE&choosenNewsId=${news.getId()}&currentPage=${currentPage}"> <c:out value="${update_news}"/></a></div>
                 <HR WIDTH="70%" ALIGN="center" SIZE="1">
             </td>
         </tr>
