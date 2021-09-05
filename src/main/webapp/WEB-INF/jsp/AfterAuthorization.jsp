@@ -10,7 +10,6 @@
     <meta charset="utf-8">
     <title>Page of successful authorization</title>
     <link rel="stylesheet" href="resources/css/css-style.css">
-
     <fmt:setLocale value="${sessionScope.local}"/>
     <fmt:setBundle basename="localization.local" var="loc"/>
     <fmt:message bundle="${loc}" key="local.name.site" var="name_site"/>
@@ -22,14 +21,12 @@
     <fmt:message bundle="${loc}" key="local.text.hello" var="hello"/>
     <fmt:message bundle="${loc}" key="local.text.updateNews" var="update_news"/>
     <fmt:message bundle="${loc}" key="local.text.addNews" var="add_news"/>
-
 </head>
 <body>
 <%
     String UserRole = (((User) request.getSession(false).getAttribute("user")).getRole()).toString();
     request.setAttribute("UserRole", UserRole);
 %>
-
 <div class="heading">
     <h1 class=headline><c:out value="${name_site}"/></h1>
     <div class=heading-1>
@@ -51,10 +48,10 @@
                 <input type="submit" class="button" value="${exit_button}"/>
             </form>
             <c:if test="${UserRole == 'ADMIN'}">
-            <form action="Controller" method="post">
-                <input type="hidden" name="command" value="GO_TO_ADD_NEWS_PAGE"/>
-                <input type="submit" class="button" value="${add_news}"/>
-            </form>
+                <form action="Controller" method="post">
+                    <input type="hidden" name="command" value="GO_TO_ADD_NEWS_PAGE"/>
+                    <input type="submit" class="button" value="${add_news}"/>
+                </form>
             </c:if>
         </div>
     </div>
@@ -71,27 +68,14 @@
         <tr ALIGN="center">
             <td ALIGN="center"><p><c:out value="${news.getDescription()}"/></p>
                 <c:if test="${UserRole == 'ADMIN'}">
-                <div ALIGN="right">
-                    <a href="Controller?command=UPDATE_NEWS_PAGE&choosenNewsId=${news.getId()}&currentPage=${currentPage}"
-                       style="
-                           font-size: 20px;
-                        display: inline-block;
-    background: #408080; /* Серый цвет фона */
-    color: black; /* Белый цвет текста */
-    padding: 1rem 1.5rem; /* Поля вокруг текста */
-    text-decoration: none; /* Убираем подчёркивание */">
-                        <c:out value="${update_news}"/></a>
-
-                    <a href="Controller?command=DELETE_NEWS&choosenNewsId=${news.getId()}&currentPage=${currentPage}"
-                       style="
-                           font-size: 20px;
-                        display: inline-block;
-    background: #408080; /* Серый цвет фона */
-    color: black; /* Белый цвет текста */
-    padding: 1rem 1.5rem; /* Поля вокруг текста */
-    text-decoration: none; /* Убираем подчёркивание */">
-                        <c:out value="${delete_news}"/></a>
-                </div>
+                    <div ALIGN="right">
+                        <a href="Controller?command=UPDATE_NEWS_PAGE&choosenNewsId=${news.getId()}&currentPage=${currentPage}"
+                           style="font-size: 20px;display: inline-block;background: #408080;color: black; padding: 1rem 1.5rem; text-decoration: none; ">
+                            <c:out value="${update_news}"/></a>
+                        <a href="Controller?command=DELETE_NEWS&choosenNewsId=${news.getId()}&currentPage=${currentPage}"
+                           style="font-size: 20px;display: inline-block; background: #408080;  color: black; padding: 1rem 1.5rem; text-decoration: none; ">
+                            <c:out value="${delete_news}"/></a>
+                    </div>
                 </c:if>
                 <HR WIDTH="70%" ALIGN="center" SIZE="1">
             </td>
