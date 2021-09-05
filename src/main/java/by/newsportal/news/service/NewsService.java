@@ -9,4 +9,8 @@ public interface NewsService {
     List<News> addNewses(int currentPageNumber) throws ServiceException;
 
     Integer getNewsMaxNumber() throws ServiceException;
+
+    void update(News news) throws ServiceException;
+
+    News getNews(Integer chosenId) throws ServiceException;
 }

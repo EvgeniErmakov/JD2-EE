@@ -32,4 +32,22 @@ public class NewsServiceImpl implements NewsService {
         }
         return newsMaxNumber;
     }
+    @Override
+    public void update(News news) throws ServiceException {
+        try {
+            NEWS_DAO.update(news);
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(), e);
+        }
+    }
+
+    public News getNews(Integer chosenId) throws ServiceException {
+        News news = null;
+        try {
+            news = NEWS_DAO.getNews(chosenId);
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(), e);
+        }
+        return news;
+    }
 }

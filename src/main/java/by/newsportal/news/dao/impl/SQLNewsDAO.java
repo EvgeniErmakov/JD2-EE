@@ -3,6 +3,7 @@ package by.newsportal.news.dao.impl;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 import by.newsportal.news.bean.News;
 import by.newsportal.news.dao.NewsDAO;
 import by.newsportal.news.dao.connection.ConnectionPool;
@@ -15,6 +16,9 @@ public class SQLNewsDAO implements NewsDAO {
     private static final String NEWS_DESCRIPTION = "description";
     private static final String SQL_GET_NUMBER_ROWS = "select count(*) from news";
     private static final String SQL_GET_NEWS_LIST = "SELECT * FROM news";
+    private static final String SQL_GET_NEWS_BY_ID = "SELECT * FROM news WHERE(" + NEWS_ID + "=?)";
+    private static final String SQL_UPDATE_NEWS = "UPDATE news SET  " + NEWS_TITLE + "=? ,  "
+            + NEWS_DESCRIPTION + "= ?,   WHERE (" + NEWS_ID + "=?)";
 
     @Override
     public List<News> getNewsList(int currentPageNumber) throws DAOException {
@@ -60,5 +64,57 @@ public class SQLNewsDAO implements NewsDAO {
             throw new DAOException("DAO Exception", e);
         }
         return numberRow;
+    }
+
+    @Override
+    public void update(News entity) throws DAOException {
+        try (Connection connection = ConnectionPool.getInstance().takeConnection();
+             PreparedStatement pr = connection.prepareStatement(SQL_UPDATE_NEWS);) {
+
+            pr.setString(1, entity.getTitle());
+            pr.setString(2, entity.getDescription());
+            pr.setInt(3, entity.getId());
+            System.out.println("Remote DB connection established");
+            pr.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("Remote server could not be connected", e);
+        } catch (ConnectionPoolException e) {
+            throw new DAOException("False query", e);
+        } catch (Exception e) {
+            throw new DAOException("False query", e);
+
+        }
+    }
+
+    public News getNews(Integer chosenId) throws DAOException {
+        News news = null;
+
+        Integer id;
+        String title;
+        String fullText;
+        String brief;
+        String imgLink;
+
+        try (Connection connection = ConnectionPool.getInstance().takeConnection();
+             PreparedStatement st = connection.prepareStatement(SQL_GET_NEWS_BY_ID);) {
+            st.setInt(1, chosenId);
+            ResultSet result = st.executeQuery();
+            while (result.next()) {
+
+                id = result.getInt(NEWS_ID);
+                title = result.getString(NEWS_TITLE);
+                fullText = result.getString(NEWS_DESCRIPTION);
+                news = new News(id, title, fullText);
+            }
+
+        } catch (SQLException e) {
+            throw new DAOException("Remote server could not be connected", e);
+        } catch (ConnectionPoolException e) {
+            throw new DAOException("False query", e);
+        } catch (Exception e) {
+            throw new DAOException("False query", e);
+        }
+
+        return news;
     }
 }

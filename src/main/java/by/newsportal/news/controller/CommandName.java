@@ -8,6 +8,7 @@ public enum CommandName {
     GO_TO_MAIN_PAGE,
     AFTER_AUTHORIZATION,
     CHANGE_LOCAL,
-    ADD_NEWS,
+    UPDATE_NEWS,
+    UPDATE_NEWS_PAGE,
     UNKNOWN_COMMAND
 }

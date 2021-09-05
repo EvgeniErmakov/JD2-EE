@@ -17,7 +17,7 @@
     <fmt:message bundle="${loc}" key="local.locbutton.name.login" var="Login_button"/>
     <fmt:message bundle="${loc}" key="local.locbutton.name.register" var="Register_button"/>
     <fmt:message bundle="${loc}" key="local.text.welcom" var="welcome"/>
-
+    <fmt:message bundle="${loc}" key="local.text.updateNews" var="update_news"/>
 </head>
 <body>
 <div class="heading">
@@ -62,6 +62,7 @@
         </tr>
         <tr ALIGN="center">
             <td ALIGN="center"><c:out value="${clip.getDescription()}"/>
+                <div><a href="Controller?commandToController=UPDATE_NEWS_PAGE&choosenNewsId=${news.getId()}&currentPage=${currentPage}"> <c:out value="${update_news}"/></a></div>
                 <HR WIDTH="70%" ALIGN="center" SIZE="1">
             </td>
         </tr>

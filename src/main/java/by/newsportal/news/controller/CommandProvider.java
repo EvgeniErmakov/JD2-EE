@@ -3,14 +3,7 @@ package by.newsportal.news.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import by.newsportal.news.controller.impl.AfterAuthorization;
-import by.newsportal.news.controller.impl.AuthorizationUser;
-import by.newsportal.news.controller.impl.GoToAuthorizationPage;
-import by.newsportal.news.controller.impl.GoToMainPage;
-import by.newsportal.news.controller.impl.GoToRegistrationPage;
-import by.newsportal.news.controller.impl.RegistrationUser;
-import by.newsportal.news.controller.impl.UnknownCommand;
-import by.newsportal.news.controller.impl.ChangeLocal;
+import by.newsportal.news.controller.impl.*;
 
 public class CommandProvider {
     private final Map<CommandName, Command> COMMANDS = new HashMap<>();
@@ -23,6 +16,8 @@ public class CommandProvider {
         COMMANDS.put(CommandName.AUTHORIZATION_USER, AuthorizationUser.getInstance());
         COMMANDS.put(CommandName.AFTER_AUTHORIZATION, AfterAuthorization.getInstance());
         COMMANDS.put(CommandName.CHANGE_LOCAL, ChangeLocal.getInstance());
+        COMMANDS.put(CommandName.UPDATE_NEWS, new UpdateNews());
+        COMMANDS.put(CommandName.UPDATE_NEWS_PAGE, new GoToUpdateNewsPage());
         COMMANDS.put(CommandName.UNKNOWN_COMMAND, UnknownCommand.getInstance());
     }
 
