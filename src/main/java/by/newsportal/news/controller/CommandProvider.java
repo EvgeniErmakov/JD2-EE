@@ -20,6 +20,8 @@ public class CommandProvider {
         COMMANDS.put(CommandName.UPDATE_NEWS_PAGE, GoToUpdateNewsPage.getInstance());
         COMMANDS.put(CommandName.DELETE_NEWS, DeleteNews.getInstance());
         COMMANDS.put(CommandName.UNKNOWN_COMMAND, UnknownCommand.getInstance());
+        COMMANDS.put(CommandName.GO_TO_ADD_NEWS_PAGE, GoToAddNewsPage.getInstance());
+        COMMANDS.put(CommandName.ADD_NEWS, AddNews.getInstance());
     }
 
     public Command findCommand(String name) {

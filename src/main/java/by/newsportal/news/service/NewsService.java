@@ -8,6 +8,8 @@ import by.newsportal.news.service.exception.ServiceException;
 public interface NewsService {
     List<News> addNewses(int currentPageNumber) throws ServiceException;
 
+    void create(News news) throws ServiceException;
+
     Integer getNewsMaxNumber() throws ServiceException;
 
     void update(News news) throws ServiceException;

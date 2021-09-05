@@ -19,6 +19,8 @@ public class SQLNewsDAO implements NewsDAO {
     private static final String SQL_GET_NEWS_BY_ID = "SELECT * FROM news WHERE(" + NEWS_ID + "=?)";
     private static final String SQL_UPDATE_NEWS = "UPDATE news SET  " + NEWS_TITLE + "=? , " + NEWS_DESCRIPTION + "= ? WHERE (" + NEWS_ID + "=?)";
     private static final String SQL_DELETE_NEWS = "DELETE FROM news WHERE(" + NEWS_ID + "=?)";
+    private static final String SQL_INSERT_NEWS = "INSERT INTO news( " + NEWS_TITLE + ", " + NEWS_DESCRIPTION + ") VALUES (?, ?)";
+
     @Override
     public List<News> getNewsList(int currentPageNumber) throws DAOException {
         int id;
@@ -128,6 +130,19 @@ public class SQLNewsDAO implements NewsDAO {
             throw new DAOException("False query", e);
 
         }
+    }
 
+    @Override
+    public void create(News entity) throws DAOException {
+        try (Connection connection = ConnectionPool.getInstance().takeConnection();
+             PreparedStatement pr = connection.prepareStatement(SQL_INSERT_NEWS);) {
+            pr.setString(1, entity.getTitle());
+            pr.setString(2, entity.getDescription());
+            pr.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("Remote server could't be connected", e);
+        } catch (Exception e) {
+            throw new DAOException("False query", e);
+        }
     }
 }

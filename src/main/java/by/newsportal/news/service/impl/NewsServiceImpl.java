@@ -60,5 +60,14 @@ public class NewsServiceImpl implements NewsService {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void create(News news) throws ServiceException {
+        try {
+            NEWS_DAO.create(news);
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(), e);
+        }
+    }
 }
 

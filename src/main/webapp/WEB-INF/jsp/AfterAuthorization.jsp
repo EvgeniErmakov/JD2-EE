@@ -13,14 +13,14 @@
     <fmt:setLocale value="${sessionScope.local}"/>
     <fmt:setBundle basename="localization.local" var="loc"/>
     <fmt:message bundle="${loc}" key="local.name.site" var="name_site"/>
-    <fmt:message bundle="${loc}" key="local.locbutton.name.exit" var="Exit_button"/>
+    <fmt:message bundle="${loc}" key="local.locbutton.name.exit" var="exit_button"/>
     <fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button"/>
     <fmt:message bundle="${loc}" key="local.locbutton.name.en" var="en_button"/>
     <fmt:message bundle="${loc}" key="local.locbutton.name.login" var="Login_button"/>
     <fmt:message bundle="${loc}" key="local.text.deleteNews" var="delete_news"/>
     <fmt:message bundle="${loc}" key="local.text.hello" var="hello"/>
     <fmt:message bundle="${loc}" key="local.text.updateNews" var="update_news"/>
-
+    <fmt:message bundle="${loc}" key="local.text.addNews" var="add_news"/>
 
 </head>
 <body>
@@ -39,10 +39,14 @@
                 <input type="submit" class="button_local" value="${en_button}"/><br/>
             </form>
         </div>
-        <div>
-            <form class="heading-2" action="Controller" method="post">
+        <div class="heading-2">
+            <form action="Controller" method="post">
                 <input type="hidden" name="command" value="GO_TO_MAIN_PAGE"/>
-                <input type="submit" class="button" value="${Exit_button}"/>
+                <input type="submit" class="button" value="${exit_button}"/>
+            </form>
+            <form action="Controller" method="post">
+                <input type="hidden" name="command" value="GO_TO_ADD_NEWS_PAGE"/>
+                <input type="submit" class="button" value="${add_news}"/>
             </form>
         </div>
     </div>
@@ -58,8 +62,10 @@
         </tr>
         <tr ALIGN="center">
             <td ALIGN="center"><c:out value="${news.getDescription()}"/>
-                <div><a href="Controller?command=UPDATE_NEWS_PAGE&choosenNewsId=${news.getId()}&currentPage=${currentPage}" style="text-decoration: none">
-                    <c:out value="${update_news}"/></a></div>
+                <div>
+                    <a href="Controller?command=UPDATE_NEWS_PAGE&choosenNewsId=${news.getId()}&currentPage=${currentPage}"
+                       style="text-decoration: none">
+                        <c:out value="${update_news}"/></a></div>
                 <div><a href="Controller?command=DELETE_NEWS&choosenNewsId=${news.getId()}&currentPage=${currentPage}"
                         style="text-decoration: none">
                     <c:out value="${delete_news}"/></a></div>
