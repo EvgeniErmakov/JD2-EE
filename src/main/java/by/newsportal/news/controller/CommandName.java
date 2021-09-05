@@ -10,5 +10,6 @@ public enum CommandName {
     CHANGE_LOCAL,
     UPDATE_NEWS,
     UPDATE_NEWS_PAGE,
+    DELETE_NEWS,
     UNKNOWN_COMMAND
 }

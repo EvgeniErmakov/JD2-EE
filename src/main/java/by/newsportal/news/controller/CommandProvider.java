@@ -18,6 +18,7 @@ public class CommandProvider {
         COMMANDS.put(CommandName.CHANGE_LOCAL, ChangeLocal.getInstance());
         COMMANDS.put(CommandName.UPDATE_NEWS, UpdateNews.getInstance());
         COMMANDS.put(CommandName.UPDATE_NEWS_PAGE, GoToUpdateNewsPage.getInstance());
+        COMMANDS.put(CommandName.DELETE_NEWS, DeleteNews.getInstance());
         COMMANDS.put(CommandName.UNKNOWN_COMMAND, UnknownCommand.getInstance());
     }
 

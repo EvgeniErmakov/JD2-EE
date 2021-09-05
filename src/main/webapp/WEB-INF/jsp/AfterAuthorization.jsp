@@ -55,6 +55,8 @@
         </tr>
         <tr ALIGN="center">
             <td ALIGN="center"><c:out value="${news.getDescription()}"/>
+                <div class="conteiner"><a href="Controller?command=DELETE_NEWS&choosenNewsId=${news.getId()}&currentPage=${currentPage}"
+                                          style="text-decoration: none">Delete news</a></div>
                 <div><a href="Controller?command=UPDATE_NEWS_PAGE&choosenNewsId=${news.getId()}&currentPage=${currentPage}"> <c:out value="${update_news}"/></a></div>
                 <HR WIDTH="70%" ALIGN="center" SIZE="1">
             </td>

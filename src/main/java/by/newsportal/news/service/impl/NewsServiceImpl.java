@@ -32,6 +32,7 @@ public class NewsServiceImpl implements NewsService {
         }
         return newsMaxNumber;
     }
+
     @Override
     public void update(News news) throws ServiceException {
         try {
@@ -50,4 +51,14 @@ public class NewsServiceImpl implements NewsService {
         }
         return news;
     }
+
+    @Override
+    public void deleteNews(Integer id) throws ServiceException {
+        try {
+            NEWS_DAO.delete(id);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
