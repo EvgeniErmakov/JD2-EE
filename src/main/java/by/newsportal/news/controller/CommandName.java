@@ -11,5 +11,7 @@ public enum CommandName {
     UPDATE_NEWS,
     UPDATE_NEWS_PAGE,
     DELETE_NEWS,
+    GO_TO_ADD_NEWS_PAGE,
+    ADD_NEWS,
     UNKNOWN_COMMAND
 }
