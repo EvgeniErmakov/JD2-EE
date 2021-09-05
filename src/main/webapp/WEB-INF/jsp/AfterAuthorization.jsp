@@ -1,3 +1,4 @@
+<%@ page import="by.newsportal.news.bean.User" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -24,6 +25,11 @@
 
 </head>
 <body>
+<%
+    String UserRole = (((User) request.getSession(false).getAttribute("user")).getRole()).toString();
+    request.setAttribute("UserRole", UserRole);
+%>
+
 <div class="heading">
     <h1 class=headline><c:out value="${name_site}"/></h1>
     <div class=heading-1>
@@ -44,10 +50,12 @@
                 <input type="hidden" name="command" value="GO_TO_MAIN_PAGE"/>
                 <input type="submit" class="button" value="${exit_button}"/>
             </form>
+            <c:if test="${UserRole == 'ADMIN'}">
             <form action="Controller" method="post">
                 <input type="hidden" name="command" value="GO_TO_ADD_NEWS_PAGE"/>
                 <input type="submit" class="button" value="${add_news}"/>
             </form>
+            </c:if>
         </div>
     </div>
 </div>
@@ -62,6 +70,7 @@
         </tr>
         <tr ALIGN="center">
             <td ALIGN="center"><p><c:out value="${news.getDescription()}"/></p>
+                <c:if test="${UserRole == 'ADMIN'}">
                 <div ALIGN="right">
                     <a href="Controller?command=UPDATE_NEWS_PAGE&choosenNewsId=${news.getId()}&currentPage=${currentPage}"
                        style="
@@ -83,6 +92,7 @@
     text-decoration: none; /* Убираем подчёркивание */">
                         <c:out value="${delete_news}"/></a>
                 </div>
+                </c:if>
                 <HR WIDTH="70%" ALIGN="center" SIZE="1">
             </td>
         </tr>
