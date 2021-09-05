@@ -16,34 +16,40 @@ import java.io.IOException;
 public class GoToUpdateNewsPage implements Command {
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
     private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
+    private static final GoToUpdateNewsPage INSTANCE = new GoToUpdateNewsPage();
+
+    public GoToUpdateNewsPage() {
+    }
+
+    public static GoToUpdateNewsPage getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = "/WEB-INF/jsp/updateNewsPage.jsp";
-
         HttpSession session = request.getSession(true);
-        Integer choosenNewsId = Integer.parseInt(request.getParameter("choosenNewsId"));
+        int choosenNewsId = Integer.parseInt(request.getParameter("choosenNewsId"));
+        ;
         String lastCommandName = "UPDATE_NEWS_PAGE&choosenNewsId=" + choosenNewsId;
         News choosenNews = null;
-        if (choosenNewsId == null || choosenNewsId < 1) {
-            path = "/WEB-INF/jsp/unknownPage.jsp";
+        if (choosenNewsId < 1) {
+            path = "/WEB-INF/jsp/Error.jsp";
             lastCommandName = "UNKNOWN_COMMAND";
             session.setAttribute("lastURL", lastCommandName); // for redirect in localization
-            response.sendRedirect("Controller?commandToController=" + path);
+            response.sendRedirect("Controller?command=" + path);
             return;
         }
-
         try {
             choosenNews = NEWS_SERVICE.getNews(choosenNewsId);
 
         } catch (ServiceException e) {
-            path = "/WEB-INF/jsp/unknownPage.jsp";
+            path = "/WEB-INF/jsp/Error.jsp";
             lastCommandName = "UNKNOWN_COMMAND";
             session.setAttribute("lastURL", lastCommandName); // for redirect in localization
-            response.sendRedirect("Controller?commandToController=" + lastCommandName);
+            response.sendRedirect("Controller?command=" + lastCommandName);
             return;
         }
-
         request.setAttribute("choosenNews", choosenNews);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
         request.getSession(true).setAttribute("lastURL", lastCommandName); // for redirect in localization

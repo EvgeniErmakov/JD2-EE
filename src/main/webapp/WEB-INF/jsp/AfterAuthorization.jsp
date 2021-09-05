@@ -37,7 +37,7 @@
             </form>
         </div>
         <div>
-            <form class="heading-2" ; action="Controller" method="post">
+            <form class="heading-2" action="Controller" method="post">
                 <input type="hidden" name="command" value="GO_TO_MAIN_PAGE"/>
                 <input type="submit" class="button" value="${Exit_button}"/>
             </form>
@@ -49,13 +49,13 @@
 <p class="text"><c:out value="${mer.getName()} ${hello}"/></p>
 
 <table class="textNews" align="center">
-    <c:forEach items="${newses}" var="clip">
+    <c:forEach items="${newses}" var="news">
         <tr ALIGN="center">
-            <th ALIGN="center"><c:out value="${clip.getTitle()}"/></th>
+            <th ALIGN="center"><c:out value="${news.getTitle()}"/></th>
         </tr>
         <tr ALIGN="center">
-            <td ALIGN="center"><c:out value="${clip.getDescription()}"/>
-                <div><a href="Controller?commandToController=UPDATE_NEWS_PAGE&choosenNewsId=${news.getId()}&currentPage=${currentPage}"> <c:out value="${update_news}"/></a></div>
+            <td ALIGN="center"><c:out value="${news.getDescription()}"/>
+                <div><a href="Controller?command=UPDATE_NEWS_PAGE&choosenNewsId=${news.getId()}&currentPage=${currentPage}"> <c:out value="${update_news}"/></a></div>
                 <HR WIDTH="70%" ALIGN="center" SIZE="1">
             </td>
         </tr>

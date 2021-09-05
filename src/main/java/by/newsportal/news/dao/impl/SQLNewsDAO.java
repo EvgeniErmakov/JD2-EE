@@ -17,8 +17,7 @@ public class SQLNewsDAO implements NewsDAO {
     private static final String SQL_GET_NUMBER_ROWS = "select count(*) from news";
     private static final String SQL_GET_NEWS_LIST = "SELECT * FROM news";
     private static final String SQL_GET_NEWS_BY_ID = "SELECT * FROM news WHERE(" + NEWS_ID + "=?)";
-    private static final String SQL_UPDATE_NEWS = "UPDATE news SET  " + NEWS_TITLE + "=? ,  "
-            + NEWS_DESCRIPTION + "= ?,   WHERE (" + NEWS_ID + "=?)";
+    private static final String SQL_UPDATE_NEWS = "UPDATE news SET  " + NEWS_TITLE + "=? , " + NEWS_DESCRIPTION + "= ? WHERE (" + NEWS_ID + "=?)";
 
     @Override
     public List<News> getNewsList(int currentPageNumber) throws DAOException {
@@ -70,11 +69,9 @@ public class SQLNewsDAO implements NewsDAO {
     public void update(News entity) throws DAOException {
         try (Connection connection = ConnectionPool.getInstance().takeConnection();
              PreparedStatement pr = connection.prepareStatement(SQL_UPDATE_NEWS);) {
-
             pr.setString(1, entity.getTitle());
             pr.setString(2, entity.getDescription());
             pr.setInt(3, entity.getId());
-            System.out.println("Remote DB connection established");
             pr.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException("Remote server could not be connected", e);

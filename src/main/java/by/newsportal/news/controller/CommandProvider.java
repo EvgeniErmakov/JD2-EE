@@ -16,8 +16,8 @@ public class CommandProvider {
         COMMANDS.put(CommandName.AUTHORIZATION_USER, AuthorizationUser.getInstance());
         COMMANDS.put(CommandName.AFTER_AUTHORIZATION, AfterAuthorization.getInstance());
         COMMANDS.put(CommandName.CHANGE_LOCAL, ChangeLocal.getInstance());
-        COMMANDS.put(CommandName.UPDATE_NEWS, new UpdateNews());
-        COMMANDS.put(CommandName.UPDATE_NEWS_PAGE, new GoToUpdateNewsPage());
+        COMMANDS.put(CommandName.UPDATE_NEWS, UpdateNews.getInstance());
+        COMMANDS.put(CommandName.UPDATE_NEWS_PAGE, GoToUpdateNewsPage.getInstance());
         COMMANDS.put(CommandName.UNKNOWN_COMMAND, UnknownCommand.getInstance());
     }
 
