@@ -55,7 +55,9 @@ body {
     margin: 0 25% 0 25%;
     width: 50%;
 }
-
+#update-button {
+    background-color: #408080;
+}
 .heading {
     margin: 10px;
     margin-left: 0px;
@@ -65,7 +67,6 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
 }
 
 .heading-1 {

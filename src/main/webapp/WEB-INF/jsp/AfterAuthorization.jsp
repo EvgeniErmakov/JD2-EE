@@ -17,8 +17,11 @@
     <fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button"/>
     <fmt:message bundle="${loc}" key="local.locbutton.name.en" var="en_button"/>
     <fmt:message bundle="${loc}" key="local.locbutton.name.login" var="Login_button"/>
+    <fmt:message bundle="${loc}" key="local.text.deleteNews" var="delete_news"/>
     <fmt:message bundle="${loc}" key="local.text.hello" var="hello"/>
     <fmt:message bundle="${loc}" key="local.text.updateNews" var="update_news"/>
+
+
 </head>
 <body>
 <div class="heading">
@@ -55,9 +58,11 @@
         </tr>
         <tr ALIGN="center">
             <td ALIGN="center"><c:out value="${news.getDescription()}"/>
-                <div class="conteiner"><a href="Controller?command=DELETE_NEWS&choosenNewsId=${news.getId()}&currentPage=${currentPage}"
-                                          style="text-decoration: none">Delete news</a></div>
-                <div><a href="Controller?command=UPDATE_NEWS_PAGE&choosenNewsId=${news.getId()}&currentPage=${currentPage}"> <c:out value="${update_news}"/></a></div>
+                <div><a href="Controller?command=UPDATE_NEWS_PAGE&choosenNewsId=${news.getId()}&currentPage=${currentPage}" style="text-decoration: none">
+                    <c:out value="${update_news}"/></a></div>
+                <div><a href="Controller?command=DELETE_NEWS&choosenNewsId=${news.getId()}&currentPage=${currentPage}"
+                        style="text-decoration: none">
+                    <c:out value="${delete_news}"/></a></div>
                 <HR WIDTH="70%" ALIGN="center" SIZE="1">
             </td>
         </tr>
