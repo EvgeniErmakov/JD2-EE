@@ -1,7 +1,7 @@
 # Project exclude paths
 /out/
-/.idea/
 /.settings/
 /build/
-/.idea/
 /.idea/libraries/
+/.project
+/.classpath
