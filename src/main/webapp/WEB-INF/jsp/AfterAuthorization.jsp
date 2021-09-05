@@ -61,14 +61,28 @@
             <th ALIGN="center"><c:out value="${news.getTitle()}"/></th>
         </tr>
         <tr ALIGN="center">
-            <td ALIGN="center"><c:out value="${news.getDescription()}"/>
-                <div>
+            <td ALIGN="center"><p><c:out value="${news.getDescription()}"/></p>
+                <div ALIGN="right">
                     <a href="Controller?command=UPDATE_NEWS_PAGE&choosenNewsId=${news.getId()}&currentPage=${currentPage}"
-                       style="text-decoration: none">
-                        <c:out value="${update_news}"/></a></div>
-                <div><a href="Controller?command=DELETE_NEWS&choosenNewsId=${news.getId()}&currentPage=${currentPage}"
-                        style="text-decoration: none">
-                    <c:out value="${delete_news}"/></a></div>
+                       style="
+                           font-size: 20px;
+                        display: inline-block;
+    background: #408080; /* Серый цвет фона */
+    color: black; /* Белый цвет текста */
+    padding: 1rem 1.5rem; /* Поля вокруг текста */
+    text-decoration: none; /* Убираем подчёркивание */">
+                        <c:out value="${update_news}"/></a>
+
+                    <a href="Controller?command=DELETE_NEWS&choosenNewsId=${news.getId()}&currentPage=${currentPage}"
+                       style="
+                           font-size: 20px;
+                        display: inline-block;
+    background: #408080; /* Серый цвет фона */
+    color: black; /* Белый цвет текста */
+    padding: 1rem 1.5rem; /* Поля вокруг текста */
+    text-decoration: none; /* Убираем подчёркивание */">
+                        <c:out value="${delete_news}"/></a>
+                </div>
                 <HR WIDTH="70%" ALIGN="center" SIZE="1">
             </td>
         </tr>

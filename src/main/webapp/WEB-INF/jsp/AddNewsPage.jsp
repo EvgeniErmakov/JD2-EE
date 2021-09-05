@@ -59,7 +59,9 @@
         <br />
         <br />
         <input type="hidden" name="command" value="ADD_NEWS" />
-        <button>Send</button>
+        <button id="update-button" style="background-color: #408080; color: black;
+   justify-content: center;    align-items: center;   margin-right: 20px;
+    margin-left: 20px; font-size: 20px;   justify-content: space-between; width: 150px;height:50px"><c:out value="${add_news}"/></button>
     </form>
 </div>
 </body>
