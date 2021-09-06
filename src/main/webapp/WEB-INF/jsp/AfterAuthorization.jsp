@@ -59,6 +59,7 @@
 
 <c:set var="mer" value="${sessionScope.user}"/>
 <p class="text"><c:out value="${mer.getName()} ${hello}"/></p>
+<HR WIDTH="70%" ALIGN="center" SIZE="1">
 
 <table class="textNews" align="center">
     <c:forEach items="${newses}" var="news">
