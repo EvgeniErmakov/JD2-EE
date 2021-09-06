@@ -30,13 +30,13 @@ public class GoToUpdateNewsPage implements Command {
         String path = "/WEB-INF/jsp/updateNewsPage.jsp";
         HttpSession session = request.getSession(true);
         int choosenNewsId = Integer.parseInt(request.getParameter("choosenNewsId"));
-        ;
+        System.out.println("я отработал");
         String lastCommandName = "UPDATE_NEWS_PAGE&choosenNewsId=" + choosenNewsId;
         News choosenNews = null;
         if (choosenNewsId < 1) {
             path = "/WEB-INF/jsp/Error.jsp";
             lastCommandName = "UNKNOWN_COMMAND";
-            session.setAttribute("lastURL", lastCommandName); // for redirect in localization
+            session.setAttribute("path", lastCommandName);
             response.sendRedirect("Controller?command=" + path);
             return;
         }
@@ -46,13 +46,13 @@ public class GoToUpdateNewsPage implements Command {
         } catch (ServiceException e) {
             path = "/WEB-INF/jsp/Error.jsp";
             lastCommandName = "UNKNOWN_COMMAND";
-            session.setAttribute("lastURL", lastCommandName); // for redirect in localization
+            session.setAttribute("path", lastCommandName);
             response.sendRedirect("Controller?command=" + lastCommandName);
             return;
         }
         request.setAttribute("choosenNews", choosenNews);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
-        request.getSession(true).setAttribute("lastURL", lastCommandName); // for redirect in localization
+        request.getSession(true).setAttribute("path", lastCommandName);
         requestDispatcher.forward(request, response);
     }
 }

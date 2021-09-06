@@ -18,9 +18,9 @@ public class GoToAddNewsPage implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = "/WEB-INF/jsp/AddNewsPage.jsp";
-        String lastCommandName = "ADD_NEWS";
+        String lastCommandName = "GO_TO_ADD_NEWS_PAGE";
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
-        request.getSession(true).setAttribute("lastURL", lastCommandName);
+        request.getSession(true).setAttribute("path", lastCommandName);
         requestDispatcher.forward(request, response);
     }
 }

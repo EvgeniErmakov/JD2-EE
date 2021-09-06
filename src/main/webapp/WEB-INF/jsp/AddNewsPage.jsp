@@ -50,7 +50,7 @@
 </div>
 
 <div class="registrationDiv" style="width: 50%; margin: 0 auto; text-align: center;">
-    <h2 style="font-weight: 600;">Add News</h2>
+    <h2 style="font-weight: 600;">${add_news}</h2>
     <form action="Controller" method="post">
         <textarea name="title"  placeholder="title" style="size: 80px; width: 350px;" ></textarea>
         <br />
