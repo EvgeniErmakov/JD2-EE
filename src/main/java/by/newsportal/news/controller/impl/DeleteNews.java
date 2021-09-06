@@ -2,7 +2,6 @@ package by.newsportal.news.controller.impl;
 
 import java.io.IOException;
 
-import by.newsportal.news.bean.News;
 import by.newsportal.news.controller.Command;
 import by.newsportal.news.service.NewsService;
 import by.newsportal.news.service.ServiceProvider;

@@ -16,6 +16,8 @@ public class UpdateNews implements Command {
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
     private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
     private static final UpdateNews INSTANCE = new UpdateNews();
+    public static final String AFTER_AUTHORIZATION_PAGE = "Controller?command=AFTER_AUTHORIZATION";
+    public static final String SESSION_PATH_COMMAND = "UPDATE_NEWS";
 
     public UpdateNews() {
     }
@@ -27,8 +29,6 @@ public class UpdateNews implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
-        String lastCommandName = "UPDATE_NEWS";
-        String path;
         String title = request.getParameter("title");
         String description = request.getParameter("description");
         int id = Integer.parseInt(request.getParameter("choosenId"));
@@ -38,28 +38,20 @@ public class UpdateNews implements Command {
         try {
             validateNews(news);
             NEWS_SERVICE.update(news);
-            path = "AFTER_AUTHORIZATION";
-            System.out.println();
-            session.setAttribute("path", lastCommandName);
-            response.sendRedirect("Controller?command=" + path);
         } catch (ServiceException e) {
-            path = "AFTER_AUTHORIZATION";
-            lastCommandName = "UPDATE_NEWS";
-            session.setAttribute("path", lastCommandName);
-            response.sendRedirect("Controller?command=" + path);
+            e.printStackTrace();
+        } finally {
+            session.setAttribute("path", SESSION_PATH_COMMAND);
+            response.sendRedirect(AFTER_AUTHORIZATION_PAGE);
         }
     }
 
     private void validateNews(News news) throws ServiceException {
         if (news.getDescription() == null || news.getDescription().equals("")) {
-            System.out.println(news.getDescription());
             throw new ServiceException("Field fullText is Empty");
         }
         if (news.getTitle() == null || news.getTitle().equals("")) {
             throw new ServiceException("Field title is Empty");
         }
-
-
     }
-
 }

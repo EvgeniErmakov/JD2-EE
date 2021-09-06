@@ -44,7 +44,6 @@ public class GoToUpdateNewsPage implements Command {
             choosenNews = NEWS_SERVICE.getNews(choosenNewsId);
 
         } catch (ServiceException e) {
-            path = "/WEB-INF/jsp/Error.jsp";
             lastCommandName = "UNKNOWN_COMMAND";
             session.setAttribute("path", lastCommandName);
             response.sendRedirect("Controller?command=" + lastCommandName);
