@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import by.newsportal.news.bean.RegistrationInfo;
 import by.newsportal.news.bean.RoleEnum;
 import by.newsportal.news.bean.User;

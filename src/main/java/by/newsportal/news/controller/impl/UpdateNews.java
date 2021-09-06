@@ -28,7 +28,7 @@ public class UpdateNews implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         String lastCommandName = "UPDATE_NEWS";
-       String path;
+        String path;
         String title = request.getParameter("title");
         String description = request.getParameter("description");
         int id = Integer.parseInt(request.getParameter("choosenId"));

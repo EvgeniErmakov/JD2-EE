@@ -7,7 +7,6 @@ import by.newsportal.news.controller.Command;
 import by.newsportal.news.service.NewsService;
 import by.newsportal.news.service.ServiceProvider;
 import by.newsportal.news.service.exception.ServiceException;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

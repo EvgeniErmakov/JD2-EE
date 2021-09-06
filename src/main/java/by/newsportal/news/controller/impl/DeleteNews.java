@@ -24,7 +24,7 @@ public class DeleteNews implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        String lastCommandName = "GO_TO_MAIN_PAGE";
+        String lastCommandName;
         String path;
         News newsDelete = null;
         int choosenNewsId = Integer.parseInt(request.getParameter("choosenNewsId"));

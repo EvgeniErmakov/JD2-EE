@@ -43,7 +43,7 @@ public class NewsServiceImpl implements NewsService {
     }
 
     public News getNews(Integer chosenId) throws ServiceException {
-        News news = null;
+        News news;
         try {
             news = NEWS_DAO.getNews(chosenId);
         } catch (DAOException e) {

@@ -6,5 +6,6 @@ import by.newsportal.news.service.exception.ServiceException;
 
 public interface UserService {
     User authorization(RegistrationInfo info) throws ServiceException;
+
     User registration(RegistrationInfo info) throws ServiceException;
 }

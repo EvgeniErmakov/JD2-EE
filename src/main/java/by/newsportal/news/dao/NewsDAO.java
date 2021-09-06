@@ -9,7 +9,9 @@ import by.newsportal.news.service.exception.ServiceException;
 
 public interface NewsDAO {
     List<News> getNewsList(int currentPageNumber) throws DAOException;
+
     public void create(News entity) throws DAOException;
+
     Integer getNewsMaxNumber() throws DAOException;
 
     void update(News news) throws ServiceException, DAOException;

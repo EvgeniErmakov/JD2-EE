@@ -58,7 +58,7 @@ public class SQLNewsDAO implements NewsDAO {
                 numberRow = rs.getInt("count(*)");
             }
         } catch (SQLException e) {
-            throw new DAOException("Remote server could not be connected", e);
+            throw new DAOException("Remote server could't be connected", e);
         } catch (ConnectionPoolException e) {
             throw new DAOException("False query", e);
         } catch (Exception e) {
@@ -77,22 +77,16 @@ public class SQLNewsDAO implements NewsDAO {
             pr.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException("Remote server could not be connected", e);
-        } catch (ConnectionPoolException e) {
-            throw new DAOException("False query", e);
         } catch (Exception e) {
             throw new DAOException("False query", e);
-
         }
     }
 
     public News getNews(Integer chosenId) throws DAOException {
         News news = null;
-
-        Integer id;
+        int id;
         String title;
         String fullText;
-        String brief;
-        String imgLink;
 
         try (Connection connection = ConnectionPool.getInstance().takeConnection();
              PreparedStatement st = connection.prepareStatement(SQL_GET_NEWS_BY_ID);) {
@@ -108,8 +102,6 @@ public class SQLNewsDAO implements NewsDAO {
 
         } catch (SQLException e) {
             throw new DAOException("Remote server could not be connected", e);
-        } catch (ConnectionPoolException e) {
-            throw new DAOException("False query", e);
         } catch (Exception e) {
             throw new DAOException("False query", e);
         }
@@ -124,11 +116,8 @@ public class SQLNewsDAO implements NewsDAO {
             pr.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException("Remote server could't be connected", e);
-        } catch (ConnectionPoolException e) {
-            throw new DAOException("False query", e);
         } catch (Exception e) {
             throw new DAOException("False query", e);
-
         }
     }
 
