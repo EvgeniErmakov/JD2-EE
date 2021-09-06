@@ -22,7 +22,6 @@
     <fmt:message bundle="${loc}" key="local.user.enteredPassword" var="enteredPassword"/>
     <fmt:message bundle="${loc}" key="local.user.repeatedPassword" var="repeatedPassword"/>
     <fmt:message bundle="${loc}" key="local.text.incorrectData" var="incorrect_data_message"/>
-    <fmt:message bundle="${loc}" key="local.text.already_exist" var="already_exist"/>
 
     <style>
         .form input {

@@ -16,9 +16,6 @@
     <fmt:message bundle="${loc}" key="local.locbutton.name.login" var="Login_button"/>
     <fmt:message bundle="${loc}" key="local.user.email" var="email"/>
     <fmt:message bundle="${loc}" key="local.user.enteredPassword" var="enteredPassword"/>
-    <fmt:message bundle="${loc}" key="local.text.incorrect_data" var="incorrect_data_message"/>
-    <fmt:message bundle="${loc}" key="local.text.registration_message" var="registrationMessage"/>
-    <fmt:message bundle="${loc}" key="local.text.user_not_found" var="userNotFound"/>
 
     <style>
         .form input {

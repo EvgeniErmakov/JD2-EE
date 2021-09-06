@@ -16,7 +16,6 @@
                  var="ru_button"/>
     <fmt:message bundle="${loc}" key="local.locbutton.name.en"
                  var="en_button"/>
-    <fmt:message bundle="${loc}" key="local.text.created" var="created"/>
     <fmt:message bundle="${loc}" key="local.text.error" var="error"/>
     <fmt:message bundle="${loc}" key="local.text.error.message" var="error_message"/>
 </head>
