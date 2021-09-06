@@ -84,8 +84,8 @@
         <input type="hidden" name="command" value="Authorization_user"/>
         <input type="text" name="email" placeholder="${email}" value=""/>
         <input type="password" name="enteredPassword" placeholder="${enteredPassword}" value=""/>
-        <input style="background: #408080; width: 50%;font-size: 20px; 	text-align: center; " type="submit" ;
-               class="button" value="${Login_button}"/>
+        <input style="background: #408080; width: 50%; font-size: 20px; text-align: center;"
+               type="submit" value="${Login_button}"/>
     </form>
 </div>
 </body>
