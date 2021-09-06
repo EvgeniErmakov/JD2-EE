@@ -26,13 +26,11 @@ public class DeleteNews implements Command {
         HttpSession session = request.getSession(false);
         String lastCommandName;
         String path;
-        News newsDelete = null;
         int choosenNewsId = Integer.parseInt(request.getParameter("choosenNewsId"));
         int currentPage = Integer.parseInt(request.getParameter("currentPage"));
         if (choosenNewsId < 1) {
             path = "/WEB-INF/jsp/Error.jsp";
-            lastCommandName = "UNKNOWN_COMMAND";
-            session.setAttribute("lastURL", lastCommandName);
+            session.setAttribute("lastURL", "UNKNOWN_COMMAND");
             response.sendRedirect("Controller?command=" + path);
             return;
         }

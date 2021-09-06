@@ -8,8 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+
 public class GoToAddNewsPage implements Command {
     private static final GoToAddNewsPage INSTANCE = new GoToAddNewsPage();
+    public static final String ADD_NEWS_PAGE = "/WEB-INF/jsp/AddNewsPage.jsp";
+    public static final String GO_TO_ADD_NEWS_PAGE = "GO_TO_ADD_NEWS_PAGE";
 
     public static GoToAddNewsPage getInstance() {
         return INSTANCE;
@@ -17,10 +20,9 @@ public class GoToAddNewsPage implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String path = "/WEB-INF/jsp/AddNewsPage.jsp";
-        String lastCommandName = "GO_TO_ADD_NEWS_PAGE";
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
-        request.getSession(true).setAttribute("path", lastCommandName);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher(ADD_NEWS_PAGE);
+        request.getSession(true).setAttribute("path", GO_TO_ADD_NEWS_PAGE);
         requestDispatcher.forward(request, response);
     }
 }
+
