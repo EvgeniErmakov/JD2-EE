@@ -9,24 +9,24 @@ import by.newsportal.news.service.UserService;
 import by.newsportal.news.service.exception.ServiceException;
 
 public class UserServiceImpl implements UserService {
-	private static final DAOProvider PROVIDER = DAOProvider.getInstance();
-	private static final UserDAO USER_DAO = PROVIDER.getUserDAO();
+    private static final DAOProvider PROVIDER = DAOProvider.getInstance();
+    private static final UserDAO USER_DAO = PROVIDER.getUserDAO();
 
-	@Override
-	public User registration(RegistrationInfo info) throws ServiceException {
-		try {
-			return USER_DAO.registration(info);
-		} catch (DAOException e) {
-			throw new ServiceException("User_DAO Exception", e);
-		}
-	}
+    @Override
+    public User registration(RegistrationInfo info) throws ServiceException {
+        try {
+            return USER_DAO.registration(info);
+        } catch (DAOException e) {
+            throw new ServiceException("User_DAO Exception", e);
+        }
+    }
 
-	@Override
-	public User authorization(RegistrationInfo info) throws ServiceException {
-		try {
-			return USER_DAO.authorization(info);
-		} catch (DAOException e) {
-			throw new ServiceException("User_DAO Exception", e);
-		}
-	}
+    @Override
+    public User authorization(RegistrationInfo info) throws ServiceException {
+        try {
+            return USER_DAO.authorization(info);
+        } catch (DAOException e) {
+            throw new ServiceException("User_DAO Exception", e);
+        }
+    }
 }
