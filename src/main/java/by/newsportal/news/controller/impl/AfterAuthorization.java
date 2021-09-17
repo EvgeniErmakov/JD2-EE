@@ -32,7 +32,7 @@ public class AfterAuthorization implements Command {
         return INSTANCE;
     }
 
-    private Integer pageNumberConverter(String currentPageNumber) {
+    public Integer pageNumberConverter(String currentPageNumber) {
         if (currentPageNumber == null || currentPageNumber.equals("")) {
             currentPageNumber = "1";
         }
