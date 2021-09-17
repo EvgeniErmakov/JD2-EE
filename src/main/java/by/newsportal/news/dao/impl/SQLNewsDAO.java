@@ -9,6 +9,8 @@ import by.newsportal.news.dao.NewsDAO;
 import by.newsportal.news.dao.connection.ConnectionPool;
 import by.newsportal.news.dao.connection.ConnectionPoolException;
 import by.newsportal.news.dao.exception.DAOException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class SQLNewsDAO implements NewsDAO {
     private static final String NEWS_ID = "id";
@@ -20,6 +22,10 @@ public class SQLNewsDAO implements NewsDAO {
     private static final String SQL_UPDATE_NEWS = "UPDATE news SET  " + NEWS_TITLE + "=? , " + NEWS_DESCRIPTION + "= ? WHERE (" + NEWS_ID + "=?)";
     private static final String SQL_DELETE_NEWS = "DELETE FROM news WHERE(" + NEWS_ID + "=?)";
     private static final String SQL_INSERT_NEWS = "INSERT INTO news( " + NEWS_TITLE + ", " + NEWS_DESCRIPTION + ") VALUES (?, ?)";
+    private static final String MESSAGE_LOGGER_NEWS_DELETED = "News has been deleted, id = ";
+    private static final String MESSAGE_LOGGER_NEWS_CREATED = "News has been created, title: ";
+    private static final String MESSAGE_LOGGER_NEWS_UPDATED = " News has been updated, title: ";
+    private static final Logger logger = LogManager.getLogger(SQLNewsDAO.class);
 
     @Override
     public List<News> getNewsList(int currentPageNumber) throws DAOException {
@@ -41,7 +47,7 @@ public class SQLNewsDAO implements NewsDAO {
                 newsList.add(new News(id, title, description));
             }
         } catch (SQLException e) {
-            throw new DAOException("Remote server could not be connected", e);
+            throw new DAOException("Remote server could 't be connected", e);
         } catch (Exception e) {
             throw new DAOException("False query", e);
         }
@@ -75,8 +81,9 @@ public class SQLNewsDAO implements NewsDAO {
             pr.setString(2, entity.getDescription());
             pr.setInt(3, entity.getId());
             pr.executeUpdate();
+            logger.info(entity.getId() + MESSAGE_LOGGER_NEWS_UPDATED + entity.getTitle());
         } catch (SQLException e) {
-            throw new DAOException("Remote server could not be connected", e);
+            throw new DAOException("Remote server could't be connected", e);
         } catch (Exception e) {
             throw new DAOException("False query", e);
         }
@@ -92,8 +99,8 @@ public class SQLNewsDAO implements NewsDAO {
              PreparedStatement st = connection.prepareStatement(SQL_GET_NEWS_BY_ID);) {
             st.setInt(1, chosenId);
             ResultSet result = st.executeQuery();
-            while (result.next()) {
 
+            while (result.next()) {
                 id = result.getInt(NEWS_ID);
                 title = result.getString(NEWS_TITLE);
                 fullText = result.getString(NEWS_DESCRIPTION);
@@ -101,7 +108,7 @@ public class SQLNewsDAO implements NewsDAO {
             }
 
         } catch (SQLException e) {
-            throw new DAOException("Remote server could not be connected", e);
+            throw new DAOException("Remote server could't be connected", e);
         } catch (Exception e) {
             throw new DAOException("False query", e);
         }
@@ -114,6 +121,7 @@ public class SQLNewsDAO implements NewsDAO {
              PreparedStatement pr = connection.prepareStatement(SQL_DELETE_NEWS);) {
             pr.setInt(1, id);
             pr.executeUpdate();
+            logger.info(MESSAGE_LOGGER_NEWS_DELETED + id);
         } catch (SQLException e) {
             throw new DAOException("Remote server could't be connected", e);
         } catch (Exception e) {
@@ -128,6 +136,7 @@ public class SQLNewsDAO implements NewsDAO {
             pr.setString(1, entity.getTitle());
             pr.setString(2, entity.getDescription());
             pr.executeUpdate();
+            logger.info(MESSAGE_LOGGER_NEWS_CREATED + entity.getTitle());
         } catch (SQLException e) {
             throw new DAOException("Remote server could't be connected", e);
         } catch (Exception e) {

@@ -11,6 +11,8 @@ import by.newsportal.news.service.exception.ServiceException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class RegistrationUser implements Command {
     private static final RegistrationUser instance = new RegistrationUser();
@@ -24,6 +26,8 @@ public class RegistrationUser implements Command {
     private static final String INCORRECT_DATA = "Controller?command=REGISTRATION_PAGE&incorrect_data_message=Incorrect data";
     private static final String EMAIL_BUSY = "Controller?command=REGISTRATION_PAGE&email_is_busy=This user is already registered";
     private static final String SUCCESSFUL_REGISTRATION = "Controller?command=AUTHORIZATION_PAGE&registration_message=You have been registered";
+    private static final String MESSAGE_AFTER_REGISTRATION = " has been registered.";
+    private static final Logger logger = LogManager.getLogger(RegistrationUser.class);
 
     private RegistrationUser() {
     }
@@ -51,6 +55,7 @@ public class RegistrationUser implements Command {
             }
             request.getSession(true).setAttribute(SESSION_PATH, PATH_COMMAND_AUTHORIZATION);
             path = SUCCESSFUL_REGISTRATION;
+            logger.info(user.getEmail() + MESSAGE_AFTER_REGISTRATION);
         } catch (ServiceException e) {
             e.printStackTrace();
             request.getSession(true).setAttribute(SESSION_PATH, PATH_COMMAND_ERROR);
