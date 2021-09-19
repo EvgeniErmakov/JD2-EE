@@ -1,5 +1,5 @@
 import by.newsportal.news.controller.impl.AfterAuthorization;
-import org.junit.Test;
+import org.testng.annotations.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

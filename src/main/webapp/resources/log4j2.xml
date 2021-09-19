@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <Properties>
-        <Property name="filename">App.log</Property>
-        <Property name="filePatterLayout">%d{yyyy.MM.dd HH:mm:ss}  - %m%n</Property>
+        <Property name="filename">./logs/log.log</Property>
+        <Property name="filePatterLayout">%d{yyyy.MM.dd HH:mm:ss} - %m%n</Property>
 
     </Properties>
 
     <appenders>
         <Console name="STDOUT" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{yyyy.MM.dd HH:mm:ss}  - %m%n" />
+            <PatternLayout pattern="%d{yyyy.MM.dd HH:mm:ss}  - %m%n"/>
         </Console>
 
         <File name="FILE" fileName="${filename}">
-            <PatternLayout pattern="${filePatterLayout}" />
+            <PatternLayout pattern="${filePatterLayout}"/>
         </File>
     </appenders>
 
     <loggers>
         <root level="info">
-            <appender-ref ref="FILE" />
-            <appender-ref ref="STDOUT" />
+            <appender-ref ref="FILE"/>
+            <appender-ref ref="STDOUT"/>
         </root>
     </loggers>
 </configuration>
