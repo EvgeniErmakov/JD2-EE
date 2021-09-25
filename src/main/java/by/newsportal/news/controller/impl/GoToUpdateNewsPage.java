@@ -10,6 +10,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
@@ -21,6 +23,7 @@ public class GoToUpdateNewsPage implements Command {
     public static final String PATH_COMMAND_ERROR = "UNKNOWN_COMMAND";
     public static final String ERROR_PAGE = "Controller?command=/WEB-INF/jsp/error.jsp";
     public static final String UPDATE_NEWS_PAGE = "/WEB-INF/jsp/updateNewsPage.jsp";
+    private static final Logger logger = LogManager.getLogger(GoToUpdateNewsPage.class);
 
     public GoToUpdateNewsPage() {
     }
@@ -45,6 +48,7 @@ public class GoToUpdateNewsPage implements Command {
             choosenNews = NEWS_SERVICE.getNews(choosenNewsId);
 
         } catch (ServiceException e) {
+            logger.error("Error in the application", e);
             session.setAttribute(SESSION_PATH, PATH_COMMAND_ERROR);
             response.sendRedirect("Controller?command=" + PATH_COMMAND_ERROR);
             return;

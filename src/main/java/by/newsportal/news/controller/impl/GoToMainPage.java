@@ -15,6 +15,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class GoToMainPage implements Command {
     public static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
@@ -24,6 +26,7 @@ public class GoToMainPage implements Command {
     public static final String ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
     private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
     private static final GoToMainPage INSTANCE = new GoToMainPage();
+    private static final Logger logger = LogManager.getLogger(GoToMainPage.class);
 
     private GoToMainPage() {
     }
@@ -65,7 +68,7 @@ public class GoToMainPage implements Command {
                 List<News> newses = NEWS_SERVICE.addNewses(currentPageNumber, "published");
                 session.setAttribute("newses", newses);
             } catch (ServiceException e) {
-                e.printStackTrace();
+                logger.error("Error in the application", e);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher(ERROR_PAGE);
                 requestDispatcher.forward(request, response);
                 return;
@@ -74,7 +77,7 @@ public class GoToMainPage implements Command {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(MAIN_PAGE);
             requestDispatcher.forward(request, response);
         } catch (ServiceException e) {
-            e.printStackTrace();
+            logger.error("Error in the application", e);
         }
     }
 }

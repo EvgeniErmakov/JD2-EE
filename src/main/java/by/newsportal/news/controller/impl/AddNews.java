@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import by.newsportal.news.bean.News;
 import by.newsportal.news.controller.Command;
+import by.newsportal.news.dao.impl.SQLNewsDAO;
 import by.newsportal.news.service.NewsService;
 import by.newsportal.news.service.ServiceProvider;
 import by.newsportal.news.service.exception.ServiceException;
@@ -11,6 +12,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class AddNews implements Command {
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
@@ -21,6 +24,7 @@ public class AddNews implements Command {
     public static final String NEWS_TITLE = "title";
     public static final String NEWS_DESCRIPTION = "description";
     public static final String SESSION_PATH = "path";
+    private static final Logger logger = LogManager.getLogger(AddNews.class);
 
     public AddNews() {
     }
@@ -40,7 +44,7 @@ public class AddNews implements Command {
             validateNews(news);
             NEWS_SERVICE.createNews(news);
         } catch (ServiceException e) {
-            e.printStackTrace();
+            logger.error("Error in the application", e);
         } finally {
             session.setAttribute(SESSION_PATH, SESSION_PATH_COMMAND);
             response.sendRedirect(AFTER_AUTHORIZATION_PAGE);

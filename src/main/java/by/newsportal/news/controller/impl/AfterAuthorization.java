@@ -15,6 +15,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class AfterAuthorization implements Command {
     private static final AfterAuthorization INSTANCE = new AfterAuthorization();
@@ -24,6 +26,7 @@ public class AfterAuthorization implements Command {
     public static final String ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
     public static final String AFTER_AUTHORIZATION_PAGE = "/WEB-INF/jsp/afterAuthorization.jsp";
     private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
+    private static final Logger logger = LogManager.getLogger(AfterAuthorization.class);
 
     private AfterAuthorization() {
     }
@@ -63,7 +66,7 @@ public class AfterAuthorization implements Command {
                 List<News> newses = NEWS_SERVICE.addNewses(currentPageNumber, "published");
                 session.setAttribute("newses", newses);
             } catch (ServiceException e) {
-                e.printStackTrace();
+                logger.error("Error in the application", e);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher(ERROR_PAGE);
                 requestDispatcher.forward(request, response);
                 return;
@@ -73,7 +76,7 @@ public class AfterAuthorization implements Command {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(AFTER_AUTHORIZATION_PAGE);
             requestDispatcher.forward(request, response);
         } catch (ServiceException e) {
-            e.printStackTrace();
+            logger.error("Error in the application", e);
         }
     }
 }

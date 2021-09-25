@@ -8,6 +8,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
@@ -20,6 +22,7 @@ public class AddNewsToHomePage implements Command {
     public static final String SESSION_PATH = "path";
     public static final String PATH_COMMAND_ERROR = "UNKNOWN_COMMAND";
     public static final String CHOOSEN_NEWS_ID = "choosenNewsId";
+    private static final Logger logger = LogManager.getLogger(AddNewsToHomePage.class);
 
     public static AddNewsToHomePage getInstance() {
         return INSTANCE;
@@ -39,7 +42,7 @@ public class AddNewsToHomePage implements Command {
             NEWS_SERVICE.addNewsToHonePage(choosenNewsId);
             response.sendRedirect(GO_TO_LIST_NEWS_OFFER_PAGE);
         } catch (ServiceException e) {
-            e.printStackTrace();
+            logger.error("Error in the application", e);
         }
     }
 }

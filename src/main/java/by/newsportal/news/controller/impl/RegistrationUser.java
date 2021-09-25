@@ -57,7 +57,7 @@ public class RegistrationUser implements Command {
             path = SUCCESSFUL_REGISTRATION;
             logger.info(user.getEmail() + MESSAGE_AFTER_REGISTRATION);
         } catch (ServiceException e) {
-            e.printStackTrace();
+            logger.error("Error in the application", e);
             request.getSession(true).setAttribute(SESSION_PATH, PATH_COMMAND_ERROR);
         }
         response.sendRedirect(path);

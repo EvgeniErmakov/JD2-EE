@@ -11,6 +11,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class OfferNews implements Command {
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
@@ -21,6 +23,7 @@ public class OfferNews implements Command {
     public static final String NEWS_TITLE = "title";
     public static final String NEWS_DESCRIPTION = "description";
     public static final String SESSION_PATH = "path";
+    private static final Logger logger = LogManager.getLogger(OfferNews.class);
 
     public OfferNews() {
     }
@@ -41,7 +44,7 @@ public class OfferNews implements Command {
             validateNews(news);
             NEWS_SERVICE.offerNews(news);
         } catch (ServiceException e) {
-            e.printStackTrace();
+            logger.error("Error in the application", e);
         } finally {
             session.setAttribute(SESSION_PATH, SESSION_PATH_COMMAND);
             response.sendRedirect(AFTER_AUTHORIZATION_PAGE);

@@ -10,6 +10,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class DeleteNews implements Command {
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
@@ -22,6 +24,7 @@ public class DeleteNews implements Command {
     public static final String SESSION_PATH_COMMAND = "AFTER_AUTHORIZATION";
     public static final String SESSION_PATH = "path";
     public static final String GO_TO_LIST_NEWS_OFFER_PAGE = "GO_TO_LIST_NEWS_OFFER_PAGE";
+    private static final Logger logger = LogManager.getLogger(DeleteNews.class);
 
     public static DeleteNews getInstance() {
         return INSTANCE;
@@ -45,7 +48,7 @@ public class DeleteNews implements Command {
                 response.sendRedirect(GO_TO_LIST_NEWS_OFFER_PAGE_COMMAND);
             }
         } catch (ServiceException e) {
-            e.printStackTrace();
+            logger.error("Error in the application", e);
         }
     }
 }

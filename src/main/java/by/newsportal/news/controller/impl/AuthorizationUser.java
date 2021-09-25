@@ -59,6 +59,7 @@ public class AuthorizationUser implements Command {
                 logger.info(user.getName() + MESSAGE_AFTER_AUTHORIZATION);
             }
         } catch (ServiceException e) {
+            logger.error("Error in the application", e);
             request.getSession(true).setAttribute(SESSION_PATH, PATH_COMMAND_ERROR);
         }
         response.sendRedirect("Controller?command=" + path);

@@ -16,6 +16,8 @@ import java.util.List;
 import by.newsportal.news.bean.News;
 import by.newsportal.news.service.exception.ServiceException;
 import jakarta.servlet.http.HttpSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class GoToListNewsOfferPage implements Command {
     private static final GoToListNewsOfferPage INSTANCE = new GoToListNewsOfferPage();
@@ -23,8 +25,10 @@ public class GoToListNewsOfferPage implements Command {
     public static final String GO_TO_LIST_NEWS_OFFER = "GO_TO_LIST_NEWS_OFFER";
     public static final String ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
     public static final String SESSION_PATH = "path";
+    public static final String GO_TO_LIST_NEWS_OFFER_PAGE = "GO_TO_LIST_NEWS_OFFER_PAGE";
     public static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
     private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
+    private static final Logger logger = LogManager.getLogger(GoToListNewsOfferPage.class);
 
     public static GoToListNewsOfferPage getInstance() {
         return INSTANCE;
@@ -64,18 +68,18 @@ public class GoToListNewsOfferPage implements Command {
                 List<News> newses = NEWS_SERVICE.addNewses(currentPageNumber, "offered");
                 session.setAttribute("newses", newses);
             } catch (ServiceException e) {
-                e.printStackTrace();
+                logger.error("Error in the application", e);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher(ERROR_PAGE);
                 requestDispatcher.forward(request, response);
                 return;
             }
             request.getSession(true).setAttribute(SESSION_PATH, GO_TO_LIST_NEWS_OFFER);
-            request.getSession().setAttribute(SESSION_PATH, "GO_TO_LIST_NEWS_OFFER_PAGE");
-            request.getSession().setAttribute("from", "GO_TO_LIST_NEWS_OFFER_PAGE");
+            request.getSession().setAttribute(SESSION_PATH, GO_TO_LIST_NEWS_OFFER_PAGE);
+            request.getSession().setAttribute("from", GO_TO_LIST_NEWS_OFFER_PAGE);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(LIST_OFFER_NEWS_PAGE);
             requestDispatcher.forward(request, response);
         } catch (ServiceException e) {
-            e.printStackTrace();
+            logger.error("Error in the application", e);
         }
     }
 
