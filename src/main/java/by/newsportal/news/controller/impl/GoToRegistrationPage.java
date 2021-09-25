@@ -12,7 +12,7 @@ public class GoToRegistrationPage implements Command {
     private static final GoToRegistrationPage INSTANCE = new GoToRegistrationPage();
     public static final String SESSION_PATH = "path";
     public static final String PATH_COMMAND_REG = "REGISTRATION_PAGE";
-    public static final String REGISTRATION_PAGE = "/WEB-INF/jsp/RegistrationPage.jsp";
+    public static final String REGISTRATION_PAGE = "/WEB-INF/jsp/registrationPage.jsp";
 
     private GoToRegistrationPage() {
     }

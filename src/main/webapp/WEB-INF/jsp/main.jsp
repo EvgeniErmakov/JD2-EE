@@ -14,10 +14,8 @@
     <fmt:message bundle="${loc}" key="local.name.site" var="name_site"/>
     <fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button"/>
     <fmt:message bundle="${loc}" key="local.locbutton.name.en" var="en_button"/>
-    <fmt:message bundle="${loc}" key="local.locbutton.name.login" var="Login_button"/>
-    <fmt:message bundle="${loc}" key="local.locbutton.name.register" var="Register_button"/>
-    <fmt:message bundle="${loc}" key="local.text.welcom" var="welcome"/>
-    <fmt:message bundle="${loc}" key="local.text.updateNews" var="update_news"/>
+    <fmt:message bundle="${loc}" key="local.locbutton.name.login" var="login_button"/>
+    <fmt:message bundle="${loc}" key="local.locbutton.name.register" var="register_button"/>
 </head>
 <body>
 <div class="heading">
@@ -41,12 +39,12 @@
 
             <form action="Controller" method="post">
                 <input type="hidden" name="command" value="AUTHORIZATION_PAGE"/>
-                <input type="submit" class="button" value="${Login_button}"/>
+                <input type="submit" class="button" value="${login_button}"/>
             </form>
 
             <form action="Controller" method="post">
                 <input type="hidden" name="command" value="REGISTRATION_PAGE"/>
-                <input type="submit" class="button" value="${Register_button}"/>
+                <input type="submit" class="button" value="${register_button}"/>
             </form>
 
         </div>

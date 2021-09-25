@@ -11,11 +11,13 @@ public class News {
         this.title = title;
         this.description = description;
     }
-    public News( String title, String description) {
+
+    public News(String title, String description) {
         super();
         this.title = title;
         this.description = description;
     }
+
     public String getTitle() {
         return title;
     }

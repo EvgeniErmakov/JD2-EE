@@ -13,9 +13,9 @@
     <fmt:message bundle="${loc}" key="local.name.site" var="name_site"/>
     <fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button"/>
     <fmt:message bundle="${loc}" key="local.locbutton.name.en" var="en_button"/>
-    <fmt:message bundle="${loc}" key="local.locbutton.name.login" var="Login_button"/>
+    <fmt:message bundle="${loc}" key="local.locbutton.name.login" var="login_button"/>
     <fmt:message bundle="${loc}" key="local.user.email" var="email"/>
-    <fmt:message bundle="${loc}" key="local.user.enteredPassword" var="enteredPassword"/>
+    <fmt:message bundle="${loc}" key="local.user.enteredPassword" var="entered_password"/>
 
     <style>
         .form input {
@@ -80,9 +80,9 @@
     <form action="Controller" method="post">
         <input type="hidden" name="command" value="Authorization_user"/>
         <input type="text" name="email" placeholder="${email}" value=""/>
-        <input type="password" name="enteredPassword" placeholder="${enteredPassword}" value=""/>
+        <input type="password" name="enteredPassword" placeholder="${entered_password}" value=""/>
         <input style="background: #408080; width: 50%; font-size: 20px; text-align: center;"
-               type="submit" value="${Login_button}"/>
+               type="submit" value="${login_button}"/>
     </form>
 </div>
 </body>

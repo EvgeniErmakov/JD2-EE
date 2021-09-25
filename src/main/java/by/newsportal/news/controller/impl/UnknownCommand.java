@@ -12,7 +12,7 @@ public class UnknownCommand implements Command {
     private static final UnknownCommand INSTANCE = new UnknownCommand();
     public static final String SESSION_PATH = "path";
     public static final String PATH_COMMAND_ERR = "UNKNOWN_COMMAND";
-    public static final String ERROR_PAGE = "/WEB-INF/jsp/Error.jsp";
+    public static final String ERROR_PAGE = "/WEB-INF/jsp/error.jsp";
 
     private UnknownCommand() {
     }

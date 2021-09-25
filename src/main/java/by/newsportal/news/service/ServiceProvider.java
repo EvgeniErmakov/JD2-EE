@@ -22,4 +22,5 @@ public final class ServiceProvider {
     public NewsService getNewsService() {
         return NEWS_SERVICE;
     }
+
 }

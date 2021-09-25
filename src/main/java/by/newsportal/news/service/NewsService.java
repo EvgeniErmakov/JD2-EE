@@ -6,13 +6,17 @@ import by.newsportal.news.bean.News;
 import by.newsportal.news.service.exception.ServiceException;
 
 public interface NewsService {
-    List<News> addNewses(int currentPageNumber) throws ServiceException;
+    List<News> addNewses(int currentPageNumber, String tableName) throws ServiceException;
 
-    void create(News news) throws ServiceException;
+    void createNews(News news) throws ServiceException;
 
-    Integer getNewsMaxNumber() throws ServiceException;
+    void offerNews(News news) throws ServiceException;
 
-    void update(News news) throws ServiceException;
+    void addNewsToHonePage(Integer id) throws ServiceException;
+
+    Integer getNewsMaxNumber(String tableName) throws ServiceException;
+
+    void updateNews(News news) throws ServiceException;
 
     News getNews(Integer chosenId) throws ServiceException;
 

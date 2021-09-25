@@ -1,25 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <title>ADD NEWS PAGE</title>
     <link rel="stylesheet" href="resources/css/css-style.css">
-    <fmt:setLocale value="${sessionScope.local}" />
-    <fmt:setBundle basename="resources.localization.local" var="loc" />
+    <fmt:setLocale value="${sessionScope.local}"/>
+    <fmt:setBundle basename="resources.localization.local" var="loc"/>
     <fmt:setLocale value="${sessionScope.local}"/>
     <fmt:setBundle basename="localization.local" var="loc"/>
     <fmt:message bundle="${loc}" key="local.name.site" var="name_site"/>
     <fmt:message bundle="${loc}" key="local.locbutton.name.exit" var="exit_button"/>
     <fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button"/>
     <fmt:message bundle="${loc}" key="local.locbutton.name.en" var="en_button"/>
-    <fmt:message bundle="${loc}" key="local.locbutton.name.login" var="Login_button"/>
-    <fmt:message bundle="${loc}" key="local.text.deleteNews" var="delete_news"/>
-    <fmt:message bundle="${loc}" key="local.text.hello" var="hello"/>
-    <fmt:message bundle="${loc}" key="local.text.updateNews" var="update_news"/>
     <fmt:message bundle="${loc}" key="local.text.addNews" var="add_news"/>
+    <fmt:message bundle="${loc}" key="local.text.newsPending" var="news_panding"/>
 </head>
 <body>
 <div class="heading">
@@ -45,6 +43,10 @@
                 <input type="hidden" name="command" value="AFTER_AUTHORIZATION"/>
                 <input type="submit" class="button" value="${exit_button}"/>
             </form>
+            <form action="Controller" method="post">
+                <input type="hidden" name="command" value="GO_TO_LIST_NEWS_OFFER_PAGE"/>
+                <input type="submit" class="button" value="${news_panding}"/>
+            </form>
         </div>
     </div>
 </div>
@@ -52,16 +54,18 @@
 <div class="registrationDiv" style="width: 50%; margin: 0 auto; text-align: center;">
     <h2 style="font-weight: 600;">${add_news}</h2>
     <form action="Controller" method="post">
-        <textarea name="title"  placeholder="title" style="size: 80px; width: 350px;" ></textarea>
-        <br />
-        <br />
-        <textarea name="description"  placeholder="description" style="size: 80px; width: 350px; height:200px" ></textarea>
-        <br />
-        <br />
-        <input type="hidden" name="command" value="ADD_NEWS" />
+        <textarea name="title" placeholder="title" style="size: 80px; width: 350px;"></textarea>
+        <br/>
+        <br/>
+        <textarea name="description" placeholder="description"
+                  style="size: 80px; width: 350px; height:200px"></textarea>
+        <br/>
+        <br/>
+        <input type="hidden" name="command" value="ADD_NEWS"/>
         <button id="update-button" style="background-color: #408080; color: black;
    justify-content: center;    align-items: center;   margin-right: 20px;
-    margin-left: 20px; font-size: 20px;   justify-content: space-between; width: 150px;height:50px"><c:out value="${add_news}"/></button>
+    margin-left: 20px; font-size: 20px;   justify-content: space-between; width: 150px;height:50px"><c:out
+                value="${add_news}"/></button>
     </form>
 </div>
 </body>

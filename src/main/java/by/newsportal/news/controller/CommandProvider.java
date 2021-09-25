@@ -21,7 +21,11 @@ public class CommandProvider {
         COMMANDS.put(CommandName.DELETE_NEWS, DeleteNews.getInstance());
         COMMANDS.put(CommandName.UNKNOWN_COMMAND, UnknownCommand.getInstance());
         COMMANDS.put(CommandName.GO_TO_ADD_NEWS_PAGE, GoToAddNewsPage.getInstance());
+        COMMANDS.put(CommandName.GO_TO_OFFER_NEWS_PAGE, GoToOfferNewsPage.getInstance());
+        COMMANDS.put(CommandName.GO_TO_LIST_NEWS_OFFER_PAGE, GoToListNewsOfferPage.getInstance());
         COMMANDS.put(CommandName.ADD_NEWS, AddNews.getInstance());
+        COMMANDS.put(CommandName.OFFER_NEWS, OfferNews.getInstance());
+        COMMANDS.put(CommandName.ADD_NEWS_TO_HOME_PAGE, AddNewsToHomePage.getInstance());
     }
 
     public Command findCommand(String name) {

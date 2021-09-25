@@ -12,44 +12,39 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-public class UpdateNews implements Command {
+public class OfferNews implements Command {
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
     private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
-    private static final UpdateNews INSTANCE = new UpdateNews();
+    private static final OfferNews INSTANCE = new OfferNews();
     public static final String AFTER_AUTHORIZATION_PAGE = "Controller?command=AFTER_AUTHORIZATION";
-    public static final String GO_TO_LIST_NEWS_OFFER_PAGE = "Controller?command=GO_TO_LIST_NEWS_OFFER_PAGE";
-    public static final String AFTER_AUTHORIZATION = "AFTER_AUTHORIZATION";
-    public static final String GO_TO_LIST_NEWS_OFFER_PAGE_PATH = "GO_TO_LIST_NEWS_OFFER_PAGE";
+    public static final String SESSION_PATH_COMMAND = "AFTER_AUTHORIZATION";
     public static final String NEWS_TITLE = "title";
     public static final String NEWS_DESCRIPTION = "description";
-    public static final String CHOOSEN_ID = "choosenId";
+    public static final String SESSION_PATH = "path";
 
-    public UpdateNews() {
+    public OfferNews() {
     }
 
-    public static UpdateNews getInstance() {
+    public static OfferNews getInstance() {
         return INSTANCE;
     }
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession(true);
-        String title = request.getParameter(NEWS_TITLE);
-        String description = request.getParameter(NEWS_DESCRIPTION);
-        int id = Integer.parseInt(request.getParameter(CHOOSEN_ID));
-        News news = new News(id, title, description);
+
+        HttpSession session = request.getSession(false);
 
         try {
+            String title = request.getParameter(NEWS_TITLE);
+            String description = request.getParameter(NEWS_DESCRIPTION);
+            News news = new News(title, description);
             validateNews(news);
-            NEWS_SERVICE.updateNews(news);
+            NEWS_SERVICE.offerNews(news);
         } catch (ServiceException e) {
             e.printStackTrace();
         } finally {
-            if (request.getSession(true).getAttribute("from").equals(AFTER_AUTHORIZATION)) {
-                response.sendRedirect(AFTER_AUTHORIZATION_PAGE);
-            } else if (request.getSession(true).getAttribute("from").equals(GO_TO_LIST_NEWS_OFFER_PAGE_PATH)) {
-                response.sendRedirect(GO_TO_LIST_NEWS_OFFER_PAGE);
-            }
+            session.setAttribute(SESSION_PATH, SESSION_PATH_COMMAND);
+            response.sendRedirect(AFTER_AUTHORIZATION_PAGE);
         }
     }
 

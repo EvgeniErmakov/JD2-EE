@@ -16,11 +16,11 @@
     <fmt:message bundle="${loc}" key="local.locbutton.name.exit" var="exit_button"/>
     <fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button"/>
     <fmt:message bundle="${loc}" key="local.locbutton.name.en" var="en_button"/>
-    <fmt:message bundle="${loc}" key="local.locbutton.name.login" var="Login_button"/>
     <fmt:message bundle="${loc}" key="local.text.deleteNews" var="delete_news"/>
     <fmt:message bundle="${loc}" key="local.text.hello" var="hello"/>
     <fmt:message bundle="${loc}" key="local.text.updateNews" var="update_news"/>
     <fmt:message bundle="${loc}" key="local.text.addNews" var="add_news"/>
+    <fmt:message bundle="${loc}" key="local.text.offerNews" var="offer_news"/>
 </head>
 <body>
 <%
@@ -44,13 +44,19 @@
         </div>
         <div class="heading-2">
             <form action="Controller" method="post">
-                <input  type="hidden" name="command" value="GO_TO_MAIN_PAGE"/>
-                <input   type="submit" class="button" value="${exit_button}"/>
+                <input type="hidden" name="command" value="GO_TO_MAIN_PAGE"/>
+                <input type="submit" class="button" value="${exit_button}"/>
             </form>
             <c:if test="${UserRole == 'ADMIN'}">
                 <form action="Controller" method="post">
                     <input type="hidden" name="command" value="GO_TO_ADD_NEWS_PAGE"/>
                     <input type="submit" class="button" value="${add_news}"/>
+                </form>
+            </c:if>
+            <c:if test="${UserRole == 'JOURNALIST'}">
+                <form action="Controller" method="post">
+                    <input type="hidden" name="command" value="GO_TO_OFFER_NEWS_PAGE"/>
+                    <input type="submit" class="button" value="${offer_news}"/>
                 </form>
             </c:if>
         </div>

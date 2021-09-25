@@ -9,20 +9,20 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-public class GoToAddNewsPage implements Command {
-    private static final GoToAddNewsPage INSTANCE = new GoToAddNewsPage();
-    public static final String ADD_NEWS_PAGE = "/WEB-INF/jsp/addNewsPage.jsp";
-    public static final String GO_TO_ADD_NEWS_PAGE = "GO_TO_ADD_NEWS_PAGE";
+public class GoToOfferNewsPage implements Command {
+    private static final GoToOfferNewsPage INSTANCE = new GoToOfferNewsPage();
+    public static final String OFFER_NEWS_PAGE = "/WEB-INF/jsp/offerNewsPage.jsp";
+    public static final String GO_TO_OFFER_NEWS_PAGE = "GO_TO_OFFER_NEWS_PAGE";
     public static final String SESSION_PATH = "path";
 
-    public static GoToAddNewsPage getInstance() {
+    public static GoToOfferNewsPage getInstance() {
         return INSTANCE;
     }
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher(ADD_NEWS_PAGE);
-        request.getSession(true).setAttribute(SESSION_PATH, GO_TO_ADD_NEWS_PAGE);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher(OFFER_NEWS_PAGE);
+        request.getSession(true).setAttribute(SESSION_PATH, GO_TO_OFFER_NEWS_PAGE);
         requestDispatcher.forward(request, response);
     }
 }

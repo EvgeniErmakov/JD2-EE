@@ -15,12 +15,12 @@
     <fmt:message bundle="${loc}" key="local.name.site" var="name_site"/>
     <fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button"/>
     <fmt:message bundle="${loc}" key="local.locbutton.name.en" var="en_button"/>
-    <fmt:message bundle="${loc}" key="local.locbutton.name.register" var="Register_button"/>
+    <fmt:message bundle="${loc}" key="local.locbutton.name.register" var="register_button"/>
     <fmt:message bundle="${loc}" key="local.user.name" var="name"/>
     <fmt:message bundle="${loc}" key="local.user.surname" var="surname"/>
     <fmt:message bundle="${loc}" key="local.user.email" var="email"/>
-    <fmt:message bundle="${loc}" key="local.user.enteredPassword" var="enteredPassword"/>
-    <fmt:message bundle="${loc}" key="local.user.repeatedPassword" var="repeatedPassword"/>
+    <fmt:message bundle="${loc}" key="local.user.enteredPassword" var="entered_password"/>
+    <fmt:message bundle="${loc}" key="local.user.repeatedPassword" var="repeated_password"/>
     <fmt:message bundle="${loc}" key="local.text.incorrectData" var="incorrect_data_message"/>
 
     <style>
@@ -84,11 +84,11 @@
         <input type="text" name="name" placeholder="${name}" value=""/>
         <input type="text" name="surname" placeholder="${surname}" value=""/>
         <input type="text" name="email" placeholder="${email}" value=""/>
-        <input type="password" name="enteredPassword" placeholder="${enteredPassword}" value=""/>
-        <input type="password" name="repeatedPassword" placeholder="${repeatedPassword}" value=""/>
+        <input type="password" name="enteredPassword" placeholder="${entered_password}" value=""/>
+        <input type="password" name="repeatedPassword" placeholder="${repeated_password}" value=""/>
 
         <input style="background: #408080; width: 50%;" type="submit"
-               class="button" value="${Register_button}"/>
+               class="button" value="${register_button}"/>
     </form>
 </div>
 </body>

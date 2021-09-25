@@ -18,6 +18,10 @@ public class AddNews implements Command {
     private static final AddNews INSTANCE = new AddNews();
     public static final String AFTER_AUTHORIZATION_PAGE = "Controller?command=AFTER_AUTHORIZATION";
     public static final String SESSION_PATH_COMMAND = "AFTER_AUTHORIZATION";
+    public static final String NEWS_TITLE = "title";
+    public static final String NEWS_DESCRIPTION = "description";
+    public static final String SESSION_PATH = "path";
+
     public AddNews() {
     }
 
@@ -27,19 +31,18 @@ public class AddNews implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         HttpSession session = request.getSession(false);
 
         try {
-            String title = request.getParameter("title");
-            String description = request.getParameter("description");
+            String title = request.getParameter(NEWS_TITLE);
+            String description = request.getParameter(NEWS_DESCRIPTION);
             News news = new News(title, description);
             validateNews(news);
-            NEWS_SERVICE.create(news);
+            NEWS_SERVICE.createNews(news);
         } catch (ServiceException e) {
             e.printStackTrace();
         } finally {
-            session.setAttribute("path", SESSION_PATH_COMMAND);
+            session.setAttribute(SESSION_PATH, SESSION_PATH_COMMAND);
             response.sendRedirect(AFTER_AUTHORIZATION_PAGE);
         }
     }

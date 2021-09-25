@@ -48,7 +48,7 @@ public class GoToMainPage implements Command {
         HttpSession session = request.getSession(true);
 
         try {
-            pagesMaxNum = NEWS_SERVICE.getNewsMaxNumber();
+            pagesMaxNum = NEWS_SERVICE.getNewsMaxNumber("published");
             pagesMaxNum = (pagesMaxNum % 5) > 0 ? pagesMaxNum / 5 + 1 : pagesMaxNum / 5;
 
             numberOfPageList = new ArrayList<>();
@@ -62,7 +62,7 @@ public class GoToMainPage implements Command {
             session.setAttribute("pageNumList", numberOfPageList);
 
             try {
-                List<News> newses = NEWS_SERVICE.addNewses(currentPageNumber);
+                List<News> newses = NEWS_SERVICE.addNewses(currentPageNumber, "published");
                 session.setAttribute("newses", newses);
             } catch (ServiceException e) {
                 e.printStackTrace();

@@ -10,7 +10,7 @@ import jakarta.servlet.ServletException;
 
 public class GoToAuthorizationPage implements Command {
     private static final GoToAuthorizationPage INSTANCE = new GoToAuthorizationPage();
-    public static final String AUTHORIZATION_PAGE = "/WEB-INF/jsp/AuthorizationPage.jsp";
+    public static final String AUTHORIZATION_PAGE = "/WEB-INF/jsp/authorizationPage.jsp";
     public static final String SESSION_PATH = "path";
     public static final String SESSION_PATH_COMMAND = "AUTHORIZATION_PAGE";
 

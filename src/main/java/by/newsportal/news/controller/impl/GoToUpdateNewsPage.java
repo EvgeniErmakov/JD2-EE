@@ -17,6 +17,10 @@ public class GoToUpdateNewsPage implements Command {
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
     private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
     private static final GoToUpdateNewsPage INSTANCE = new GoToUpdateNewsPage();
+    public static final String SESSION_PATH = "path";
+    public static final String PATH_COMMAND_ERROR = "UNKNOWN_COMMAND";
+    public static final String ERROR_PAGE = "Controller?command=/WEB-INF/jsp/error.jsp";
+    public static final String UPDATE_NEWS_PAGE = "/WEB-INF/jsp/updateNewsPage.jsp";
 
     public GoToUpdateNewsPage() {
     }
@@ -27,31 +31,27 @@ public class GoToUpdateNewsPage implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String path = "/WEB-INF/jsp/updateNewsPage.jsp";
+        String path = UPDATE_NEWS_PAGE;
         HttpSession session = request.getSession(true);
         int choosenNewsId = Integer.parseInt(request.getParameter("choosenNewsId"));
-        System.out.println("я отработал");
         String lastCommandName = "UPDATE_NEWS_PAGE&choosenNewsId=" + choosenNewsId;
-        News choosenNews = null;
+        News choosenNews;
         if (choosenNewsId < 1) {
-            path = "/WEB-INF/jsp/Error.jsp";
-            lastCommandName = "UNKNOWN_COMMAND";
-            session.setAttribute("path", lastCommandName);
-            response.sendRedirect("Controller?command=" + path);
+            session.setAttribute(SESSION_PATH, PATH_COMMAND_ERROR);
+            response.sendRedirect(ERROR_PAGE);
             return;
         }
         try {
             choosenNews = NEWS_SERVICE.getNews(choosenNewsId);
 
         } catch (ServiceException e) {
-            lastCommandName = "UNKNOWN_COMMAND";
-            session.setAttribute("path", lastCommandName);
-            response.sendRedirect("Controller?command=" + lastCommandName);
+            session.setAttribute(SESSION_PATH, PATH_COMMAND_ERROR);
+            response.sendRedirect("Controller?command=" + PATH_COMMAND_ERROR);
             return;
         }
         request.setAttribute("choosenNews", choosenNews);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
-        request.getSession(true).setAttribute("path", lastCommandName);
+        request.getSession(true).setAttribute(SESSION_PATH, lastCommandName);
         requestDispatcher.forward(request, response);
     }
 }
