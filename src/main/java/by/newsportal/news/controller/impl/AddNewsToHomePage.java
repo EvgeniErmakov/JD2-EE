@@ -39,7 +39,7 @@ public class AddNewsToHomePage implements Command {
             return;
         }
         try {
-            NEWS_SERVICE.addNewsToHonePage(choosenNewsId);
+            NEWS_SERVICE.addNewsToHomePage(choosenNewsId);
             response.sendRedirect(GO_TO_LIST_NEWS_OFFER_PAGE);
         } catch (ServiceException e) {
             logger.error("Error in the application", e);

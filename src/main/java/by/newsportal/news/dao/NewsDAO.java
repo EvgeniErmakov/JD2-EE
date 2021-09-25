@@ -14,7 +14,7 @@ public interface NewsDAO {
 
     public void offerNews(News entity) throws DAOException;
 
-    void addNewsToHonePage(Integer id) throws DAOException;
+    void addNewsToHomePage(Integer id) throws DAOException;
 
     Integer getNewsMaxNumber(String tableName) throws DAOException;
 

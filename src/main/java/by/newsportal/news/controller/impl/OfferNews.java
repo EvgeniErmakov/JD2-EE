@@ -20,6 +20,7 @@ public class OfferNews implements Command {
     private static final OfferNews INSTANCE = new OfferNews();
     public static final String AFTER_AUTHORIZATION_PAGE = "Controller?command=AFTER_AUTHORIZATION";
     public static final String SESSION_PATH_COMMAND = "AFTER_AUTHORIZATION";
+    public static final String NEWS_ID = "id";
     public static final String NEWS_TITLE = "title";
     public static final String NEWS_DESCRIPTION = "description";
     public static final String SESSION_PATH = "path";

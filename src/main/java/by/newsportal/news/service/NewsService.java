@@ -12,7 +12,7 @@ public interface NewsService {
 
     void offerNews(News news) throws ServiceException;
 
-    void addNewsToHonePage(Integer id) throws ServiceException;
+    void addNewsToHomePage(Integer id) throws ServiceException;
 
     Integer getNewsMaxNumber(String tableName) throws ServiceException;
 

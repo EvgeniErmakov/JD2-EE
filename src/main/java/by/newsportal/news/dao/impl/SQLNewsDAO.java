@@ -22,7 +22,7 @@ public class SQLNewsDAO implements NewsDAO {
     private static final String SQL_GET_NEWS_LIST = "SELECT * FROM news WHERE status = '%s' ORDER BY id DESC";
     private static final String SQL_GET_NEWS_BY_ID = "SELECT * FROM news WHERE(" + NEWS_ID + "=?)";
     private static final String SQL_UPDATE_NEWS = "UPDATE news SET  " + NEWS_TITLE + "=? , " + NEWS_DESCRIPTION + "= ? WHERE (" + NEWS_ID + "=?)";
-    private static final String SQL_DELETE_NEWS = "DELETE FROM news WHERE(" + NEWS_ID + "=?)";
+    private static final String SQL_DELETE_NEWS = "UPDATE news SET " + NEWS_STATUS_OFFER + " = 'deleted' WHERE id = ?";
     private static final String SQL_INSERT_NEWS = "INSERT INTO news( " + NEWS_TITLE + ", " + NEWS_DESCRIPTION + ") VALUES (?, ?)";
     private static final String SQL_INSERT_OFFER_NEWS = "INSERT INTO news( " + NEWS_TITLE + ", " + NEWS_DESCRIPTION + ", " + NEWS_STATUS_OFFER + ") VALUES (?, ?, ?)";
     private static final String SQL_ADD_NEWS_TO_HOME_PAGE = "UPDATE news SET " + NEWS_STATUS_OFFER + " = 'published' WHERE id = ?";
@@ -30,6 +30,7 @@ public class SQLNewsDAO implements NewsDAO {
     private static final String MESSAGE_LOGGER_NEWS_CREATED = "News has been created, title: ";
     private static final String MESSAGE_LOGGER_NEWS_OFFERED = "News has been offered, title: ";
     private static final String MESSAGE_LOGGER_NEWS_UPDATED = " News has been updated, title: ";
+    private static final String MESSAGE_LOGGER_NEWS_ADD_NEWS_TO_THE_MAIN_PAGE = " News has been added to the main page, id: ";
     private static final Logger logger = LogManager.getLogger(SQLNewsDAO.class);
 
     @Override
@@ -168,11 +169,12 @@ public class SQLNewsDAO implements NewsDAO {
     }
 
     @Override
-    public void addNewsToHonePage(Integer id) throws DAOException {
+    public void addNewsToHomePage(Integer id) throws DAOException {
         try (Connection connection = ConnectionPool.getInstance().takeConnection();
              PreparedStatement pr = connection.prepareStatement(SQL_ADD_NEWS_TO_HOME_PAGE)) {
             pr.setInt(1, id);
             pr.executeUpdate();
+            logger.info(MESSAGE_LOGGER_NEWS_ADD_NEWS_TO_THE_MAIN_PAGE + id);
         } catch (SQLException e) {
             throw new DAOException("Remote server could't be connected", e);
         } catch (Exception e) {

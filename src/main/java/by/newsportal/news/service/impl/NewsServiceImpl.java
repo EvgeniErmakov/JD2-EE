@@ -80,9 +80,9 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public void addNewsToHonePage(Integer id) throws ServiceException {
+    public void addNewsToHomePage(Integer id) throws ServiceException {
         try {
-            NEWS_DAO.addNewsToHonePage(id);
+            NEWS_DAO.addNewsToHomePage(id);
         } catch (DAOException e) {
             throw new ServiceException(e.getMessage(), e);
         }
