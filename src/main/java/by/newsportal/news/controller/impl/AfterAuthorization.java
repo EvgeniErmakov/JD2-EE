@@ -2,7 +2,6 @@ package by.newsportal.news.controller.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import by.newsportal.news.bean.News;
@@ -21,6 +20,7 @@ import org.apache.logging.log4j.Logger;
 public class AfterAuthorization implements Command {
     private static final AfterAuthorization INSTANCE = new AfterAuthorization();
     private static final String SESSION_PATH = "path";
+    private static final String FROM_PATH = "from";
     private static final String NEWS_STATUS = "published";
     private static final String NAME_LIST_OF_NEWS = "newses";
     private static final String CURRENT_PAGE = "currentPage";
@@ -76,7 +76,7 @@ public class AfterAuthorization implements Command {
                 return;
             }
             request.getSession().setAttribute(SESSION_PATH, SESSION_PATH_COMMAND);
-            request.getSession().setAttribute("from", SESSION_PATH_COMMAND);
+            request.getSession().setAttribute(FROM_PATH, SESSION_PATH_COMMAND);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(AFTER_AUTHORIZATION_PAGE);
             requestDispatcher.forward(request, response);
         } catch (ServiceException e) {

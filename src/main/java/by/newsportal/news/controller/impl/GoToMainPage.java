@@ -2,7 +2,6 @@ package by.newsportal.news.controller.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import by.newsportal.news.bean.News;

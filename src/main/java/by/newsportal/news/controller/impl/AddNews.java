@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import by.newsportal.news.bean.News;
 import by.newsportal.news.controller.Command;
-import by.newsportal.news.dao.impl.SQLNewsDAO;
 import by.newsportal.news.service.NewsService;
 import by.newsportal.news.service.ServiceProvider;
 import by.newsportal.news.service.exception.ServiceException;
