@@ -20,5 +20,5 @@ public interface NewsService {
 
     News getNews(Integer chosenId) throws ServiceException;
 
-    public void deleteNews(Integer id) throws ServiceException;
+    void deleteNews(Integer id) throws ServiceException;
 }

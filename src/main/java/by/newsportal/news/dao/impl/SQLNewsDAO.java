@@ -17,15 +17,17 @@ public class SQLNewsDAO implements NewsDAO {
     private static final String NEWS_ID = "id";
     private static final String NEWS_TITLE = "title";
     private static final String NEWS_DESCRIPTION = "description";
-    private static final String NEWS_STATUS_OFFER = "status";
+    private static final String NEWS_STATUS = "status";
+    private static final String NEWS_STATUS_OFFER = "offered";
     private static final String SQL_GET_NUMBER_ROWS = "SELECT COUNT(*) FROM news WHERE status = '%s'";
     private static final String SQL_GET_NEWS_LIST = "SELECT * FROM news WHERE status = '%s' ORDER BY id DESC";
+    private static final String SQL_GET_COUNT_NEWS = "count(*)";
     private static final String SQL_GET_NEWS_BY_ID = "SELECT * FROM news WHERE(" + NEWS_ID + "=?)";
     private static final String SQL_UPDATE_NEWS = "UPDATE news SET  " + NEWS_TITLE + "=? , " + NEWS_DESCRIPTION + "= ? WHERE (" + NEWS_ID + "=?)";
-    private static final String SQL_DELETE_NEWS = "UPDATE news SET " + NEWS_STATUS_OFFER + " = 'deleted' WHERE id = ?";
+    private static final String SQL_DELETE_NEWS = "UPDATE news SET " + NEWS_STATUS + " = 'deleted' WHERE id = ?";
     private static final String SQL_INSERT_NEWS = "INSERT INTO news( " + NEWS_TITLE + ", " + NEWS_DESCRIPTION + ") VALUES (?, ?)";
-    private static final String SQL_INSERT_OFFER_NEWS = "INSERT INTO news( " + NEWS_TITLE + ", " + NEWS_DESCRIPTION + ", " + NEWS_STATUS_OFFER + ") VALUES (?, ?, ?)";
-    private static final String SQL_ADD_NEWS_TO_HOME_PAGE = "UPDATE news SET " + NEWS_STATUS_OFFER + " = 'published', id = (SELECT MAX(id) FROM (select id from news) as newsTwo)+1 WHERE id = ?";
+    private static final String SQL_INSERT_OFFER_NEWS = "INSERT INTO news( " + NEWS_TITLE + ", " + NEWS_DESCRIPTION + ", " + NEWS_STATUS + ") VALUES (?, ?, ?)";
+    private static final String SQL_ADD_NEWS_TO_HOME_PAGE = "UPDATE news SET " + NEWS_STATUS + " = 'published', id = (SELECT MAX(id) FROM (select id from news) as newsTwo)+1 WHERE id = ?";
     private static final String MESSAGE_LOGGER_NEWS_DELETED = "News has been deleted, id = ";
     private static final String MESSAGE_LOGGER_NEWS_CREATED = "News has been created, title: ";
     private static final String MESSAGE_LOGGER_NEWS_OFFERED = "News has been offered, title: ";
@@ -69,7 +71,7 @@ public class SQLNewsDAO implements NewsDAO {
              PreparedStatement statement = connection.prepareStatement(String.format(SQL_GET_NUMBER_ROWS, tableName));
              ResultSet rs = statement.executeQuery();) {
             while (rs.next()) {
-                numberRow = rs.getInt("count(*)");
+                numberRow = rs.getInt(SQL_GET_COUNT_NEWS);
             }
         } catch (SQLException e) {
             throw new DAOException("Remote server could't be connected", e);
@@ -158,7 +160,7 @@ public class SQLNewsDAO implements NewsDAO {
              PreparedStatement pr = connection.prepareStatement(SQL_INSERT_OFFER_NEWS)) {
             pr.setString(1, entity.getTitle());
             pr.setString(2, entity.getDescription());
-            pr.setString(3, "offered");
+            pr.setString(3, NEWS_STATUS_OFFER);
             pr.executeUpdate();
             logger.info(MESSAGE_LOGGER_NEWS_OFFERED + entity.getTitle());
         } catch (SQLException e) {
