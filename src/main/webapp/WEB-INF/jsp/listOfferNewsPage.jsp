@@ -68,7 +68,7 @@
             <th ALIGN="center"><c:out value="${news.getTitle()}"/></th>
         </tr>
         <tr ALIGN="center">
-            <td ALIGN="center"><p><c:out value="${news.getDescription()}"/></p>
+            <td ALIGN="center"><p class="textDescription"><c:out value="${news.getDescription()}"/></p>
                 <div ALIGN="right">
                     <a href="Controller?command=ADD_NEWS_TO_HOME_PAGE&choosenNewsId=${news.getId()}&currentPage=${currentPage}"
                        style="font-size: 20px;display: inline-block;background: #408080;color: black; padding: 1rem 1.5rem; text-decoration: none; ">

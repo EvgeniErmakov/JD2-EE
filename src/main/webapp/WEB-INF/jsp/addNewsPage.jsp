@@ -58,7 +58,7 @@
         <br/>
         <br/>
         <textarea name="description" placeholder="description"
-                  style="size: 80px; width: 350px; height:200px"></textarea>
+                  style="size: 80px; width: 350px; height:200px; wrap: hard;"></textarea>
         <br/>
         <br/>
         <input type="hidden" name="command" value="ADD_NEWS"/>

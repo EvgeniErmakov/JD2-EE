@@ -25,7 +25,7 @@ public class SQLNewsDAO implements NewsDAO {
     private static final String SQL_DELETE_NEWS = "UPDATE news SET " + NEWS_STATUS_OFFER + " = 'deleted' WHERE id = ?";
     private static final String SQL_INSERT_NEWS = "INSERT INTO news( " + NEWS_TITLE + ", " + NEWS_DESCRIPTION + ") VALUES (?, ?)";
     private static final String SQL_INSERT_OFFER_NEWS = "INSERT INTO news( " + NEWS_TITLE + ", " + NEWS_DESCRIPTION + ", " + NEWS_STATUS_OFFER + ") VALUES (?, ?, ?)";
-    private static final String SQL_ADD_NEWS_TO_HOME_PAGE = "UPDATE news SET " + NEWS_STATUS_OFFER + " = 'published' WHERE id = ?";
+    private static final String SQL_ADD_NEWS_TO_HOME_PAGE = "UPDATE news SET " + NEWS_STATUS_OFFER + " = 'published', id = (SELECT MAX(id) FROM (select id from news) as newsTwo)+1 WHERE id = ?";
     private static final String MESSAGE_LOGGER_NEWS_DELETED = "News has been deleted, id = ";
     private static final String MESSAGE_LOGGER_NEWS_CREATED = "News has been created, title: ";
     private static final String MESSAGE_LOGGER_NEWS_OFFERED = "News has been offered, title: ";
