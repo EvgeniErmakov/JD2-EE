@@ -10,9 +10,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class GoToRegistrationPage implements Command {
     private static final GoToRegistrationPage INSTANCE = new GoToRegistrationPage();
-    public static final String SESSION_PATH = "path";
-    public static final String PATH_COMMAND_REG = "REGISTRATION_PAGE";
-    public static final String REGISTRATION_PAGE = "/WEB-INF/jsp/registrationPage.jsp";
+    private static final String SESSION_PATH = "path";
+    private static final String PATH_COMMAND_REG = "REGISTRATION_PAGE";
+    private static final String REGISTRATION_PAGE = "/WEB-INF/jsp/registrationPage.jsp";
 
     private GoToRegistrationPage() {
     }

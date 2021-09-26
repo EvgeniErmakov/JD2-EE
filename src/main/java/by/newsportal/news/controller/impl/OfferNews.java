@@ -18,12 +18,11 @@ public class OfferNews implements Command {
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
     private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
     private static final OfferNews INSTANCE = new OfferNews();
-    public static final String AFTER_AUTHORIZATION_PAGE = "Controller?command=AFTER_AUTHORIZATION";
-    public static final String SESSION_PATH_COMMAND = "AFTER_AUTHORIZATION";
-    public static final String NEWS_ID = "id";
-    public static final String NEWS_TITLE = "title";
-    public static final String NEWS_DESCRIPTION = "description";
-    public static final String SESSION_PATH = "path";
+    private static final String AFTER_AUTHORIZATION_PAGE = "Controller?command=AFTER_AUTHORIZATION";
+    private static final String ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
+    private static final String NEWS_TITLE = "title";
+    private static final String NEWS_DESCRIPTION = "description";
+    private static final String SESSION_PATH = "path";
     private static final Logger logger = LogManager.getLogger(OfferNews.class);
 
     public OfferNews() {
@@ -36,19 +35,17 @@ public class OfferNews implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        HttpSession session = request.getSession(false);
+        String title = request.getParameter(NEWS_TITLE);
+        String description = request.getParameter(NEWS_DESCRIPTION);
+        News news = new News(title, description);
 
         try {
-            String title = request.getParameter(NEWS_TITLE);
-            String description = request.getParameter(NEWS_DESCRIPTION);
-            News news = new News(title, description);
             validateNews(news);
             NEWS_SERVICE.offerNews(news);
+            response.sendRedirect(AFTER_AUTHORIZATION_PAGE);
         } catch (ServiceException e) {
             logger.error("Error in the application", e);
-        } finally {
-            session.setAttribute(SESSION_PATH, SESSION_PATH_COMMAND);
-            response.sendRedirect(AFTER_AUTHORIZATION_PAGE);
+            response.sendRedirect(ERROR_PAGE);
         }
     }
 

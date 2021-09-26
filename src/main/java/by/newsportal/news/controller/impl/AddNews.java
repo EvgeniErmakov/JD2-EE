@@ -19,11 +19,11 @@ public class AddNews implements Command {
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
     private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
     private static final AddNews INSTANCE = new AddNews();
-    public static final String AFTER_AUTHORIZATION_PAGE = "Controller?command=AFTER_AUTHORIZATION";
-    public static final String SESSION_PATH_COMMAND = "AFTER_AUTHORIZATION";
-    public static final String NEWS_TITLE = "title";
-    public static final String NEWS_DESCRIPTION = "description";
-    public static final String SESSION_PATH = "path";
+    private static final String AFTER_AUTHORIZATION_PAGE = "Controller?command=AFTER_AUTHORIZATION";
+    private static final String SESSION_PATH_COMMAND = "AFTER_AUTHORIZATION";
+    private static final String NEWS_TITLE = "title";
+    private static final String NEWS_DESCRIPTION = "description";
+    private static final String SESSION_PATH = "path";
     private static final Logger logger = LogManager.getLogger(AddNews.class);
 
     public AddNews() {

@@ -9,9 +9,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class ChangeLocal implements Command {
     private static final ChangeLocal INSTANCE = new ChangeLocal();
-    public static final String SESSION_PATH = "path";
-    public static final String SESSION_LOCAL = "local";
-    public static final String PART_PATH = "Controller?command=";
+    private static final String SESSION_PATH = "path";
+    private static final String SESSION_LOCAL = "local";
+    private static final String PART_PATH = "Controller?command=";
 
     private ChangeLocal() {
     }
@@ -23,7 +23,7 @@ public class ChangeLocal implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getSession(true).setAttribute(SESSION_LOCAL, request.getParameter(SESSION_LOCAL));
-        String path = PART_PATH + request.getSession(true).getAttribute(SESSION_PATH);
+        String path = PART_PATH + request.getSession().getAttribute(SESSION_PATH);
         response.sendRedirect(path);
     }
 }

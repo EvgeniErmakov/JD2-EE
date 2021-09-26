@@ -19,10 +19,12 @@ public class GoToUpdateNewsPage implements Command {
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
     private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
     private static final GoToUpdateNewsPage INSTANCE = new GoToUpdateNewsPage();
-    public static final String SESSION_PATH = "path";
-    public static final String PATH_COMMAND_ERROR = "UNKNOWN_COMMAND";
-    public static final String ERROR_PAGE = "Controller?command=/WEB-INF/jsp/error.jsp";
-    public static final String UPDATE_NEWS_PAGE = "/WEB-INF/jsp/updateNewsPage.jsp";
+    private static final String SESSION_PATH = "path";
+    private static final String CHOOSEN_NEWS = "choosenNews";
+    private static final String CHOOSEN_NEWS_ID = "choosenNewsId";
+    private static final String ERROR_PAGE = "Controller?command=/WEB-INF/jsp/error.jsp";
+    private static final String UPDATE_NEWS_PAGE = "/WEB-INF/jsp/updateNewsPage.jsp";
+    private static final String LAST_COMMAND_NAME = "UPDATE_NEWS_PAGE&choosenNewsId=";
     private static final Logger logger = LogManager.getLogger(GoToUpdateNewsPage.class);
 
     public GoToUpdateNewsPage() {
@@ -34,28 +36,25 @@ public class GoToUpdateNewsPage implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String path = UPDATE_NEWS_PAGE;
-        HttpSession session = request.getSession(true);
-        int choosenNewsId = Integer.parseInt(request.getParameter("choosenNewsId"));
-        String lastCommandName = "UPDATE_NEWS_PAGE&choosenNewsId=" + choosenNewsId;
+
+        int choosenNewsId = Integer.parseInt(request.getParameter(CHOOSEN_NEWS_ID));
         News choosenNews;
+
         if (choosenNewsId < 1) {
-            session.setAttribute(SESSION_PATH, PATH_COMMAND_ERROR);
             response.sendRedirect(ERROR_PAGE);
             return;
         }
+
         try {
             choosenNews = NEWS_SERVICE.getNews(choosenNewsId);
-
         } catch (ServiceException e) {
             logger.error("Error in the application", e);
-            session.setAttribute(SESSION_PATH, PATH_COMMAND_ERROR);
-            response.sendRedirect("Controller?command=" + PATH_COMMAND_ERROR);
+            response.sendRedirect(ERROR_PAGE);
             return;
         }
-        request.setAttribute("choosenNews", choosenNews);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
-        request.getSession(true).setAttribute(SESSION_PATH, lastCommandName);
+        request.setAttribute(CHOOSEN_NEWS, choosenNews);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher(UPDATE_NEWS_PAGE);
+        request.getSession(true).setAttribute(SESSION_PATH, LAST_COMMAND_NAME + choosenNewsId);
         requestDispatcher.forward(request, response);
     }
 }

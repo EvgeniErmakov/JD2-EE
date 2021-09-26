@@ -9,6 +9,7 @@ import by.newsportal.news.service.ServiceProvider;
 import by.newsportal.news.service.UserService;
 import by.newsportal.news.service.exception.ServiceException;
 import by.newsportal.news.service.validation.ValidationInformation;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,11 +25,9 @@ public class RegistrationUser implements Command {
     private static final String EMAIL = "email";
     private static final String FIRST_PASSWORD = "enteredPassword";
     private static final String SECOND_PASSWORD = "repeatedPassword";
-    private static final String EMPTY_PASSWORD = "";
     private static final String SESSION_PATH = "path";
     private static final String PATH_COMMAND_REGISTRATION = "REGISTRATION_PAGE";
-    private static final String PATH_COMMAND_ERROR = "Controller?command=UNKNOWN_COMMAND";
-    private static final String PATH_COMMAND_AUTHORIZATION = "AUTHORIZATION_PAGE";
+    private static final String ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
     private static final String INCORRECT_DATA = "Controller?command=REGISTRATION_PAGE&incorrect_data_message=Incorrect data";
     private static final String EMAIL_BUSY = "Controller?command=REGISTRATION_PAGE&email_is_busy=This user is already registered";
     private static final String SUCCESSFUL_REGISTRATION = "Controller?command=AUTHORIZATION_PAGE&registration_message=You have been registered";
@@ -45,8 +44,6 @@ public class RegistrationUser implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String path = PATH_COMMAND_ERROR;
-
         RegistrationInfo information = new RegistrationInfo(request);
 
         information.setName(request.getParameter(NAME));
@@ -70,13 +67,11 @@ public class RegistrationUser implements Command {
                 return;
             }
 
-            request.getSession(true).setAttribute(SESSION_PATH, PATH_COMMAND_AUTHORIZATION);
-            path = SUCCESSFUL_REGISTRATION;
             logger.info(user.getEmail() + MESSAGE_AFTER_REGISTRATION);
+            response.sendRedirect(SUCCESSFUL_REGISTRATION);
         } catch (ServiceException e) {
             logger.error("Error in the application", e);
-            request.getSession(true).setAttribute(SESSION_PATH, PATH_COMMAND_ERROR);
+            response.sendRedirect(ERROR_PAGE);
         }
-        response.sendRedirect(path);
     }
 }

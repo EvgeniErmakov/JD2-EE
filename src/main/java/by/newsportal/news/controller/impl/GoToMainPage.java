@@ -19,11 +19,16 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class GoToMainPage implements Command {
-    public static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
-    public static final String SESSION_PATH = "path";
-    public static final String PATH_COMMAND_MAIN = "go_to_main_page";
-    public static final String MAIN_PAGE = "/WEB-INF/jsp/main.jsp";
-    public static final String ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
+    private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
+    private static final String SESSION_PATH = "path";
+    private static final String NAME_LIST_OF_NEWS = "newses";
+    private static final String PATH_COMMAND_MAIN = "go_to_main_page";
+    private static final String MAIN_PAGE = "/WEB-INF/jsp/main.jsp";
+    private static final String ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
+    private static final String NEWS_STATUS = "published";
+    private static final String CURRENT_PAGE = "currentPage";
+    private static final String REQUEST_CURRENT_PAGE = "requestCurrentPage";
+    private static final String PAGE_NUMBER_LIST = "pageNumList";
     private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
     private static final GoToMainPage INSTANCE = new GoToMainPage();
     private static final Logger logger = LogManager.getLogger(GoToMainPage.class);
@@ -45,38 +50,36 @@ public class GoToMainPage implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int currentPageNumber;
-
-        Integer pagesMaxNum;
+        int pagesMaxNum;
         List<Integer> numberOfPageList;
         HttpSession session = request.getSession(true);
 
         try {
-            pagesMaxNum = NEWS_SERVICE.getNewsMaxNumber("published");
+            pagesMaxNum = NEWS_SERVICE.getNewsMaxNumber(NEWS_STATUS);
             pagesMaxNum = (pagesMaxNum % 5) > 0 ? pagesMaxNum / 5 + 1 : pagesMaxNum / 5;
-
             numberOfPageList = new ArrayList<>();
             for (int i = 1; i <= pagesMaxNum; i++) {
                 numberOfPageList.add(i);
             }
-            Collections.sort(numberOfPageList);
-            currentPageNumber = pageNumberConverter(request.getParameter("requestCurrentPage"));
 
-            session.setAttribute("currentPage", currentPageNumber);
-            session.setAttribute("pageNumList", numberOfPageList);
+            currentPageNumber = pageNumberConverter(request.getParameter(REQUEST_CURRENT_PAGE));
+
+            session.setAttribute(CURRENT_PAGE, currentPageNumber);
+            session.setAttribute(PAGE_NUMBER_LIST, numberOfPageList);
 
             try {
-                List<News> newses = NEWS_SERVICE.addNewses(currentPageNumber, "published");
-                session.setAttribute("newses", newses);
+                List<News> newses = NEWS_SERVICE.addNewses(currentPageNumber, NEWS_STATUS);
+                session.setAttribute(NAME_LIST_OF_NEWS, newses);
             } catch (ServiceException e) {
                 logger.error("Error in the application", e);
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher(ERROR_PAGE);
-                requestDispatcher.forward(request, response);
+                response.sendRedirect(ERROR_PAGE);
                 return;
             }
-            request.getSession(true).setAttribute(SESSION_PATH, PATH_COMMAND_MAIN);
+            request.getSession().setAttribute(SESSION_PATH, PATH_COMMAND_MAIN);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(MAIN_PAGE);
             requestDispatcher.forward(request, response);
         } catch (ServiceException e) {
+            response.sendRedirect(ERROR_PAGE);
             logger.error("Error in the application", e);
         }
     }

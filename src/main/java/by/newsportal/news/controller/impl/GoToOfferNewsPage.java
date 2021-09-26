@@ -11,9 +11,9 @@ import java.io.IOException;
 
 public class GoToOfferNewsPage implements Command {
     private static final GoToOfferNewsPage INSTANCE = new GoToOfferNewsPage();
-    public static final String OFFER_NEWS_PAGE = "/WEB-INF/jsp/offerNewsPage.jsp";
-    public static final String GO_TO_OFFER_NEWS_PAGE = "GO_TO_OFFER_NEWS_PAGE";
-    public static final String SESSION_PATH = "path";
+    private static final String OFFER_NEWS_PAGE = "/WEB-INF/jsp/offerNewsPage.jsp";
+    private static final String GO_TO_OFFER_NEWS_PAGE = "GO_TO_OFFER_NEWS_PAGE";
+    private static final String SESSION_PATH = "path";
 
     public static GoToOfferNewsPage getInstance() {
         return INSTANCE;
