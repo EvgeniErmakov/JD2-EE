@@ -88,8 +88,19 @@ body {
     border-radius: 3px; /* Скругляем уголки */
 }
 .textNews {
-    text-align: center;
     font-size: 35px;
+    width: auto;
+    word-break: break-word;
+    color: #000000;
+    margin: auto;
+    text-align:justify;
+}
+
+.textDescription {
+    text-indent: 75px;
+    text-align:justify;
+    margin: 10px;
+    font-size: 28px;
     color: #000000;
 }
 

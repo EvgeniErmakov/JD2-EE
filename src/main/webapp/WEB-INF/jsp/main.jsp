@@ -59,7 +59,7 @@
             <th ALIGN="center"><c:out value="${clip.getTitle()}"/></th>
         </tr>
         <tr ALIGN="center">
-            <td ALIGN="center"><c:out value="${clip.getDescription()}"/>
+            <td ALIGN="center"><p class="textDescription"><c:out value="${clip.getDescription()}"/></p>
                 <HR WIDTH="70%" ALIGN="center" SIZE="1">
             </td>
         </tr>

@@ -73,7 +73,7 @@
             <th ALIGN="center"><c:out value="${news.getTitle()}"/></th>
         </tr>
         <tr ALIGN="center">
-            <td ALIGN="center"><p><c:out value="${news.getDescription()}"/></p>
+            <td ALIGN="center"><p class="textDescription"><c:out value="${news.getDescription()}"/></p>
                 <c:if test="${UserRole == 'ADMIN'}">
                     <div ALIGN="right">
                         <a href="Controller?command=UPDATE_NEWS_PAGE&choosenNewsId=${news.getId()}&currentPage=${currentPage}"
