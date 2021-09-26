@@ -30,8 +30,8 @@ public class ValidationInformationTest {
 
     static Stream<Arguments> provideArgumentsCheckPasswordTest() {
         return Stream.of(
-                Arguments.of("Q193213324862q^", true),
-                Arguments.of("q1932133Q^", true),
+                Arguments.of("qqQ932133869992q^", true),
+                Arguments.of("q14133Q^", true),
                 Arguments.of("3", false),
                 Arguments.of("", false)
         );
