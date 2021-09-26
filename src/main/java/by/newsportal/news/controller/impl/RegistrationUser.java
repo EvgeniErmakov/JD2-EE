@@ -8,6 +8,7 @@ import by.newsportal.news.controller.Command;
 import by.newsportal.news.service.ServiceProvider;
 import by.newsportal.news.service.UserService;
 import by.newsportal.news.service.exception.ServiceException;
+import by.newsportal.news.service.validation.ValidationInformation;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,6 +19,11 @@ public class RegistrationUser implements Command {
     private static final RegistrationUser instance = new RegistrationUser();
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
     private static final UserService USER_SERVICE = PROVIDER.getUserService();
+    private static final String NAME = "name";
+    private static final String SURNAME = "surname";
+    private static final String EMAIL = "email";
+    private static final String FIRST_PASSWORD = "enteredPassword";
+    private static final String SECOND_PASSWORD = "repeatedPassword";
     private static final String EMPTY_PASSWORD = "";
     private static final String SESSION_PATH = "path";
     private static final String PATH_COMMAND_REGISTRATION = "REGISTRATION_PAGE";
@@ -29,6 +35,7 @@ public class RegistrationUser implements Command {
     private static final String MESSAGE_AFTER_REGISTRATION = " has been registered.";
     private static final Logger logger = LogManager.getLogger(RegistrationUser.class);
 
+
     private RegistrationUser() {
     }
 
@@ -39,10 +46,19 @@ public class RegistrationUser implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = PATH_COMMAND_ERROR;
+
         RegistrationInfo information = new RegistrationInfo(request);
+
+        information.setName(request.getParameter(NAME));
+        information.setSurname(request.getParameter(SURNAME));
+        information.setEmail(request.getParameter(EMAIL));
+        information.setEnteredPassword(request.getParameter(FIRST_PASSWORD));
+        information.setRepeatedPassword(request.getParameter(SECOND_PASSWORD));
+
         request.getSession(true).setAttribute(SESSION_PATH, PATH_COMMAND_REGISTRATION);
+
         try {
-            if (EMPTY_PASSWORD.equals(information.getEnteredPassword()) || !(information.getEnteredPassword().equals(information.getRepeatedPassword()))) {
+            if (!ValidationInformation.validationRegistrationInformation(information)) {
                 response.sendRedirect(INCORRECT_DATA);
                 return;
             }
@@ -53,6 +69,7 @@ public class RegistrationUser implements Command {
                 response.sendRedirect(EMAIL_BUSY);
                 return;
             }
+
             request.getSession(true).setAttribute(SESSION_PATH, PATH_COMMAND_AUTHORIZATION);
             path = SUCCESSFUL_REGISTRATION;
             logger.info(user.getEmail() + MESSAGE_AFTER_REGISTRATION);
