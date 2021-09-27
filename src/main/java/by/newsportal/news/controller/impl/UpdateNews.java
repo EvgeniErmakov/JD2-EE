@@ -21,7 +21,6 @@ public class UpdateNews implements Command {
     private static final String AFTER_AUTHORIZATION_PAGE = "Controller?command=AFTER_AUTHORIZATION";
     private static final String GO_TO_LIST_NEWS_OFFER_PAGE = "Controller?command=GO_TO_LIST_NEWS_OFFER_PAGE";
     private static final String AFTER_AUTHORIZATION = "AFTER_AUTHORIZATION";
-    private static final String ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
     private static final String GO_TO_LIST_NEWS_OFFER_PAGE_PATH = "GO_TO_LIST_NEWS_OFFER_PAGE";
     private static final String NEWS_TITLE = "title";
     private static final String NEWS_DESCRIPTION = "description";
@@ -47,15 +46,14 @@ public class UpdateNews implements Command {
         try {
             validateNews(news);
             NEWS_SERVICE.updateNews(news);
-
+        } catch (ServiceException e) {
+            logger.error("Field fullText or title is Empty", e);
+        } finally {
             if (lastPage.equals(AFTER_AUTHORIZATION)) {
                 response.sendRedirect(AFTER_AUTHORIZATION_PAGE);
             } else if (lastPage.equals(GO_TO_LIST_NEWS_OFFER_PAGE_PATH)) {
                 response.sendRedirect(GO_TO_LIST_NEWS_OFFER_PAGE);
             }
-        } catch (ServiceException e) {
-            logger.error("Error in the application", e);
-            response.sendRedirect(ERROR_PAGE);
         }
     }
 

@@ -41,12 +41,9 @@ public class SQLUserDAO implements UserDAO {
                 insertUser.setString(1, information.getName());
                 insertUser.setString(2, information.getSurname());
                 insertUser.setString(3, information.getEmail());
-                System.out.println("Vse norm!");
                 insertUser.setString(4, passwordAuthentication.hash(information.getEnteredPassword()));
-                System.out.println(passwordAuthentication.hash(information.getEnteredPassword()));
                 insertUser.setString(5, RoleEnum.USER.getRole());
                 insertUser.executeUpdate();
-                System.out.println("Vse norm3!");
                 return new User(information.getEmail(), information.getEnteredPassword());
             }
         } catch (SQLException e) {

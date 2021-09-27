@@ -19,10 +19,8 @@ public class OfferNews implements Command {
     private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
     private static final OfferNews INSTANCE = new OfferNews();
     private static final String AFTER_AUTHORIZATION_PAGE = "Controller?command=AFTER_AUTHORIZATION";
-    private static final String ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
     private static final String NEWS_TITLE = "title";
     private static final String NEWS_DESCRIPTION = "description";
-    private static final String SESSION_PATH = "path";
     private static final Logger logger = LogManager.getLogger(OfferNews.class);
 
     public OfferNews() {
@@ -42,10 +40,10 @@ public class OfferNews implements Command {
         try {
             validateNews(news);
             NEWS_SERVICE.offerNews(news);
-            response.sendRedirect(AFTER_AUTHORIZATION_PAGE);
         } catch (ServiceException e) {
-            logger.error("Error in the application", e);
-            response.sendRedirect(ERROR_PAGE);
+            logger.error("Field fullText or title is Empty", e);
+        }finally {
+            response.sendRedirect(AFTER_AUTHORIZATION_PAGE);
         }
     }
 
