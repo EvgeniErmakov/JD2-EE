@@ -20,9 +20,9 @@ public class SQLUserDAO implements UserDAO {
     private static final String EMAIL = "email";
     private static final String PASSWORD = "password";
     private static final String ROLE = "role";
-    private static final String SQL_INSERT_USER = "INSERT INTO projectnews(name,surname,email,password,role) VALUES(?,?,?,?,?)";
-    private static final String SQL_GET_AUTHORIZATION = "SELECT * FROM projectnews WHERE(" + EMAIL + "= ?)";
-    private static final String SELECT_USER = "SELECT * FROM projectnews WHERE(" + EMAIL + "= ?)";
+    private static final String SQL_INSERT_USER = "INSERT INTO users(name,surname,email,password,role) VALUES(?,?,?,?,?)";
+    private static final String SQL_GET_AUTHORIZATION = "SELECT * FROM users WHERE(" + EMAIL + "= ?)";
+    private static final String SELECT_USER = "SELECT * FROM users WHERE(" + EMAIL + "= ?)";
     private static final PasswordAuthentication passwordAuthentication = PasswordAuthentication.getInstance();
 
 
