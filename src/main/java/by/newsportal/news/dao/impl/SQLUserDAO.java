@@ -12,6 +12,7 @@ import by.newsportal.news.dao.UserDAO;
 import by.newsportal.news.dao.connection.ConnectionPool;
 import by.newsportal.news.dao.connection.ConnectionPoolException;
 import by.newsportal.news.dao.exception.DAOException;
+import by.newsportal.news.dao.passwordauthentication.PasswordAuthentication;
 
 public class SQLUserDAO implements UserDAO {
     private static final String NAME = "name";
@@ -20,8 +21,10 @@ public class SQLUserDAO implements UserDAO {
     private static final String PASSWORD = "password";
     private static final String ROLE = "role";
     private static final String SQL_INSERT_USER = "INSERT INTO projectnews(name,surname,email,password,role) VALUES(?,?,?,?,?)";
-    private static final String SQL_GET_AUTHORIZATION = "SELECT * FROM projectnews WHERE(" + EMAIL + "= ? AND " + PASSWORD + "= ?)";
+    private static final String SQL_GET_AUTHORIZATION = "SELECT * FROM projectnews WHERE(" + EMAIL + "= ?)";
     private static final String SELECT_USER = "SELECT * FROM projectnews WHERE(" + EMAIL + "= ?)";
+    private static final PasswordAuthentication passwordAuthentication = PasswordAuthentication.getInstance();
+
 
     @Override
     public User registration(RegistrationInfo information) throws DAOException {
@@ -38,9 +41,12 @@ public class SQLUserDAO implements UserDAO {
                 insertUser.setString(1, information.getName());
                 insertUser.setString(2, information.getSurname());
                 insertUser.setString(3, information.getEmail());
-                insertUser.setString(4, information.getEnteredPassword());
+                System.out.println("Vse norm!");
+                insertUser.setString(4, passwordAuthentication.hash(information.getEnteredPassword()));
+                System.out.println(passwordAuthentication.hash(information.getEnteredPassword()));
                 insertUser.setString(5, RoleEnum.USER.getRole());
                 insertUser.executeUpdate();
+                System.out.println("Vse norm3!");
                 return new User(information.getEmail(), information.getEnteredPassword());
             }
         } catch (SQLException e) {
@@ -56,15 +62,15 @@ public class SQLUserDAO implements UserDAO {
         try (Connection connection = ConnectionPool.getInstance().takeConnection();
              PreparedStatement pr = connection.prepareStatement(SQL_GET_AUTHORIZATION);) {
             pr.setString(1, userInfo.getEmail());
-            pr.setString(2, userInfo.getEnteredPassword());
             ResultSet result = pr.executeQuery();
-            if (result.next()) {
-                String name = result.getString(NAME);
-                String surname = result.getString(SURNAME);
-                String email = result.getString(EMAIL);
-                String password = result.getString(PASSWORD);
-                RoleEnum role = RoleEnum.valueOf(result.getString(ROLE));
-                user = new User(name, surname, email, password, role);
+            while (result.next()) {
+                if (passwordAuthentication.authenticate(userInfo.getEnteredPassword(), result.getString(PASSWORD))) {
+                    String name = result.getString(NAME);
+                    String surname = result.getString(SURNAME);
+                    String email = result.getString(EMAIL);
+                    RoleEnum role = RoleEnum.valueOf(result.getString(ROLE));
+                    user = new User(name, surname, email, role);
+                }
             }
             return user;
         } catch (SQLException e) {

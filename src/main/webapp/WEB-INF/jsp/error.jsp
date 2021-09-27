@@ -7,8 +7,8 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Error</title>
-    <link rel="stylesheet" href="resources/css/NewSst.css">
+    <title>ErrorPage</title>
+    <link rel="stylesheet" href="resources/css/css-style.css">
     <fmt:setLocale value="${sessionScope.local}"/>
     <fmt:setBundle basename="localization.local" var="loc"/>
     <fmt:message bundle="${loc}" key="local.name.site" var="name_site"/>
@@ -20,27 +20,14 @@
     <fmt:message bundle="${loc}" key="local.text.error.message" var="error_message"/>
 </head>
 <body>
+
 <div class="heading">
     <h1><a href="Controller?command=go_to_main_page" style="color : black;
 			font-family:serif; font-size: 75px;margin: 50px;text-align: center;">
         <c:out value="${name_site}"/></a>
     </h1>
-    </h1>
-    <div class=heading-1>
-        <div class="heading-2">
-            <form action="Controller" method="post">
-                <input type="hidden" name="local" value="ru"/>
-                <input type="hidden" name="command" value="CHANGE_LOCAL"/>
-                <input type="submit" class="button_local" value="${ru_button}"/><br/>
-            </form>
-            <form action="Controller" method="post">
-                <input type="hidden" name="local" value="en"/>
-                <input type="hidden" name="command" value="CHANGE_LOCAL"/>
-                <input type="submit" class="button_local" value="${en_button}"/><br/>
-            </form>
-        </div>
-    </div>
 </div>
+
 <h1 class="headline"><c:out value="${error}"/></h1>
 <p class="text"><c:out value="${error_message}"/></p>
 </body>
