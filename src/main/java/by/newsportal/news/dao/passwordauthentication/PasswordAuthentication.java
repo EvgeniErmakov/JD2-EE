@@ -19,21 +19,14 @@ public final class PasswordAuthentication {
 	private static final String ALGORITHM = "PBKDF2WithHmacSHA1";
 	private static final int SIZE = 128;
 	private static final Pattern LAYOUTA = Pattern.compile("\\$31\\$(\\d\\d?)\\$(.{43})");
-	private final SecureRandom random;
-	private final int cost;
+	private final SecureRandom random= new SecureRandom();
+
 
 	public static PasswordAuthentication getInstance() {
 		return instance;
 	}
 
 	private PasswordAuthentication() {
-		this(DEFAULT_COST);
-	}
-
-	private PasswordAuthentication(int cost) {
-		iterations(cost); 
-		this.cost = cost;
-		this.random = new SecureRandom();
 	}
 
 	private static int iterations(int cost) {
@@ -50,12 +43,12 @@ public final class PasswordAuthentication {
 	public String hash(char[] password) {
 		byte[] salt = new byte[SIZE / 8];
 		random.nextBytes(salt);
-		byte[] dk = pbkdf2(password, salt, 1 << cost);
+		byte[] dk = pbkdf2(password, salt, 1 << DEFAULT_COST);
 		byte[] hash = new byte[salt.length + dk.length];
 		System.arraycopy(salt, 0, hash, 0, salt.length);
 		System.arraycopy(dk, 0, hash, salt.length, dk.length);
 		Base64.Encoder enc = Base64.getUrlEncoder().withoutPadding();
-		return ID + cost + '$' + enc.encodeToString(hash);
+		return ID + DEFAULT_COST + '$' + enc.encodeToString(hash);
 	}
 
 	public boolean authenticate(String password, String token) {
