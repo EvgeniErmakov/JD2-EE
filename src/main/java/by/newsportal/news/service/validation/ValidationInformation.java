@@ -7,7 +7,7 @@ public class ValidationInformation {
 
     private static final String CHECK_EMAIL = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
     private static final String CHECK_PASSWORD = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
-    private static final String CHECK_NAME_SURNAME = "^[a-zA-Zà-ÿÀ-ß0-9-_\\.]{3,30}$";
+    private static final String CHECK_NAME_SURNAME = "[a-zA-Z_à-ÿÀ-ß0-9]{3,30}$";
 
     private ValidationInformation() {
     }

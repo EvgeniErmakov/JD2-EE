@@ -31,7 +31,7 @@ public class SQLNewsDAO implements NewsDAO {
     private static final String MESSAGE_LOGGER_NEWS_DELETED = "News has been deleted, id = ";
     private static final String MESSAGE_LOGGER_NEWS_CREATED = "News has been created, title: ";
     private static final String MESSAGE_LOGGER_NEWS_OFFERED = "News has been offered, title: ";
-    private static final String MESSAGE_LOGGER_NEWS_UPDATED = " News has been updated, title: ";
+    private static final String MESSAGE_LOGGER_NEWS_UPDATED = " News has been updated, id = ";
     private static final String MESSAGE_LOGGER_NEWS_ADD_NEWS_TO_THE_MAIN_PAGE = " News has been added to the main page, id: ";
     private static final Logger logger = LogManager.getLogger(SQLNewsDAO.class);
 
@@ -91,7 +91,7 @@ public class SQLNewsDAO implements NewsDAO {
             pr.setString(2, entity.getDescription());
             pr.setInt(3, entity.getId());
             pr.executeUpdate();
-            logger.info(entity.getId() + MESSAGE_LOGGER_NEWS_UPDATED + entity.getTitle());
+            logger.info(MESSAGE_LOGGER_NEWS_UPDATED + entity.getId());
         } catch (SQLException e) {
             throw new DAOException("Remote server could't be connected", e);
         } catch (Exception e) {
