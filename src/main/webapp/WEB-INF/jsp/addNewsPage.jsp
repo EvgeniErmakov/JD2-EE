@@ -40,7 +40,7 @@
         </div>
         <div class="heading-2">
             <form action="Controller" method="post">
-                <input type="hidden" name="command" value="AFTER_AUTHORIZATION"/>
+                <input type="hidden" name="command" value="GO_TO_MAIN_PAGE"/>
                 <input type="submit" class="button" value="${exit_button}"/>
             </form>
             <form action="Controller" method="post">
