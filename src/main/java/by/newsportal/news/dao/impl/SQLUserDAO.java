@@ -54,14 +54,14 @@ public class SQLUserDAO implements UserDAO {
     }
 
     @Override
-    public User authorization(RegistrationInfo userInfo) throws DAOException {
+    public User authorization(RegistrationInfo information) throws DAOException {
         User user = null;
         try (Connection connection = ConnectionPool.getInstance().takeConnection();
              PreparedStatement pr = connection.prepareStatement(SQL_GET_AUTHORIZATION);) {
-            pr.setString(1, userInfo.getEmail());
+            pr.setString(1, information.getEmail());
             ResultSet result = pr.executeQuery();
             while (result.next()) {
-                if (passwordAuthentication.authenticate(userInfo.getEnteredPassword(), result.getString(PASSWORD))) {
+                if (passwordAuthentication.authenticate(information.getEnteredPassword(), result.getString(PASSWORD))) {
                     String name = result.getString(NAME);
                     String surname = result.getString(SURNAME);
                     String email = result.getString(EMAIL);
