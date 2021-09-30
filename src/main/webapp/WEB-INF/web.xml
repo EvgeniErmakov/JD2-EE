@@ -18,4 +18,16 @@
     <servlet-name>Controller</servlet-name>
     <url-pattern>/Controller</url-pattern>
   </servlet-mapping>
+
+  <filter>
+    <display-name>CommandFilter</display-name>
+    <filter-name>CommandFilter</filter-name>
+    <filter-class>by.newsportal.news.filter.CommandFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>CommandFilter</filter-name>
+    <url-pattern>/Controller</url-pattern>
+  </filter-mapping>
+
 </web-app>
