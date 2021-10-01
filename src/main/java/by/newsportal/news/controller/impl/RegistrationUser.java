@@ -26,7 +26,7 @@ public class RegistrationUser implements Command {
     private static final String SECOND_PASSWORD = "repeatedPassword";
     private static final String SESSION_PATH = "path";
     private static final String PATH_COMMAND_REGISTRATION = "REGISTRATION_PAGE";
-    private static final String ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
+    private static final String GO_TO_ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
     private static final String INCORRECT_DATA = "Controller?command=REGISTRATION_PAGE&incorrect_data_message=Incorrect data";
     private static final String EMAIL_BUSY = "Controller?command=REGISTRATION_PAGE&email_is_busy=This user is already registered";
     private static final String SUCCESSFUL_REGISTRATION = "Controller?command=AUTHORIZATION_PAGE&registration_message=You have been registered";
@@ -70,7 +70,7 @@ public class RegistrationUser implements Command {
             response.sendRedirect(SUCCESSFUL_REGISTRATION);
         } catch (ServiceException e) {
             logger.error("Error in the application", e);
-            response.sendRedirect(ERROR_PAGE);
+            response.sendRedirect(GO_TO_ERROR_PAGE);
         }
     }
 }

@@ -23,7 +23,6 @@ public class ChangeLocal implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getSession(true).setAttribute(SESSION_LOCAL, request.getParameter(SESSION_LOCAL));
-        String path = PART_PATH + request.getSession().getAttribute(SESSION_PATH);
-        response.sendRedirect(path);
+        response.sendRedirect(PART_PATH + request.getSession().getAttribute(SESSION_PATH));
     }
 }

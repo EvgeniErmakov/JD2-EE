@@ -11,8 +11,8 @@ import jakarta.servlet.http.HttpServletResponse;
 public class UnknownCommand implements Command {
     private static final UnknownCommand INSTANCE = new UnknownCommand();
     private static final String SESSION_PATH = "path";
-    private static final String PATH_COMMAND_ERR = "UNKNOWN_COMMAND";
-    private static final String ERROR_PAGE = "/WEB-INF/jsp/error.jsp";
+    private static final String PATH_COMMAND_ERROR = "UNKNOWN_COMMAND";
+    private static final String GO_TO_ERROR_PAGE = "/WEB-INF/jsp/error.jsp";
 
     private UnknownCommand() {
     }
@@ -23,8 +23,8 @@ public class UnknownCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getSession(true).setAttribute(SESSION_PATH, PATH_COMMAND_ERR);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher(ERROR_PAGE);
+        request.getSession(true).setAttribute(SESSION_PATH, PATH_COMMAND_ERROR);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher(GO_TO_ERROR_PAGE);
         requestDispatcher.forward(request, response);
     }
 }

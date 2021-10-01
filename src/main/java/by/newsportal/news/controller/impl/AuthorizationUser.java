@@ -20,10 +20,10 @@ public class AuthorizationUser implements Command {
     private static final UserService USER_SERVICE = PROVIDER.getUserService();
     private static final String SESSION_PATH = "path";
     private static final String ATTRIBUTE_USER = "user";
-    private static final String PATH_COMMAND_ERROR = "Controller?command=UNKNOWN_COMMAND";
+    private static final String GO_TO_ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
     private static final String PATH_COMMAND_AFTER_AUTHORIZATION = "Controller?command=AFTER_AUTHORIZATION";
-    private static final String INCORRECT_DATA = "Controller?command=AUTHORIZATION_PAGE&incorrect_data_message=Incorrect data:";
-    private static final String USER_NOT_FOUND = "Controller?command=AUTHORIZATION_PAGE&incorrect_data_message=User is not found";
+    private static final String INCORRECT_DATA_MESSAGE = "Controller?command=AUTHORIZATION_PAGE&incorrect_data_message=Incorrect data:";
+    private static final String USER_NOT_FOUND_MESSAGE = "Controller?command=AUTHORIZATION_PAGE&incorrect_data_message=User is not found";
     private static final String AFTER_AUTHORIZATION = "AFTER_AUTHORIZATION";
     private static final String MESSAGE_AFTER_AUTHORIZATION = " has been authorized.";
     private static final Logger logger = LogManager.getLogger(AuthorizationUser.class);
@@ -41,7 +41,7 @@ public class AuthorizationUser implements Command {
 
         try {
             if (info.getEnteredPassword().equals("") || info.getEmail().equals("")) {
-                response.sendRedirect(INCORRECT_DATA);
+                response.sendRedirect(INCORRECT_DATA_MESSAGE);
                 return;
             }
 
@@ -49,7 +49,7 @@ public class AuthorizationUser implements Command {
             request.getSession(true).setAttribute(SESSION_PATH, AFTER_AUTHORIZATION);
 
             if (user == null) {
-                response.sendRedirect(USER_NOT_FOUND);
+                response.sendRedirect(USER_NOT_FOUND_MESSAGE);
             } else {
                 request.getSession().setAttribute(ATTRIBUTE_USER, user);
                 logger.info(user.getName() + MESSAGE_AFTER_AUTHORIZATION);
@@ -58,7 +58,7 @@ public class AuthorizationUser implements Command {
 
         } catch (ServiceException e) {
             logger.error("Error in the application", e);
-            response.sendRedirect(PATH_COMMAND_ERROR);
+            response.sendRedirect(GO_TO_ERROR_PAGE);
         }
     }
 }

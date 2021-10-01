@@ -23,7 +23,7 @@ public class GoToListNewsOfferPage implements Command {
     private static final GoToListNewsOfferPage INSTANCE = new GoToListNewsOfferPage();
     private static final String LIST_OFFER_NEWS_PAGE = "/WEB-INF/jsp/listOfferNewsPage.jsp";
     private static final String FROM_PATH = "from";
-    private static final String ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
+    private static final String GO_TO_ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
     private static final String NEWS_STATUS = "offered";
     private static final String SESSION_PATH = "path";
     private static final String CURRENT_PAGE = "currentPage";
@@ -73,7 +73,7 @@ public class GoToListNewsOfferPage implements Command {
                 session.setAttribute(NAME_LIST_OF_NEWS, newses);
             } catch (ServiceException e) {
                 logger.error("Error in the application", e);
-                response.sendRedirect(ERROR_PAGE);
+                response.sendRedirect(GO_TO_ERROR_PAGE);
                 return;
             }
             request.getSession().setAttribute(SESSION_PATH, GO_TO_LIST_NEWS_OFFER_PAGE);
@@ -81,7 +81,7 @@ public class GoToListNewsOfferPage implements Command {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(LIST_OFFER_NEWS_PAGE);
             requestDispatcher.forward(request, response);
         } catch (ServiceException e) {
-            response.sendRedirect(ERROR_PAGE);
+            response.sendRedirect(GO_TO_ERROR_PAGE);
             logger.error("Error in the application", e);
         }
     }

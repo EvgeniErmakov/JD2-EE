@@ -18,7 +18,7 @@ public class AddNewsToMainPage implements Command {
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
     private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
     private static final AddNewsToMainPage INSTANCE = new AddNewsToMainPage();
-    private static final String AFTER_AUTHORIZATION_PAGE = "Controller?command=AFTER_AUTHORIZATION";
+    private static final String GO_TO_AFTER_AUTHORIZATION_PAGE = "Controller?command=AFTER_AUTHORIZATION";
     private static final String SESSION_PATH_COMMAND = "AFTER_AUTHORIZATION";
     private static final String NEWS_TITLE = "title";
     private static final String NEWS_DESCRIPTION = "description";
@@ -46,7 +46,7 @@ public class AddNewsToMainPage implements Command {
             logger.error("Error in the application", e);
         } finally {
             session.setAttribute(SESSION_PATH, SESSION_PATH_COMMAND);
-            response.sendRedirect(AFTER_AUTHORIZATION_PAGE);
+            response.sendRedirect(GO_TO_AFTER_AUTHORIZATION_PAGE);
         }
     }
 

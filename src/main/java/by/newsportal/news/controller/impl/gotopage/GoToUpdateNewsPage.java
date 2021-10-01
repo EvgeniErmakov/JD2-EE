@@ -21,7 +21,7 @@ public class GoToUpdateNewsPage implements Command {
     private static final String SESSION_PATH = "path";
     private static final String CHOOSEN_NEWS = "choosenNews";
     private static final String CHOOSEN_NEWS_ID = "choosenNewsId";
-    private static final String ERROR_PAGE = "Controller?command=/WEB-INF/jsp/error.jsp";
+    private static final String GO_TO_ERROR_PAGE = "Controller?command=/WEB-INF/jsp/error.jsp";
     private static final String UPDATE_NEWS_PAGE = "/WEB-INF/jsp/updateNewsPage.jsp";
     private static final String LAST_COMMAND_NAME = "UPDATE_NEWS_PAGE&choosenNewsId=";
     private static final Logger logger = LogManager.getLogger(GoToUpdateNewsPage.class);
@@ -39,7 +39,7 @@ public class GoToUpdateNewsPage implements Command {
         News choosenNews;
 
         if (choosenNewsId < 1) {
-            response.sendRedirect(ERROR_PAGE);
+            response.sendRedirect(GO_TO_ERROR_PAGE);
             return;
         }
 
@@ -47,7 +47,7 @@ public class GoToUpdateNewsPage implements Command {
             choosenNews = NEWS_SERVICE.getNews(choosenNewsId);
         } catch (ServiceException e) {
             logger.error("Error in the application", e);
-            response.sendRedirect(ERROR_PAGE);
+            response.sendRedirect(GO_TO_ERROR_PAGE);
             return;
         }
         request.setAttribute(CHOOSEN_NEWS, choosenNews);

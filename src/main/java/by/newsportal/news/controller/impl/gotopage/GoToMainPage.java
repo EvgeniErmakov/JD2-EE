@@ -23,7 +23,7 @@ public class GoToMainPage implements Command {
     private static final String NAME_LIST_OF_NEWS = "newses";
     private static final String PATH_COMMAND_MAIN = "go_to_main_page";
     private static final String MAIN_PAGE = "/WEB-INF/jsp/main.jsp";
-    private static final String ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
+    private static final String GO_TO_ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
     private static final String NEWS_STATUS = "published";
     private static final String CURRENT_PAGE = "currentPage";
     private static final String REQUEST_CURRENT_PAGE = "requestCurrentPage";
@@ -71,14 +71,14 @@ public class GoToMainPage implements Command {
                 session.setAttribute(NAME_LIST_OF_NEWS, newses);
             } catch (ServiceException e) {
                 logger.error("Error in the application", e);
-                response.sendRedirect(ERROR_PAGE);
+                response.sendRedirect(GO_TO_ERROR_PAGE);
                 return;
             }
             request.getSession().setAttribute(SESSION_PATH, PATH_COMMAND_MAIN);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(MAIN_PAGE);
             requestDispatcher.forward(request, response);
         } catch (ServiceException e) {
-            response.sendRedirect(ERROR_PAGE);
+            response.sendRedirect(GO_TO_ERROR_PAGE);
             logger.error("Error in the application", e);
         }
     }

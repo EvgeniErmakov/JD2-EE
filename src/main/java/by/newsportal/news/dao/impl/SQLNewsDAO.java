@@ -2,7 +2,6 @@ package by.newsportal.news.dao.impl;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import by.newsportal.news.bean.News;
@@ -27,12 +26,12 @@ public class SQLNewsDAO implements NewsDAO {
     private static final String SQL_DELETE_NEWS = "UPDATE news SET " + NEWS_STATUS + " = 'deleted' WHERE id = ?";
     private static final String SQL_INSERT_NEWS = "INSERT INTO news( " + NEWS_TITLE + ", " + NEWS_DESCRIPTION + ") VALUES (?, ?)";
     private static final String SQL_INSERT_OFFER_NEWS = "INSERT INTO news( " + NEWS_TITLE + ", " + NEWS_DESCRIPTION + ", " + NEWS_STATUS + ") VALUES (?, ?, ?)";
-    private static final String SQL_ADD_NEWS_TO_HOME_PAGE = "UPDATE news SET " + NEWS_STATUS + " = 'published', id = (SELECT MAX(id) FROM (select id from news) as newsTwo)+1 WHERE id = ?";
+    private static final String SQL_MOVE_NEWS_TO_MAIN_PAGE = "UPDATE news SET " + NEWS_STATUS + " = 'published', id = (SELECT MAX(id) FROM (select id from news) as newsTwo)+1 WHERE id = ?";
     private static final String MESSAGE_LOGGER_NEWS_DELETED = "News has been deleted, id = ";
     private static final String MESSAGE_LOGGER_NEWS_CREATED = "News has been created, title: ";
     private static final String MESSAGE_LOGGER_NEWS_OFFERED = "News has been offered, title: ";
     private static final String MESSAGE_LOGGER_NEWS_UPDATED = " News has been updated, id = ";
-    private static final String MESSAGE_LOGGER_NEWS_ADD_NEWS_TO_THE_MAIN_PAGE = " News has been added to the main page, id: ";
+    private static final String MESSAGE_LOGGER_NEWS_ADD_MOVE_NEWS_TO_MAIN_PAGE = " News has been moved to the main page, id: ";
     private static final Logger logger = LogManager.getLogger(SQLNewsDAO.class);
 
     @Override
@@ -60,7 +59,6 @@ public class SQLNewsDAO implements NewsDAO {
         } catch (Exception e) {
             throw new DAOException("False query", e);
         }
-
         return newsList;
     }
 
@@ -173,10 +171,10 @@ public class SQLNewsDAO implements NewsDAO {
     @Override
     public void addNewsToHomePage(Integer id) throws DAOException {
         try (Connection connection = ConnectionPool.getInstance().takeConnection();
-             PreparedStatement pr = connection.prepareStatement(SQL_ADD_NEWS_TO_HOME_PAGE)) {
+             PreparedStatement pr = connection.prepareStatement(SQL_MOVE_NEWS_TO_MAIN_PAGE)) {
             pr.setInt(1, id);
             pr.executeUpdate();
-            logger.info(MESSAGE_LOGGER_NEWS_ADD_NEWS_TO_THE_MAIN_PAGE + id);
+            logger.info(MESSAGE_LOGGER_NEWS_ADD_MOVE_NEWS_TO_MAIN_PAGE + id);
         } catch (SQLException e) {
             throw new DAOException("Remote server could't be connected", e);
         } catch (Exception e) {

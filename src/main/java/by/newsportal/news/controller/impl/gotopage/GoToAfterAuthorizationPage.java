@@ -19,6 +19,7 @@ import org.apache.logging.log4j.Logger;
 
 public class GoToAfterAuthorizationPage implements Command {
     private static final GoToAfterAuthorizationPage INSTANCE = new GoToAfterAuthorizationPage();
+    private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
     private static final String SESSION_PATH = "path";
     private static final String FROM_PATH = "from";
     private static final String NEWS_STATUS = "published";
@@ -26,9 +27,8 @@ public class GoToAfterAuthorizationPage implements Command {
     private static final String CURRENT_PAGE = "currentPage";
     private static final String REQUEST_CURRENT_PAGE = "requestCurrentPage";
     private static final String PAGE_NUMBER_LIST = "pageNumList";
-    private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
     private static final String SESSION_PATH_COMMAND = "AFTER_AUTHORIZATION";
-    private static final String ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
+    private static final String GO_TO_ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
     private static final String AFTER_AUTHORIZATION_PAGE = "/WEB-INF/jsp/afterAuthorization.jsp";
     private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
     private static final Logger logger = LogManager.getLogger(GoToAfterAuthorizationPage.class);
@@ -72,7 +72,7 @@ public class GoToAfterAuthorizationPage implements Command {
                 session.setAttribute(NAME_LIST_OF_NEWS, newses);
             } catch (ServiceException e) {
                 logger.error("Error in the application", e);
-                response.sendRedirect(ERROR_PAGE);
+                response.sendRedirect(GO_TO_ERROR_PAGE);
                 return;
             }
             request.getSession().setAttribute(SESSION_PATH, SESSION_PATH_COMMAND);
@@ -80,7 +80,7 @@ public class GoToAfterAuthorizationPage implements Command {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(AFTER_AUTHORIZATION_PAGE);
             requestDispatcher.forward(request, response);
         } catch (ServiceException e) {
-            response.sendRedirect(ERROR_PAGE);
+            response.sendRedirect(GO_TO_ERROR_PAGE);
             logger.error("Error in the application", e);
         }
     }
