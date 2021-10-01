@@ -1,4 +1,4 @@
-package by.newsportal.news.controller.impl;
+package by.newsportal.news.controller.impl.gotopage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,8 +17,8 @@ import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class AfterAuthorization implements Command {
-    private static final AfterAuthorization INSTANCE = new AfterAuthorization();
+public class GoToAfterAuthorizationPage implements Command {
+    private static final GoToAfterAuthorizationPage INSTANCE = new GoToAfterAuthorizationPage();
     private static final String SESSION_PATH = "path";
     private static final String FROM_PATH = "from";
     private static final String NEWS_STATUS = "published";
@@ -31,12 +31,12 @@ public class AfterAuthorization implements Command {
     private static final String ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
     private static final String AFTER_AUTHORIZATION_PAGE = "/WEB-INF/jsp/afterAuthorization.jsp";
     private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
-    private static final Logger logger = LogManager.getLogger(AfterAuthorization.class);
+    private static final Logger logger = LogManager.getLogger(GoToAfterAuthorizationPage.class);
 
-    private AfterAuthorization() {
+    private GoToAfterAuthorizationPage() {
     }
 
-    public static AfterAuthorization getInstance() {
+    public static GoToAfterAuthorizationPage getInstance() {
         return INSTANCE;
     }
 

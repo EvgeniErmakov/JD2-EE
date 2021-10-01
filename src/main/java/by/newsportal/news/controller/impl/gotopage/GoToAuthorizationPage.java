@@ -1,4 +1,4 @@
-package by.newsportal.news.controller.impl;
+package by.newsportal.news.controller.impl.gotopage;
 
 import java.io.IOException;
 

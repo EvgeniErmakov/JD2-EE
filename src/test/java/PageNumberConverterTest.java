@@ -1,5 +1,4 @@
-import by.newsportal.news.controller.impl.AfterAuthorization;
-import org.testng.annotations.Test;
+import by.newsportal.news.controller.impl.gotopage.GoToAfterAuthorizationPage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -23,7 +22,7 @@ class PageNumberConverterTest {
     @MethodSource("provideArguments")
     @ParameterizedTest()
     void test(String currentPageNumber, int expected) {
-        int actual = AfterAuthorization.getInstance().pageNumberConverter(currentPageNumber);
+        int actual = GoToAfterAuthorizationPage.getInstance().pageNumberConverter(currentPageNumber);
         assertEquals(expected, actual);
     }
 }
