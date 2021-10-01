@@ -29,5 +29,4 @@
     <filter-name>CommandFilter</filter-name>
     <url-pattern>/Controller</url-pattern>
   </filter-mapping>
-
 </web-app>

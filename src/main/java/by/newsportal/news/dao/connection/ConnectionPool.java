@@ -145,7 +145,6 @@ public final class ConnectionPool {
     }
 
     private class PooledConnection implements Connection {
-
         private Connection connection;
 
         public PooledConnection(Connection c) throws SQLException {

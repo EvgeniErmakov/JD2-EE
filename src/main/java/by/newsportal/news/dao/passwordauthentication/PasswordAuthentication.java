@@ -12,7 +12,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class PasswordAuthentication {
-
 	private static final PasswordAuthentication instance = new PasswordAuthentication();
 	public static final String ID = "$31$";
 	public static final int DEFAULT_COST = 16;
@@ -20,7 +19,6 @@ public final class PasswordAuthentication {
 	private static final int SIZE = 128;
 	private static final Pattern LAYOUTA = Pattern.compile("\\$31\\$(\\d\\d?)\\$(.{43})");
 	private final SecureRandom random= new SecureRandom();
-
 
 	public static PasswordAuthentication getInstance() {
 		return instance;
@@ -68,7 +66,6 @@ public final class PasswordAuthentication {
 			zero |= hash[salt.length + idx] ^ check[idx];
 		return zero == 0;
 	}
-	
 
 	private static byte[] pbkdf2(char[] password, byte[] salt, int iterations) {
 		KeySpec spec = new PBEKeySpec(password, salt, iterations, SIZE);
@@ -81,5 +78,4 @@ public final class PasswordAuthentication {
 			throw new IllegalStateException("Invalid SecretKeyFactory", ex);
 		}
 	}
-
 }

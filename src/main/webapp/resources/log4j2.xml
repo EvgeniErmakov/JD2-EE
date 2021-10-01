@@ -3,7 +3,6 @@
     <Properties>
         <Property name="filename">./logs/log.log</Property>
         <Property name="filePatterLayout">%d{yyyy.MM.dd HH:mm:ss} - %m%n</Property>
-
     </Properties>
 
     <appenders>

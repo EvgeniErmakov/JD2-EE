@@ -64,7 +64,5 @@
     margin-left: 20px; font-size: 20px;   justify-content: space-between; width: 150px;height:50px"><c:out value="${button_update}"/></button>
     </form>
 </div>
-
-
 </body>
 </html>

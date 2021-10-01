@@ -7,7 +7,6 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 @DisplayName("pageNumberConverter")
 class PageNumberConverterTest {
     static Stream<Arguments> provideArguments() {

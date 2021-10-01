@@ -39,7 +39,6 @@ public class GoToListNewsOfferPage implements Command {
         return INSTANCE;
     }
 
-
     private Integer pageNumberConverter(String currentPageNumber) {
         if (currentPageNumber == null || currentPageNumber.equals("")) {
             currentPageNumber = "1";
@@ -86,5 +85,4 @@ public class GoToListNewsOfferPage implements Command {
             logger.error("Error in the application", e);
         }
     }
-
 }

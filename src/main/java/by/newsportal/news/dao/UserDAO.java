@@ -6,6 +6,5 @@ import by.newsportal.news.dao.exception.DAOException;
 
 public interface UserDAO {
     User registration(RegistrationInfo info) throws DAOException;
-
     User authorization(RegistrationInfo info) throws DAOException;
 }

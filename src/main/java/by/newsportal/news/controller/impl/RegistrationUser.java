@@ -9,7 +9,6 @@ import by.newsportal.news.service.ServiceProvider;
 import by.newsportal.news.service.UserService;
 import by.newsportal.news.service.exception.ServiceException;
 import by.newsportal.news.service.validation.ValidationInformation;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

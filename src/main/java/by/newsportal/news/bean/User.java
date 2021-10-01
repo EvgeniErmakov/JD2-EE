@@ -16,7 +16,6 @@ public class User implements Serializable {
         this.password = password;
     }
 
-
     public User(String name, String surname, String email, RoleEnum role) {
         this.name = name;
         this.surname = surname;
@@ -64,7 +63,6 @@ public class User implements Serializable {
     public void setRole(RoleEnum role) {
         this.role = role;
     }
-
 
     @Override
     public boolean equals(Object o) {

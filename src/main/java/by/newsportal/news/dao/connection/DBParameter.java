@@ -1,7 +1,6 @@
 package by.newsportal.news.dao.connection;
 
 public final class DBParameter {
-
     private DBParameter() {
     }
 

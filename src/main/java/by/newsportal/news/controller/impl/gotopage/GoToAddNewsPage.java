@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-
 public class GoToAddNewsPage implements Command {
     private static final GoToAddNewsPage INSTANCE = new GoToAddNewsPage();
     private static final String ADD_NEWS_PAGE = "/WEB-INF/jsp/addNewsPage.jsp";

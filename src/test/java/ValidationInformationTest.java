@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("ValidationInformation")
 public class ValidationInformationTest {
-
     static Stream<Arguments> provideArgumentsCheckEmailTest() {
         return Stream.of(
                 Arguments.of("evgeniermakov1994@mail.ru", true),
@@ -26,7 +25,6 @@ public class ValidationInformationTest {
         boolean actual = ValidationInformation.checkEmail(email);
         assertEquals(expected, actual);
     }
-
 
     static Stream<Arguments> provideArgumentsCheckPasswordTest() {
         return Stream.of(

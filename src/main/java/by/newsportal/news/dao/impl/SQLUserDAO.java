@@ -25,7 +25,6 @@ public class SQLUserDAO implements UserDAO {
     private static final String SELECT_USER = "SELECT * FROM users WHERE(" + EMAIL + "= ?)";
     private static final PasswordAuthentication passwordAuthentication = PasswordAuthentication.getInstance();
 
-
     @Override
     public User registration(RegistrationInfo information) throws DAOException {
         try (Connection connection = ConnectionPool.getInstance().takeConnection();

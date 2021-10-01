@@ -35,7 +35,6 @@ public class GoToUpdateNewsPage implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         int choosenNewsId = Integer.parseInt(request.getParameter(CHOOSEN_NEWS_ID));
         News choosenNews;
 

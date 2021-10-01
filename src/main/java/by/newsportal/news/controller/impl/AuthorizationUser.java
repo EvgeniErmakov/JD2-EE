@@ -14,7 +14,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
 public class AuthorizationUser implements Command {
     private static final AuthorizationUser INSTANCE = new AuthorizationUser();
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
@@ -61,6 +60,5 @@ public class AuthorizationUser implements Command {
             logger.error("Error in the application", e);
             response.sendRedirect(PATH_COMMAND_ERROR);
         }
-
     }
 }

@@ -34,10 +34,10 @@ public class CommandFilter implements Filter {
             requestDispatcher.forward(request, response);
             return;
         }
+
         lastCommand = req.getParameter(COMMAND_REQUEST_PARAM);
         chain.doFilter(request, response);
     }
-
 
     public boolean checkLastCommand(String command) {
         switch (command) {
