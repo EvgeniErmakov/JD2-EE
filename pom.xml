@@ -56,7 +56,7 @@
 
     </dependencies>
     <build>
-        <finalName>NewsMavenPr</finalName>
+        <finalName>NewsMavenProject</finalName>
         <resources>
             <resource>
                 <directory>src/main/java</directory>
