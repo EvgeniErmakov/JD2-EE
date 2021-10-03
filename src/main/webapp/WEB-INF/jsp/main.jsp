@@ -69,19 +69,22 @@
 <div class="pagination" style="width: 50%; margin: 0 auto; text-align: center;">
     <c:if test="${currentPage>1}">
         <a href="Controller?command=GO_TO_MAIN_PAGE&requestCurrentPage=${pageNumList.get(currentPage-2)}">&laquo;</a>
-    </c:if> <c:forEach var="page" items="${pageNumList}">
-
-    <c:if test="${page != currentPage}">
-        <a href="Controller?command=GO_TO_MAIN_PAGE&requestCurrentPage=${page}">${page}</a>
     </c:if>
 
-    <c:if test="${page == currentPage}">
-        <a class="active" href="#">${page}</a>
-    </c:if>
+    <c:forEach var="page" items="${pageNumList}">
+        <c:if test="${page != currentPage}">
+            <a href="Controller?command=GO_TO_MAIN_PAGE&requestCurrentPage=${page}">${page}</a>
+        </c:if>
 
-</c:forEach> <c:if test="${pageNumList.size()>currentPage}">
-    <a href="Controller?command=GO_TO_MAIN_PAGE&requestCurrentPage=${pageNumList.get(currentPage)}">&raquo;</a>
-</c:if></div>
+        <c:if test="${page == currentPage}">
+            <a class="active" href="#">${page}</a>
+        </c:if>
+    </c:forEach>
+
+    <c:if test="${pageNumList.size()>currentPage}">
+        <a href="Controller?command=GO_TO_MAIN_PAGE&requestCurrentPage=${pageNumList.get(currentPage)}">&raquo;</a>
+    </c:if>
+</div>
 
 </body>
 </html>

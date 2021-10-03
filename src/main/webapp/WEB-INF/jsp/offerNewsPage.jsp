@@ -20,7 +20,7 @@
 </head>
 <body>
 <div class="heading">
-    <h1><a href="Controller?command=AFTER_AUTHORIZATION" style="color : black;
+    <h1><a href="Controller?command=GO_TO_AFTER_AUTHORIZATION_PAGE" style="color : black;
 			font-family:serif; font-size: 75px;margin: 50px;text-align: center;">
         <c:out value="${name_site}"/></a>
     </h1>

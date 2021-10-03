@@ -17,7 +17,7 @@ public class OfferNews implements Command {
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
     private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
     private static final OfferNews INSTANCE = new OfferNews();
-    private static final String AFTER_AUTHORIZATION_PAGE = "Controller?command=AFTER_AUTHORIZATION";
+    private static final String AFTER_AUTHORIZATION_PAGE = "Controller?command=GO_TO_AFTER_AUTHORIZATION_PAGE";
     private static final String NEWS_TITLE = "title";
     private static final String NEWS_DESCRIPTION = "description";
     private static final Logger logger = LogManager.getLogger(OfferNews.class);

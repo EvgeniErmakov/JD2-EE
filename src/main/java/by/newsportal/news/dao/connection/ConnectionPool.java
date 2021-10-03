@@ -508,7 +508,5 @@ public final class ConnectionPool {
             // TODO Auto-generated method stub
             return connection.getNetworkTimeout();
         }
-
     }
-
 }

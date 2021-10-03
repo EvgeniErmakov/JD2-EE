@@ -16,10 +16,10 @@ public class DeleteNews implements Command {
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
     private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
     private static final DeleteNews INSTANCE = new DeleteNews();
-    private static final String AFTER_AUTHORIZATION_PAGE = "Controller?command=AFTER_AUTHORIZATION";
+    private static final String AFTER_AUTHORIZATION_PAGE = "Controller?command=GO_TO_AFTER_AUTHORIZATION_PAGE";
     private static final String ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
     private static final String GO_TO_LIST_NEWS_OFFER_PAGE_COMMAND = "Controller?command=GO_TO_LIST_NEWS_OFFER_PAGE";
-    private static final String SESSION_PATH_COMMAND = "AFTER_AUTHORIZATION";
+    private static final String SESSION_PATH_COMMAND = "GO_TO_AFTER_AUTHORIZATION_PAGE";
     private static final String SESSION_PATH = "path";
     private static final String GO_TO_LIST_NEWS_OFFER_PAGE = "GO_TO_LIST_NEWS_OFFER_PAGE";
     private static final String LAST_PAGE = "from";

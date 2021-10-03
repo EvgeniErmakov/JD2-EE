@@ -17,9 +17,9 @@ public class UpdateNews implements Command {
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
     private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
     private static final UpdateNews INSTANCE = new UpdateNews();
-    private static final String AFTER_AUTHORIZATION_PAGE = "Controller?command=AFTER_AUTHORIZATION";
+    private static final String AFTER_AUTHORIZATION_PAGE = "Controller?command=GO_TO_AFTER_AUTHORIZATION_PAGE";
     private static final String GO_TO_LIST_NEWS_OFFER_PAGE = "Controller?command=GO_TO_LIST_NEWS_OFFER_PAGE";
-    private static final String AFTER_AUTHORIZATION = "AFTER_AUTHORIZATION";
+    private static final String AFTER_AUTHORIZATION = "GO_TO_AFTER_AUTHORIZATION_PAGE";
     private static final String GO_TO_LIST_NEWS_OFFER_PAGE_PATH = "GO_TO_LIST_NEWS_OFFER_PAGE";
     private static final String NEWS_TITLE = "title";
     private static final String NEWS_DESCRIPTION = "description";

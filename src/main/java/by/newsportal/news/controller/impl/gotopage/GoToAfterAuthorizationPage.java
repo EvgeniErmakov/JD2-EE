@@ -27,7 +27,7 @@ public class GoToAfterAuthorizationPage implements Command {
     private static final String CURRENT_PAGE = "currentPage";
     private static final String REQUEST_CURRENT_PAGE = "requestCurrentPage";
     private static final String PAGE_NUMBER_LIST = "pageNumList";
-    private static final String SESSION_PATH_COMMAND = "AFTER_AUTHORIZATION";
+    private static final String SESSION_PATH_COMMAND = "GO_TO_AFTER_AUTHORIZATION_PAGE";
     private static final String GO_TO_ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
     private static final String AFTER_AUTHORIZATION_PAGE = "/WEB-INF/jsp/afterAuthorization.jsp";
     private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
