@@ -28,7 +28,7 @@ public class CommandFilter implements Filter {
         if (session.getAttributeNames().hasMoreElements() == false) {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(GO_TO_MAIN_PAGE);
             requestDispatcher.forward(request, response);
-        } else if (lastCommand.equals("GO_TO_MAIN_PAGE") && !checkLastCommand(req.getParameter(COMMAND_REQUEST_PARAM))) {
+        } else if (lastCommand.equals(COMMAND_GO_TO_MAIN_PAGE) && !checkLastCommand(req.getParameter(COMMAND_REQUEST_PARAM))) {
             lastCommand = req.getParameter(COMMAND_REQUEST_PARAM);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(GO_TO_AUTHORIZATION_PAGE);
             requestDispatcher.forward(request, response);

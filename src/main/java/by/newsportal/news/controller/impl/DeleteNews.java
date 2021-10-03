@@ -20,7 +20,6 @@ public class DeleteNews implements Command {
     private static final String ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
     private static final String GO_TO_LIST_NEWS_OFFER_PAGE_COMMAND = "Controller?command=GO_TO_LIST_NEWS_OFFER_PAGE";
     private static final String SESSION_PATH_COMMAND = "GO_TO_AFTER_AUTHORIZATION_PAGE";
-    private static final String SESSION_PATH = "path";
     private static final String GO_TO_LIST_NEWS_OFFER_PAGE = "GO_TO_LIST_NEWS_OFFER_PAGE";
     private static final String LAST_PAGE = "from";
     private static final String CHOOSEN_NEWS_ID = "choosenNewsId";

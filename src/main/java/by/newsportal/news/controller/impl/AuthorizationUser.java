@@ -18,13 +18,11 @@ public class AuthorizationUser implements Command {
     private static final AuthorizationUser INSTANCE = new AuthorizationUser();
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
     private static final UserService USER_SERVICE = PROVIDER.getUserService();
-    private static final String SESSION_PATH = "path";
     private static final String ATTRIBUTE_USER = "user";
     private static final String GO_TO_ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
     private static final String PATH_COMMAND_AFTER_AUTHORIZATION = "Controller?command=GO_TO_AFTER_AUTHORIZATION_PAGE";
     private static final String INCORRECT_DATA_MESSAGE = "Controller?command=AUTHORIZATION_PAGE&incorrect_data_message=Incorrect data:";
     private static final String USER_NOT_FOUND_MESSAGE = "Controller?command=AUTHORIZATION_PAGE&incorrect_data_message=User is not found";
-    private static final String AFTER_AUTHORIZATION = "GO_TO_AFTER_AUTHORIZATION_PAGE";
     private static final String MESSAGE_AFTER_AUTHORIZATION = " has been authorized.";
     private static final Logger logger = LogManager.getLogger(AuthorizationUser.class);
 
@@ -46,7 +44,6 @@ public class AuthorizationUser implements Command {
             }
 
             User user = USER_SERVICE.authorization(info);
-            request.getSession(true).setAttribute(SESSION_PATH, AFTER_AUTHORIZATION);
 
             if (user == null) {
                 response.sendRedirect(USER_NOT_FOUND_MESSAGE);
