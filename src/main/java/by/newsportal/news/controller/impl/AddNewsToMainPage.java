@@ -32,7 +32,6 @@ public class AddNewsToMainPage implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
 
         try {
             String title = request.getParameter(NEWS_TITLE);

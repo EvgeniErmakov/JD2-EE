@@ -18,7 +18,6 @@ public class MoveNewsToMainPage implements Command {
     private static final MoveNewsToMainPage INSTANCE = new MoveNewsToMainPage();
     private static final String GO_TO_LIST_NEWS_OFFER_PAGE = "Controller?command=GO_TO_LIST_NEWS_OFFER_PAGE";
     private static final String ERROR_PAGE = "Controller?command=UNKNOWN_COMMAND";
-    private static final String SESSION_PATH = "path";
     private static final String CHOOSEN_NEWS_ID = "choosenNewsId";
     private static final Logger logger = LogManager.getLogger(MoveNewsToMainPage.class);
 
